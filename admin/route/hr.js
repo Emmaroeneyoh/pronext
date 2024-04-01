@@ -1,7 +1,7 @@
 const { adminretrieveusersController, adminretrievesingleuserController, admindeleteuserController, updateadminController } = require("../app/controller/hr");
 const { admin_check_token } = require("../core/authorisation");
 const { adminValidation } = require("../core/validation/auth");
-const { adminupdateprofileValidation } = require("../core/validation/hr");
+const { adminupdateprofileValidation, adminretrievesingleprofileValidation } = require("../core/validation/hr");
 
 const router = require("express").Router();
 router.post(
@@ -18,13 +18,13 @@ router.post(
 );
 router.post(
     "/retrieve/single/admin",
-    adminretrievesingleprofileValidat,
+    adminretrievesingleprofileValidation,
     admin_check_token,
     adminretrievesingleuserController
 );
 router.post(
     "/delete/admin",
-    adminretrievesingleprofileValidat,
+    adminretrievesingleprofileValidation,
     admin_check_token,
     admindeleteuserController
 );

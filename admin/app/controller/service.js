@@ -71,7 +71,8 @@ const adminretrievesinglserviceController = async (req, res, next) => {
 };
 const admindeleteserviceController = async (req, res, next) => {
   const { serviceid } = req.body;
-  try {
+    try {
+      console.log('ser', serviceid)
     let trainee = await serviceModel.findByIdAndDelete(serviceid);
     return res.status(200).json({
       status_code: 200,

@@ -10,6 +10,7 @@ const { coonectdb } = require("./helper/connectdb");
 //admin
 const adminauth = require('./admin/route/auth')
 const adminservice = require('./admin/route/service')
+const adminhr = require('./admin/route/hr')
 
 
 const { PORT } = require("./helper/core/utils");
@@ -27,6 +28,7 @@ const admin = '/admin'
 //for admin
 app.use(admin, adminauth) 
 app.use(admin, adminservice) 
+app.use(admin, adminhr) 
 
 //error handler
 app.use((req, res, next) => {
