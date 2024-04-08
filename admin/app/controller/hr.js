@@ -17,7 +17,7 @@ const adminretrieveusersController = async (req, res, next) => {
 };
 const adminretrievesingleuserController = async (req, res, next) => {
   try {
-    const { staffid } = req.body;
+    const { staffid } = req.params;
     let comment = await AdminModel.findById(staffid);
     return res.status(200).json({
       status_code: 200,

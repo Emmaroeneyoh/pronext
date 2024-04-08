@@ -5,7 +5,7 @@ const { AdminModel } = require('./db/admin');
 
 
 const admin_check_token = async (req, res, next) => {
-    let admin = req.body.adminid
+    let admin = req.body.adminid  || req.params.adminid
     const checkuser = await AdminModel.findById(admin)
   if (!checkuser) {
     return res.status(400).json({
@@ -22,8 +22,10 @@ const admin_check_token = async (req, res, next) => {
           token = req.headers.authorization.split(' ')[1] // gotten the token, now we will decode it
 
           const decoded = jwt.verify(token, adminJWT)
-          const user = decoded.admin
+        const user = decoded.admin
+        console.log('posis' , user , admin)
         if (admin != user) {
+          console.log('posis' )
           return res.status(400).json({
             status_code: 400,
             status: false,

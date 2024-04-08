@@ -10,14 +10,14 @@ router.post(
     admin_check_token,
     updateadminController
 );
-router.post(
-    "/retrieve/all/admins",
+router.get(
+    "/retrieve/all/admins/:adminid",
     adminValidation,
     admin_check_token,
     adminretrieveusersController
 );
-router.post(
-    "/retrieve/single/admin",
+router.get(
+    "/retrieve/single/admin/:adminid/:staffid",
     adminretrievesingleprofileValidation,
     admin_check_token,
     adminretrievesingleuserController

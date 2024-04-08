@@ -35,7 +35,7 @@ const adminretrievesingleprofileValidation = (req, res, next) => {
     staffid: joi.string().required(),
     
   });
-  const { error } = schema.validate(req.body);
+  const { error } = schema.validate(req.params);
   if (error) {
     let err = error.details[0].message;
     let errlen = err.split(" ");

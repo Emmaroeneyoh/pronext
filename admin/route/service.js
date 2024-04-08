@@ -26,7 +26,7 @@ router.post(
     adminretrievesinglserviceController
 );
 router.post(
-    "/retrieve/all/service",
+    "/retrieve/all/service/:adminid",
     adminValidation,
     admin_check_token,
     adminretrieveallserviceController

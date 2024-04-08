@@ -11,8 +11,11 @@ const { coonectdb } = require("./helper/connectdb");
 const adminauth = require('./admin/route/auth')
 const adminservice = require('./admin/route/service')
 const adminhr = require('./admin/route/hr')
+const adminuser = require('./admin/route/user')
 
 
+//user
+const userhire = require('./user/route/hirejob')
 const { PORT } = require("./helper/core/utils");
 
 coonectdb()
@@ -29,6 +32,11 @@ const admin = '/admin'
 app.use(admin, adminauth) 
 app.use(admin, adminservice) 
 app.use(admin, adminhr) 
+app.use(admin, adminuser) 
+
+//for user
+app.use(user, userhire) 
+
 
 //error handler
 app.use((req, res, next) => {
