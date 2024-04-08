@@ -55,7 +55,7 @@ const adminupdateserviceController = async (req, res, next) => {
 };
 
 const adminretrievesinglserviceController = async (req, res, next) => {
-  const { serviceid } = req.body;
+  const { serviceid } = req.params;
   try {
     let trainee = await serviceModel.findById(serviceid);
     return res.status(200).json({

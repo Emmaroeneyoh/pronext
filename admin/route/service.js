@@ -1,7 +1,7 @@
 const { admincreateserviceController, adminretrievesinglserviceController, admindeleteserviceController, adminretrieveallserviceController } = require("../app/controller/service");
 const { admin_check_token } = require("../core/authorisation");
 const { adminValidation } = require("../core/validation/auth");
-const { admincreateserviceValidation, adminupdateserviceValidation, adminretrievedeleteserviceValidation } = require("../core/validation/service");
+const { admincreateserviceValidation, adminupdateserviceValidation, adminretrievedeleteserviceValidation, adminsingleserviceValidation } = require("../core/validation/service");
 
 const router = require("express").Router();
 
@@ -19,13 +19,13 @@ router.post(
     admin_check_token,
     admincreateserviceController
 );
-router.post(
-    "/retrieve/single/service",
-    adminretrievedeleteserviceValidation,
+router.get(
+    "/retrieve/single/service/:adminid/:serviceid",
+    adminsingleserviceValidation,
     admin_check_token,
     adminretrievesinglserviceController
 );
-router.post(
+router.get(
     "/retrieve/all/service/:adminid",
     adminValidation,
     admin_check_token,
