@@ -128,7 +128,7 @@ const adminNewPasswordLink = async (req, res) => {
       from: "emmaroeneyoh@gmail.com",
       to: `${email}`,
       subject: "Nodemailer Project",
-      text: `${token}`,
+      text: `${link}`,
       // html: data,
     };
 
