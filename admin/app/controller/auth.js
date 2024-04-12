@@ -109,7 +109,7 @@ const adminNewPasswordLink = async (req, res) => {
     };
     const token = jwt.sign(payload, secret, { expiresIn: "50m" });
 
-    const link = `https://dev-myt-page.netlify.app/reset_password/?token=${token}`;
+    const link = `https://pronext.netlify.app/admin/auth/new-password?token=${token}`;
 
     //start of nodemailer
     var transporter = nodemailer.createTransport({

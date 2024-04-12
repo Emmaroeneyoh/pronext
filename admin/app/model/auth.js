@@ -25,11 +25,11 @@ const adminSignupModel = async (data, res) => {
     });
 
     const userDetails = await form.save();
-    const token = create_admin_token(userDetails._id);
+    // const token = create_admin_token(userDetails._id);
     const userData = {
       id: userDetails._id,
       email: userDetails.email,
-      token,
+      // token,
     };
 
     return userData;
