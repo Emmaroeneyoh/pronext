@@ -9,6 +9,12 @@ const Adminschema = new schema({
         firstname: {
             type:String,
         },
+        dob: {
+            type:String,
+        },
+        gender: {
+            type:String,
+        },
         email:{
             type:String
         },

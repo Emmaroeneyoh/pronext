@@ -34,6 +34,8 @@ const userfindjobValidation = (req, res, next) => {
     email: joi.string().required(),
     educationalaccount: joi.string().required(),
     lastname: joi.string().required(),
+    dob: joi.string().required(), 
+    gender: joi.string().required(),
    firstname: joi.string().required(),
    educationalqualification: joi.string().required(),
    location: joi.string().required(),

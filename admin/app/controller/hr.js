@@ -22,7 +22,7 @@ const adminretrievesingleuserController = async (req, res, next) => {
     return res.status(200).json({
       status_code: 200,
       status: true,
-      message: "cart code generated",
+      message: "user recieved",
       data: comment,
     });
   } catch (error) {

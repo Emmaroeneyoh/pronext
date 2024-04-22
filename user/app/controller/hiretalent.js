@@ -37,7 +37,7 @@ const userfindjobController = async (req, res, next) => {
     site,
     scheduledate,
     file,
-    type,
+    type, gender, dob
   } = req.body;
   try {
     const data = {
@@ -52,7 +52,7 @@ const userfindjobController = async (req, res, next) => {
         site,
         scheduledate,
         file,
-        type,
+        type, gender, dob
     };
     let trainee = await userfindjobModel(data, res);
     return res.status(200).json({

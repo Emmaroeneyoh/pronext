@@ -34,21 +34,33 @@ const userhiretalentModel = async (data, res) => {
 const userfindjobModel = async (data, res) => {
     try {
       const {
-        email,
-        name,
-        phone,
-        scheduledate,
-        proposaltype,
-        additionalmessage,
+         firstname,
+    lastname,
+    email,
+    phone,
+    educationalaccount,
+    educationalqualification,
+    location,
+    bpoexperience,
+    site,
+    scheduledate,
+    file,
+    type, gender, dob
       } = data;
   
       const form = await new findjobModel({
-        email,
-        name,
-        phone,
-        scheduledate,
-        proposaltype,
-        additionalmessage,
+         firstname,
+    lastname,
+    email,
+    phone,
+    educationalaccount,
+    educationalqualification,
+    location,
+    bpoexperience,
+    site,
+    scheduledate,
+    file,
+    type, gender, dob
       });
       const productDetails = await form.save()
      
