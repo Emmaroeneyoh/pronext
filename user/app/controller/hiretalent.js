@@ -1,4 +1,8 @@
-const { userhiretalentModel, userfindjobModel } = require("../model/hiretalent");
+const {
+  userhiretalentModel,
+  userfindjobModel,
+  contactmodel,
+} = require("../model/hiretalent");
 
 const userhiretalentController = async (req, res, next) => {
   const { email, name, phone, scheduledate, proposaltype, additionalmessage } =
@@ -37,22 +41,26 @@ const userfindjobController = async (req, res, next) => {
     site,
     scheduledate,
     file,
-    type, gender, dob
+    type,
+    gender,
+    dob,
   } = req.body;
   try {
     const data = {
-        firstname,
-        lastname,
-        email,
-        phone,
-        educationalaccount,
-        educationalqualification,
-        location,
-        bpoexperience,
-        site,
-        scheduledate,
-        file,
-        type, gender, dob
+      firstname,
+      lastname,
+      email,
+      phone,
+      educationalaccount,
+      educationalqualification,
+      location,
+      bpoexperience,
+      site,
+      scheduledate,
+      file,
+      type,
+      gender,
+      dob,
     };
     let trainee = await userfindjobModel(data, res);
     return res.status(200).json({
@@ -67,6 +75,30 @@ const userfindjobController = async (req, res, next) => {
   }
 };
 
+const contactuscontroller = async (req, res, next) => {
+  try {
+    const { enquiry, message, phone, email, name } = req.body;
+
+    const data = {
+      enquiry,
+      message,
+      phone,
+      email,
+      name,
+    };
+    const contactadmin = await contactmodel(data, res);
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "form submitted",
+    });
+  } catch (error) {
+    console.log(error);
+    handleError(error.message)(res);
+  }
+};
+
 module.exports = {
-  userhiretalentController,  userfindjobController
+  userhiretalentController,
+  userfindjobController,contactuscontroller
 };

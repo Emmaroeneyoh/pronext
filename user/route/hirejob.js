@@ -1,5 +1,5 @@
-const { userhiretalentController, userfindjobController } = require("../app/controller/hiretalent");
-const { userhiretalentValidation, userfindjobValidation } = require("../core/validation/hirejob");
+const { userhiretalentController, userfindjobController, contactuscontroller } = require("../app/controller/hiretalent");
+const { userhiretalentValidation, userfindjobValidation, contactusValidation } = require("../core/validation/hirejob");
 
 const router = require("express").Router();
 
@@ -14,6 +14,12 @@ router.post(
     "/findjob",
     userfindjobValidation,
     userfindjobController
+);
+
+router.post(
+    "/contactus",
+    contactusValidation,
+    contactuscontroller
 );
 
 
