@@ -1,5 +1,9 @@
 const { AdminModel } = require("../../core/db/admin");
-const { adminupdateprofileModel } = require("../model/hr");
+const {
+  adminupdateprofileModel,
+  adminupdatepasswordModel,
+} = require("../model/hr");
+const bcrypt = require("bcrypt");
 
 const adminretrieveusersController = async (req, res, next) => {
   try {
@@ -98,11 +102,19 @@ const updateadminController = async (req, res, next) => {
 };
 
 const updateadminprofilecontroller = async (req, res, next) => {
- 
   try {
     const { firstname, email, lastname, photo, address, phone, dob, staffid } =
       req.body;
     const useremail = email.toLowerCase();
+    const staff = await AdminModel.findOne({ email: useremail });
+  if (staff._id != staffid) {
+    return res.status(200).json({
+      status_code: 400,
+      status: true,
+      message: "email already exist",
+      error: "email already exist",
+    });
+  }
     const data = {
       firstname,
       useremail,
@@ -113,16 +125,62 @@ const updateadminprofilecontroller = async (req, res, next) => {
       dob,
       staffid,
     };
-    const updateprofile = await adminupdateprofileModel(data, res)
+    const updateprofile = await adminupdateprofileModel(data, res);
     return res.status(200).json({
       status_code: 200,
       status: true,
       message: "user profile updated",
-    })
-
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     handleError(error.message)(res);
+  }
+};
+
+const updatepasswordController = async (req, res, next) => {
+  const { adminid, currentpassword, newpassword } = req.body;
+  try {
+    const customerDetails = await AdminModel.findById(adminid);
+    if (!customerDetails) {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: "user dont exist on our application",
+        data: [],
+        error: "user dont exist on our application",
+      });
+    }
+
+    const checkPassword = await bcrypt.compare(
+      currentpassword,
+      customerDetails.password
+    );
+    if (!checkPassword) {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: "incorrect password",
+        data: [],
+        error: "incorrect password",
+      });
+    }
+    const salt = await bcrypt.genSalt();
+    const Harshpassword = await bcrypt.hash(newpassword, salt);
+    const data = {
+      adminid,
+      Harshpassword,
+    };
+
+    let trainee = await adminupdatepasswordModel(data, res);
+
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "password updated",
+    });
+  } catch (error) {
+    console.log(error);
+    return handleError(error.message)(res);
   }
 };
 
@@ -130,5 +188,7 @@ module.exports = {
   adminretrieveusersController,
   updateadminController,
   adminretrievesingleuserController,
-  admindeleteuserController,  updateadminprofilecontroller
+  admindeleteuserController,
+  updateadminprofilecontroller,
+  updatepasswordController,
 };
