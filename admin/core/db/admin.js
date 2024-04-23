@@ -9,7 +9,7 @@ const Adminschema = new schema({
         password:{
             type:String
         },
-        firstname:{
+        firstname :{
             type:String
         },
         lastname:{

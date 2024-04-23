@@ -63,7 +63,6 @@ const userfindjobValidation = (req, res, next) => {
 };
 
 
-
 const contactusValidation = (req, res, next) => {
   const schema = joi.object({
     // adminId: joi.string().required(),

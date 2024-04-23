@@ -2,14 +2,15 @@ const { AdminModel } = require("../../core/db/admin");
 
 
 const adminupdateprofileModel = async (data, res) => {
+  console.log('polsidfte' , data)
     try {
       const {
-        lastname, firstname, userEmail, address, photo, phone, dob , adminid
+        lastname, firstname, useremail, address, photo, phone, dob , staffid
       } = data;
   
-      const form = await AdminModel.findByIdAndUpdate(adminid, {
+      const form = await AdminModel.findByIdAndUpdate(staffid, {
         $set: {
-            lastname, firstname,address, photo, phone, dob , email : userEmail
+            lastname, firstname,address, photo, phone, dob , email : useremail
         },
       });
   

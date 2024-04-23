@@ -97,9 +97,38 @@ const updateadminController = async (req, res, next) => {
   }
 };
 
+const updateadminprofilecontroller = async (req, res, next) => {
+ 
+  try {
+    const { firstname, email, lastname, photo, address, phone, dob, staffid } =
+      req.body;
+    const useremail = email.toLowerCase();
+    const data = {
+      firstname,
+      useremail,
+      lastname,
+      photo,
+      address,
+      phone,
+      dob,
+      staffid,
+    };
+    const updateprofile = await adminupdateprofileModel(data, res)
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "user profile updated",
+    })
+
+  } catch (error) {
+    console.log(error)
+    handleError(error.message)(res);
+  }
+};
+
 module.exports = {
   adminretrieveusersController,
   updateadminController,
   adminretrievesingleuserController,
-  admindeleteuserController,
+  admindeleteuserController,  updateadminprofilecontroller
 };
