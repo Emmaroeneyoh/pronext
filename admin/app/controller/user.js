@@ -1,3 +1,4 @@
+const { contactusModel } = require("../../../user/core/db/contactus");
 const { findjobModel } = require("../../../user/core/db/find.work");
 const { hiretalentModel } = require("../../../user/core/db/hire.talent");
 const { handleError } = require("../../core/utils");
@@ -99,7 +100,7 @@ const adminretrieveformsController = async (req, res, next) => {
     const skip = (page - 1) * limit;
     const type = req.query.type;
     const status = req.query.status;
-    const date = (req.query.date);
+    const date = req.query.date;
     var query = { $and: [] };
 
     if (status != "") {
@@ -107,8 +108,8 @@ const adminretrieveformsController = async (req, res, next) => {
     }
 
     if (date != "") {
-      const ndate = `${date}+00:00`
-      query.$and.push({ createdAt : ndate});
+      const ndate = `${date}+00:00`;
+      query.$and.push({ createdAt: ndate });
     }
     if (type == "findjob") {
       let trainee = await findjobModel.find(query).skip(skip).limit(limit);
@@ -136,7 +137,21 @@ const adminretrieveformsController = async (req, res, next) => {
           total: trainee.length, // This is not the total count, it's the count of items on this page
         },
       });
-    } else {
+    }  else if (type == "contactus") {
+      let trainee = await contactusModel.find().skip(skip).limit(limit);
+      return res.status(200).json({
+        status_code: 200,
+        status: true,
+        message: "signup process successful",
+        data: trainee,
+        pagination: {
+          page: page,
+          limit: 15,
+          total: trainee.length, // This is not the total count, it's the count of items on this page
+        },
+      });
+    }
+    else {
       return res.status(200).json({
         status_code: 200,
         status: true,
@@ -169,6 +184,14 @@ const adminretrievesingleformController = async (req, res, next) => {
         message: "signup process successful",
         data: trainee,
       });
+    } else if (type == "contactus") {
+      let trainee = await contactusModel.findById(formid);
+      return res.status(200).json({
+        status_code: 200,
+        status: true,
+        message: "signup process successful",
+        data: trainee,
+      });
     } else {
       return res.status(200).json({
         status_code: 200,
@@ -188,5 +211,6 @@ module.exports = {
   adminretrieveallfindjobController,
   admindeletefindjobController,
   adminretrievesinglefindjobController,
-  adminretrieveformsController, adminretrievesingleformController
+  adminretrieveformsController,
+  adminretrievesingleformController,
 };

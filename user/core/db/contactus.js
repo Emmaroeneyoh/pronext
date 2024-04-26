@@ -16,6 +16,9 @@ const Adminschema = new schema({
         enquiry :{
             type:String , default :""
         },
+       status :{
+            type:String , default :""
+        },
        message:{
             type:String
         },
