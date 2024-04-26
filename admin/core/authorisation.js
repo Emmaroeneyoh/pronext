@@ -5,7 +5,8 @@ const { AdminModel } = require('./db/admin');
 
 
 const admin_check_token = async (req, res, next) => {
-    let admin = req.body.adminid  || req.params.adminid
+  let admin = req.body.adminid || req.params.adminid
+  
     const checkuser = await AdminModel.findById(admin)
   if (!checkuser) {
     return res.status(400).json({

@@ -86,7 +86,7 @@ const adminResetpasswordValidation = (req, res, next) => {
 };
 const adminValidation = (req, res, next) => {
   const schema = joi.object({
-    adminid: joi.string().required(),
+    adminid: joi.string().required().length(24),
   });
   const { error } = schema.validate(req.params);
   if (error) {
