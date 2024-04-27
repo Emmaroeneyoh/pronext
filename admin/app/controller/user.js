@@ -97,7 +97,7 @@ const adminretrieveformsController = async (req, res, next) => {
   try {
     const page = req.query.page || 1;
     const limit = 10;
-    const skip = (page - 1) * limit;
+    let skip = (page - 1) * limit;
     const type = req.query.type;
     const status = req.query.status;
     const date = req.query.date;
@@ -150,7 +150,24 @@ const adminretrieveformsController = async (req, res, next) => {
           total: trainee.length, // This is not the total count, it's the count of items on this page
         },
       });
-    }
+    }  else if (type == "all") {
+      const halflimit = limit / 2
+      skip = (page - 1) * halflimit;
+        let contactus = await contactusModel.find().skip(skip).limit(halflimit);
+        let hiretalent = await hiretalentModel.find().skip(skip).limit(halflimit);
+      let findjob = await findjobModel.find().skip(skip).limit(halflimit);
+      const formdata = { contactus, hiretalent, findjob }
+        return res.status(200).json({
+          status_code: 200,
+          status: true,
+          message: "signup process successful",
+          data: formdata,
+          pagination: {
+            page: page,
+             // This is not the total count, it's the count of items on this page
+          },
+        });
+      }
     else {
       return res.status(200).json({
         status_code: 200,
