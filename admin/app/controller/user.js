@@ -101,13 +101,15 @@ const adminretrieveformsController = async (req, res, next) => {
     const type = req.query.type;
     const status = req.query.status;
     const date = req.query.date;
+    console.log(date)
     var query = { $and: [] };
 
-    if (status != "") {
+    if ( status && status != "") {
       query.$and.push({ status: status });
     }
-
-    if (date != "") {
+  
+ 
+    if (date && date != "") {
       const ndate = `${date}+00:00`;
       query.$and.push({ createdAt: ndate });
     }
