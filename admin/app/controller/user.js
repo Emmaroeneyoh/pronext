@@ -113,43 +113,60 @@ const adminretrieveformsController = async (req, res, next) => {
       const ndate = `${date}+00:00`;
       query.$and.push({ createdAt: ndate });
     }
+    
+    console.log(query.$and.length)
     if (type == "findjob") {
-      let trainee = await findjobModel.find(query).skip(skip).limit(limit);
+      let findjobdata
+      if (query.$and.length > 0) {
+        findjobdata = await findjobModel.find(query).skip(skip).limit(limit);
+      } else {
+        findjobdata = await findjobModel.find().skip(skip).limit(limit);
+      }
       return res.status(200).json({
         status_code: 200,
         status: true,
         message: "signup process successful",
-        data: trainee,
+        data: findjobdata,
         pagination: {
           page: page,
           limit: 15,
-          total: trainee.length, // This is not the total count, it's the count of items on this page
+          total: findjobdata.length, // This is not the total count, it's the count of items on this page
         },
       });
     } else if (type == "hiretalent") {
-      let trainee = await hiretalentModel.find().skip(skip).limit(limit);
+      let hiretalent
+      if (query.$and.length > 0) {
+        hiretalent = await hiretalentModel.find(query).skip(skip).limit(limit);
+      } else {
+        hiretalent = await hiretalentModel.find().skip(skip).limit(limit);
+      }
       return res.status(200).json({
         status_code: 200,
         status: true,
         message: "signup process successful",
-        data: trainee,
+        data: hiretalent,
         pagination: {
           page: page,
           limit: 15,
-          total: trainee.length, // This is not the total count, it's the count of items on this page
+          total: hiretalent.length, // This is not the total count, it's the count of items on this page
         },
       });
-    }  else if (type == "contactus") {
-      let trainee = await contactusModel.find().skip(skip).limit(limit);
+    } else if (type == "contactus") {
+      let contactus
+      if (query.$and.length > 0) {
+        contactus = await contactusModel.find(query).skip(skip).limit(limit);
+      } else {
+        contactus = await contactusModel.find().skip(skip).limit(limit);
+      }
       return res.status(200).json({
         status_code: 200,
         status: true,
         message: "signup process successful",
-        data: trainee,
+        data: contactus,
         pagination: {
           page: page,
           limit: 15,
-          total: trainee.length, // This is not the total count, it's the count of items on this page
+          total: contactus.length, // This is not the total count, it's the count of items on this page
         },
       });
     }  else if (type == "all") {
