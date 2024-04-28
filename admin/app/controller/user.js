@@ -175,7 +175,7 @@ const adminretrieveformsController = async (req, res, next) => {
         let contactus = await contactusModel.find().skip(skip).limit(halflimit);
         let hiretalent = await hiretalentModel.find().skip(skip).limit(halflimit);
       let findjob = await findjobModel.find().skip(skip).limit(halflimit);
-      const formdata = { contactus, hiretalent, findjob }
+      const formdata = [...contactus, ...hiretalent, ...findjob]
         return res.status(200).json({
           status_code: 200,
           status: true,
@@ -183,6 +183,7 @@ const adminretrieveformsController = async (req, res, next) => {
           data: formdata,
           pagination: {
             page: page,
+            limit:15
              // This is not the total count, it's the count of items on this page
           },
         });
