@@ -80,6 +80,7 @@ const admindeletefindjobController = async (req, res, next) => {
 };
 const adminretrieveallfindjobController = async (req, res, next) => {
   try {
+    
     let trainee = await findjobModel.find();
     return res.status(200).json({
       status_code: 200,
@@ -95,6 +96,8 @@ const adminretrieveallfindjobController = async (req, res, next) => {
 
 const adminretrieveformsController = async (req, res, next) => {
   try {
+
+   
     const page = req.query.page || 1;
     const limit = 10;
     let skip = (page - 1) * limit;
@@ -104,7 +107,8 @@ const adminretrieveformsController = async (req, res, next) => {
     console.log(date)
     var query = { $and: [] };
 
-    if ( status && status != "") {
+    if (status && status != "") {
+      console.log(status)
       query.$and.push({ status: status });
     }
   
@@ -154,8 +158,10 @@ const adminretrieveformsController = async (req, res, next) => {
     } else if (type == "contactus") {
       let contactus
       if (query.$and.length > 0) {
+       
         contactus = await contactusModel.find(query).skip(skip).limit(limit);
       } else {
+        
         contactus = await contactusModel.find().skip(skip).limit(limit);
       }
       return res.status(200).json({
@@ -172,9 +178,19 @@ const adminretrieveformsController = async (req, res, next) => {
     }  else if (type == "all") {
       const halflimit = limit / 2
       skip = (page - 1) * halflimit;
-        let contactus = await contactusModel.find().skip(skip).limit(halflimit);
-        let hiretalent = await hiretalentModel.find().skip(skip).limit(halflimit);
-      let findjob = await findjobModel.find().skip(skip).limit(halflimit);
+      let contactus 
+      let hiretalent
+      let findjob
+      if (query.$and.length > 0) {
+         contactus = await contactusModel.find(query).skip(skip).limit(halflimit);
+         hiretalent = await hiretalentModel.find(query).skip(skip).limit(halflimit);
+       findjob = await findjobModel.find(query).skip(skip).limit(halflimit);
+      } else {
+         contactus = await contactusModel.find().skip(skip).limit(halflimit);
+         hiretalent = await hiretalentModel.find().skip(skip).limit(halflimit);
+       findjob = await findjobModel.find().skip(skip).limit(halflimit);
+      }
+       
       const formdata = [...contactus, ...hiretalent, ...findjob]
         return res.status(200).json({
           status_code: 200,
