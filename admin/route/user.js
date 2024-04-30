@@ -8,7 +8,7 @@ const router = require("express").Router();
 
 
 
-router.get(
+router.post(
     "/retrieve/all/form/:adminid",
     adminValidation,
     admin_check_token,
