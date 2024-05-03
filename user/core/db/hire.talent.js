@@ -22,7 +22,7 @@ const Adminschema = new schema({
             type:String
         },
         status :{
-            type:String , default :""
+            type:String , default :"NewForm"
         },
        
     createdAt : {

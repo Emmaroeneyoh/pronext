@@ -17,7 +17,7 @@ const Adminschema = new schema({
             type:String , default :""
         },
        status :{
-            type:String , default :""
+            type:String , default :"NewForm"
         },
        message:{
             type:String
