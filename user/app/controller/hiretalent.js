@@ -1,3 +1,6 @@
+const { contactusModel } = require("../../core/db/contactus");
+const { findjobModel } = require("../../core/db/find.work");
+const { hiretalentModel } = require("../../core/db/hire.talent");
 const {
   userhiretalentModel,
   userfindjobModel,
@@ -5,16 +8,17 @@ const {
 } = require("../model/hiretalent");
 
 const userhiretalentController = async (req, res, next) => {
-  const { email, name, phone, scheduledate, proposaltype, additionalmessage } =
+  const { email, name, phone, scheduledate, proposaltype, additionalmessage , createdAt} =
     req.body;
   try {
+    
     const data = {
       email,
       name,
       phone,
       scheduledate,
       proposaltype,
-      additionalmessage,
+      additionalmessage, createdAt
     };
     let trainee = await userhiretalentModel(data, res);
     return res.status(200).json({
@@ -43,7 +47,7 @@ const userfindjobController = async (req, res, next) => {
     file,
     type,
     gender,
-    dob,
+    dob, createdAt
   } = req.body;
   try {
     const data = {
@@ -60,7 +64,7 @@ const userfindjobController = async (req, res, next) => {
       file,
       type,
       gender,
-      dob,
+      dob, createdAt
     };
     let trainee = await userfindjobModel(data, res);
     return res.status(200).json({
@@ -77,14 +81,14 @@ const userfindjobController = async (req, res, next) => {
 
 const contactuscontroller = async (req, res, next) => {
   try {
-    const { enquiry, message, phone, email, name } = req.body;
+    const { enquiry, message, phone, email, name , createdAt} = req.body;
 
     const data = {
       enquiry,
       message,
       phone,
       email,
-      name,
+      name, createdAt
     };
     const contactadmin = await contactmodel(data, res);
     return res.status(200).json({

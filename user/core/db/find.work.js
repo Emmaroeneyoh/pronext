@@ -53,8 +53,7 @@ const Adminschema = new schema({
         
        
     createdAt : {
-        type: Date,
-        default:Date.now
+        type:String
     }
 })
 const findjobModel = mongoose.model('findjob', Adminschema )

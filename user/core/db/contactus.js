@@ -24,8 +24,7 @@ const Adminschema = new schema({
         },
        
     createdAt : {
-        type: Date,
-        default:Date.now
+        type:String
     }
 })
 const contactusModel = mongoose.model('contactus', Adminschema )

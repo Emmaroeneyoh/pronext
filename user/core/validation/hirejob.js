@@ -11,6 +11,7 @@ const userhiretalentValidation = (req, res, next) => {
     scheduledate: joi.string().required(),
     phone: joi.string().required(),
     proposaltype: joi.string().required(),
+    createdAt: joi.string().required(),
   });
   const { error } = schema.validate(req.body);
   if (error) {
@@ -45,6 +46,7 @@ const userfindjobValidation = (req, res, next) => {
     site: joi.string().required(),
     file: joi.string().required(),
     type: joi.string().required(),
+    createdAt: joi.string().required(),
   });
   const { error } = schema.validate(req.body);
   if (error) {
@@ -70,7 +72,8 @@ const contactusValidation = (req, res, next) => {
     message: joi.string().required(),
     name: joi.string().required(),
     enquiry: joi.string().required(), 
-    phone: joi.string().required()
+    phone: joi.string().required(),
+    createdAt: joi.string().required(),
   });
   const { error } = schema.validate(req.body);
   if (error) {

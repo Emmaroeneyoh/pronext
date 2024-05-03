@@ -10,7 +10,7 @@ const userhiretalentModel = async (data, res) => {
       phone,
       scheduledate,
       proposaltype,
-      additionalmessage,
+      additionalmessage, createdAt
     } = data;
 
     const form = await new hiretalentModel({
@@ -19,7 +19,7 @@ const userhiretalentModel = async (data, res) => {
       phone,
       scheduledate,
       proposaltype,
-      additionalmessage,
+      additionalmessage, createdAt
     });
     const productDetails = await form.save();
 
@@ -46,7 +46,7 @@ const userfindjobModel = async (data, res) => {
       file,
       type,
       gender,
-      dob,
+      dob, createdAt
     } = data;
 
     const form = await new findjobModel({
@@ -63,7 +63,7 @@ const userfindjobModel = async (data, res) => {
       file,
       type,
       gender,
-      dob,
+      dob, createdAt
     });
     const productDetails = await form.save();
 
@@ -77,13 +77,13 @@ const userfindjobModel = async (data, res) => {
 
 const contactmodel = async (data, res) => {
   try {
-    const { enquiry, message, phone, email, name } = data;
+    const { enquiry, message, phone, email, name  , createdAt} = data;
     const contactus = await new contactusModel({
       enquiry,
       message,
       phone,
       email,
-      name,
+      name, createdAt
     });
     await contactus.save();
     return "success";
