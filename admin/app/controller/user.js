@@ -120,12 +120,19 @@ const adminretrieveformsController = async (req, res, next) => {
       query.$and.push({ status: { $in: status } });
     } 
     const data = { page, limit, skip, type , query}
-    let trainee = await adminretrieveformsmodel(data, res);
+    let obj = await adminretrieveformsmodel(data, res);
+    if (!obj.status) {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: obj.message,
+      });
+    }
     return res.status(200).json({
       status_code: 200,
       status: true,
       message: "signup process successful",
-      data: trainee,
+      data: obj.totaldata,
       pagination: {
         limit , page 
       }

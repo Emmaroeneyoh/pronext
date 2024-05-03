@@ -3,6 +3,11 @@ const { findjobModel } = require("../../../user/core/db/find.work");
 const { hiretalentModel } = require("../../../user/core/db/hire.talent");
 
 const adminretrieveformsmodel = async (data, res) => {
+    let obj = {
+        status: true,
+        message : "",
+        totaldata : []        
+    }
   try {
     const { page, limit, skip, type , query } = data;
     console.log(query.$and.length);
@@ -10,14 +15,13 @@ const adminretrieveformsmodel = async (data, res) => {
     let hiretalent = []
       let contactus = []
       let formdata = []
-      let totaldata = []
     if (type.includes("findjob")) {
       if (query.$and.length > 0) {
         findjobdata = await findjobModel.find(query).skip(skip).limit(limit) 
       } else {
         findjobdata = await findjobModel.find().skip(skip).limit(limit);
         }
-        totaldata.push(...findjobdata);
+        obj.totaldata.push(...findjobdata);
     }
 
     if (type.includes("hiretalent")) {
@@ -26,7 +30,7 @@ const adminretrieveformsmodel = async (data, res) => {
       } else {
         hiretalent = await hiretalentModel.find().skip(skip).limit(limit);
         }
-        totaldata.push(...hiretalent);
+        obj.totaldata.push(...hiretalent);
     }
       if (type.includes("contactus")) {
         
@@ -35,7 +39,7 @@ const adminretrieveformsmodel = async (data, res) => {
       } else {
           contactus = await contactusModel.find().skip(skip).limit(limit);
           }
-          totaldata.push(...contactus);
+          obj.totaldata.push(...contactus);
     } else if (type == "All") {
       const halflimit = limit / 2;
       skip = (page - 1) * halflimit;
@@ -55,14 +59,16 @@ const adminretrieveformsmodel = async (data, res) => {
         findjob = await findjobModel.find().skip(skip).limit(halflimit);
       }
 
-       formdata = [...contactus, ...hiretalent, ...findjob];
+       obj.totaldata = [...contactus, ...hiretalent, ...findjob];
       
       }
-     
-       return totaldata
+      
+       return obj
   } catch (error) {
-    console.log(error);
-    return error.message;
+      console.log('poleis', error);
+      obj.status = false
+      obj.message = error.message
+    return obj
     // handleError(error.message)(res)
   }
 };
