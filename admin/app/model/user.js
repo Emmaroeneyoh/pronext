@@ -17,27 +17,27 @@ const adminretrieveformsmodel = async (data, res) => {
       let formdata = []
     if (type.includes("findjob")) {
       if (query.$and.length > 0) {
-        findjobdata = await findjobModel.find(query).skip(skip).limit(limit) 
+        findjobdata = await findjobModel.find(query).skip(skip).limit(limit).sort({ createdAt: -1 })
       } else {
-        findjobdata = await findjobModel.find().skip(skip).limit(limit);
+        findjobdata = await findjobModel.find().skip(skip).limit(limit).sort({ createdAt: -1 })
         }
         obj.totaldata.push(...findjobdata);
     }
 
     if (type.includes("hiretalent")) {
       if (query.$and.length > 0) {
-        hiretalent = await hiretalentModel.find(query).skip(skip).limit(limit);
+        hiretalent = await hiretalentModel.find(query).skip(skip).limit(limit).sort({ createdAt: -1 })
       } else {
-        hiretalent = await hiretalentModel.find().skip(skip).limit(limit);
+        hiretalent = await hiretalentModel.find().skip(skip).limit(limit).sort({ createdAt: -1 })
         }
         obj.totaldata.push(...hiretalent);
     }
       if (type.includes("contactus")) {
         
       if (query.$and.length > 0) {
-        contactus = await contactusModel.find(query).skip(skip).limit(limit);
+        contactus = await contactusModel.find(query).skip(skip).limit(limit).sort({ createdAt: -1 })
       } else {
-          contactus = await contactusModel.find().skip(skip).limit(limit);
+          contactus = await contactusModel.find().skip(skip).limit(limit).sort({ createdAt: -1 })
           }
           obj.totaldata.push(...contactus);
     } else if (type == "All") {
@@ -47,16 +47,16 @@ const adminretrieveformsmodel = async (data, res) => {
         contactus = await contactusModel
           .find(query)
           .skip(skip)
-          .limit(halflimit);
+          .limit(halflimit).sort({ createdAt: -1 })
         hiretalent = await hiretalentModel
           .find(query)
           .skip(skip)
-          .limit(halflimit);
-        findjob = await findjobModel.find(query).skip(skip).limit(halflimit);
+          .limit(halflimit).sort({ createdAt: -1 })
+        findjob = await findjobModel.find(query).skip(skip).limit(halflimit).sort({ createdAt: -1 })
       } else {
-        contactus = await contactusModel.find().skip(skip).limit(halflimit);
-        hiretalent = await hiretalentModel.find().skip(skip).limit(halflimit);
-        findjob = await findjobModel.find().skip(skip).limit(halflimit);
+        contactus = await contactusModel.find().skip(skip).limit(halflimit).sort({ createdAt: -1 })
+        hiretalent = await hiretalentModel.find().skip(skip).limit(halflimit).sort({ createdAt: -1 })
+        findjob = await findjobModel.find().skip(skip).limit(halflimit).sort({ createdAt: -1 })
       }
 
        obj.totaldata = [...contactus, ...hiretalent, ...findjob];
