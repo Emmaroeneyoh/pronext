@@ -72,8 +72,42 @@ const adminretrieveformsmodel = async (data, res) => {
     // handleError(error.message)(res)
   }
 };
+const adminupdateformstatusmodel = async (data, res) => {
+   
+  try {
+    const { formid , status , type } = data;
+    if (type == "findjob") {
+        let trainee = await findjobModel.findByIdAndUpdate(formid, {
+            $set: {
+                status
+            },
+          });
+        return  trainee;
+      } else if (type == "hiretalent") {
+        let trainee = await hiretalentModel.findByIdAndUpdate(formid, {
+            $set: {
+                status
+            },
+          });
+        return  trainee;
+      } else if (type == "contactus") {
+        let trainee = await contactusModel.findByIdAndUpdate(formid, {
+            $set: {
+                status
+            },
+          });
+        return  trainee;
+      } 
+  } catch (error) {
+      console.log('poleis', error);
+      obj.status = false
+      obj.message = error.message
+    return obj
+    // handleError(error.message)(res)
+  }
+};
 
 
 module.exports = {
-    adminretrieveformsmodel
+    adminretrieveformsmodel , adminupdateformstatusmodel
 }

@@ -1,7 +1,7 @@
-const { adminretrieveallhiretalentController, adminretrievesinglehiretalentController, admindeletehiremeController, adminretrieveallfindjobController, adminretrievesinglefindjobController, admindeletefindjobController, adminretrieveformsController, adminretrievesingleformController } = require("../app/controller/user");
+const { adminretrieveallhiretalentController, adminretrievesinglehiretalentController, admindeletehiremeController, adminretrieveallfindjobController, adminretrievesinglefindjobController, admindeletefindjobController, adminretrieveformsController, adminretrievesingleformController, adminretrieveupdateformstatusController } = require("../app/controller/user");
 const { admin_check_token } = require("../core/authorisation");
 const { adminValidation } = require("../core/validation/auth");
-const { adminuserformValidation } = require("../core/validation/service");
+const { adminuserformValidation, adminupdateformstatusValidation } = require("../core/validation/service");
 
 
 const router = require("express").Router();
@@ -38,6 +38,12 @@ router.delete(
     adminuserformValidation,
     admin_check_token,
     admindeletehiremeController
+);
+router.post(
+    "/update/form/status",
+    adminupdateformstatusValidation,
+    admin_check_token,
+    adminretrieveupdateformstatusController
 );
 
 router.get(

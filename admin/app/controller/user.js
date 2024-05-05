@@ -2,7 +2,7 @@ const { contactusModel } = require("../../../user/core/db/contactus");
 const { findjobModel } = require("../../../user/core/db/find.work");
 const { hiretalentModel } = require("../../../user/core/db/hire.talent");
 const { handleError } = require("../../core/utils");
-const { adminretrieveformsmodel } = require("../model/user");
+const { adminretrieveformsmodel, adminupdateformstatusmodel } = require("../model/user");
 // const moment = require("moment");
 
 const adminretrievesinglehiretalentController = async (req, res, next) => {
@@ -103,23 +103,20 @@ const adminretrieveformsController = async (req, res, next) => {
     const date = req.query.date;
     var query = { $and: [] };
 
- 
-
     if (date && date != "") {
-      
       query.$and.push({ createdAt: date });
-    } 
-    if ( !type || type.length == 0) {
+    }
+    if (!type || type.length == 0) {
       return res.status(400).json({
         status_code: 400,
         status: false,
         message: "type must not be an empty array",
       });
-    } 
-    if ( status && status.length > 0) {
+    }
+    if (status && status.length > 0) {
       query.$and.push({ status: { $in: status } });
-    } 
-    const data = { page, limit, skip, type , query}
+    }
+    const data = { page, limit, skip, type, query };
     let obj = await adminretrieveformsmodel(data, res);
     if (!obj.status) {
       return res.status(400).json({
@@ -134,8 +131,9 @@ const adminretrieveformsController = async (req, res, next) => {
       message: "signup process successful",
       data: obj.totaldata,
       pagination: {
-        limit , page 
-      }
+        limit,
+        page,
+      },
     });
   } catch (error) {
     console.log(error);
@@ -183,6 +181,29 @@ const adminretrievesingleformController = async (req, res, next) => {
     handleError(error.message)(res);
   }
 };
+const adminretrieveupdateformstatusController = async (req, res, next) => {
+  try {
+    const { formid, status, type } = req.body;
+    const data = { formid, status, type }
+   console.log(type)
+    if (type != "findjob" && type != "contactus" && type != "hiretalent") {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: "invalid form type",
+      });
+    }
+    const updateform = await adminupdateformstatusmodel(data, res)
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "form status updated",
+    });
+  } catch (error) {
+    console.log(error);
+    handleError(error.message)(res);
+  }
+};
 module.exports = {
   adminretrievesinglehiretalentController,
   adminretrieveallhiretalentController,
@@ -191,5 +212,5 @@ module.exports = {
   admindeletefindjobController,
   adminretrievesinglefindjobController,
   adminretrieveformsController,
-  adminretrievesingleformController,
+  adminretrievesingleformController,  adminretrieveupdateformstatusController
 };
