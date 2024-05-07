@@ -2,6 +2,7 @@ const { AdminModel } = require("../../core/db/admin");
 const {
   adminupdateprofileModel,
   adminupdatepasswordModel,
+  admindashboardModel,
 } = require("../model/hr");
 const bcrypt = require("bcrypt");
 
@@ -182,6 +183,23 @@ const updatepasswordController = async (req, res, next) => {
     console.log(error);
     return handleError(error.message)(res);
   }
+  
+};
+
+const admindashboardController = async (req, res, next) => {
+  try {
+    const data = 'pol'
+    let trainee = await admindashboardModel(data, res);
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "signup process successful",
+      data: trainee,
+    });
+  } catch (error) {
+    console.log(error);
+    handleError(error.message)(res);
+  }
 };
 
 module.exports = {
@@ -190,5 +208,5 @@ module.exports = {
   adminretrievesingleuserController,
   admindeleteuserController,
   updateadminprofilecontroller,
-  updatepasswordController,
+  updatepasswordController,  admindashboardController
 };
