@@ -53,6 +53,7 @@ const admindashboardModel = async (data, res) => {
      const contactus = await contactusModel.find({ createdAt: { $gte: dateString } }).sort({ createdAt: -1 })
      const  hiretalent = await hiretalentModel.find({ createdAt: { $gte: dateString } }).sort({ createdAt: -1 })
     const findjob = await findjobModel.find({ createdAt: { $gte: dateString } }).sort({ createdAt: -1 })
+    const  totaldata = [...contactus, ...hiretalent, ...findjob]
     
     const totalcontactus = await contactusModel.countDocuments()
     const totalhiretalent = await hiretalentModel.countDocuments()
@@ -60,7 +61,7 @@ const admindashboardModel = async (data, res) => {
 
     const totalform = totalcontactus + totalhiretalent + totalfindjob 
     
-    const dashboard = {contactus , findjob , hiretalent , totalcontactus , totalhiretalent , totalfindjob , totalform}
+    const dashboard = {totaldata, totalcontactus , totalhiretalent , totalfindjob , totalform}
   
       return dashboard;
     } catch (error) {

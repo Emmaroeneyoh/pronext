@@ -10,7 +10,8 @@ const userhiretalentModel = async (data, res) => {
       phone,
       scheduledate,
       proposaltype,
-      additionalmessage, createdAt
+      additionalmessage,
+      createdAt,
     } = data;
 
     const form = await new hiretalentModel({
@@ -19,7 +20,8 @@ const userhiretalentModel = async (data, res) => {
       phone,
       scheduledate,
       proposaltype,
-      additionalmessage, createdAt
+      additionalmessage,
+      createdAt,
     });
     const productDetails = await form.save();
 
@@ -46,7 +48,8 @@ const userfindjobModel = async (data, res) => {
       file,
       type,
       gender,
-      dob, createdAt
+      dob,
+      createdAt,
     } = data;
 
     const form = await new findjobModel({
@@ -60,10 +63,10 @@ const userfindjobModel = async (data, res) => {
       bpoexperience,
       site,
       scheduledate,
-      file,
-      type,
+      fileupload: { file, type },
       gender,
-      dob, createdAt
+      dob,
+      createdAt,
     });
     const productDetails = await form.save();
 
@@ -77,13 +80,14 @@ const userfindjobModel = async (data, res) => {
 
 const contactmodel = async (data, res) => {
   try {
-    const { enquiry, message, phone, email, name  , createdAt} = data;
+    const { enquiry, message, phone, email, name, createdAt } = data;
     const contactus = await new contactusModel({
       enquiry,
       message,
       phone,
       email,
-      name, createdAt
+      name,
+      createdAt,
     });
     await contactus.save();
     return "success";
@@ -94,5 +98,6 @@ const contactmodel = async (data, res) => {
 };
 module.exports = {
   userhiretalentModel,
-  userfindjobModel,  contactmodel
+  userfindjobModel,
+  contactmodel,
 };
