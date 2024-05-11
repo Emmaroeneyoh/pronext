@@ -5,6 +5,7 @@ const {
   admindashboardModel,
 } = require("../model/hr");
 const bcrypt = require("bcrypt");
+const { findjobModel } = require("../../../user/core/db/find.work");
 
 const adminretrieveusersController = async (req, res, next) => {
   try {

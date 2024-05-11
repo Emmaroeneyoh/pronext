@@ -118,6 +118,7 @@ const adminretrieveformsController = async (req, res, next) => {
     }
     const data = { page, limit, skip, type, query };
     let obj = await adminretrieveformsmodel(data, res);
+
     if (!obj.status) {
       return res.status(400).json({
         status_code: 400,
@@ -125,6 +126,8 @@ const adminretrieveformsController = async (req, res, next) => {
         message: obj.message,
       });
     }
+    const totalform = obj.totaldata.length
+    const totalpages = Math.ceil(totalform/limit)
     return res.status(200).json({
       status_code: 200,
       status: true,
@@ -132,7 +135,7 @@ const adminretrieveformsController = async (req, res, next) => {
       data: obj.totaldata,
       pagination: {
         limit,
-        page,
+        page, totalpages
       },
     });
   } catch (error) {
