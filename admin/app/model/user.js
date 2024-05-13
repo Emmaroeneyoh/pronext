@@ -15,6 +15,7 @@ const adminretrieveformsmodel = async (data, res) => {
     let hiretalent = []
       let contactus = []
       let formdata = []
+      let limitdata = 3
     if (type.includes("findjob")) {
       if (query.$and.length > 0) {
         findjobdata = await findjobModel.aggregate([
@@ -22,7 +23,7 @@ const adminretrieveformsmodel = async (data, res) => {
             { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
             { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
             { $skip: skip }, // Skip documents
-            { $limit: limit } // Limit the number of documents returned
+            { $limit: limitdata } // Limit the number of documents returned
           ])
       } else {
         findjobdata = await findjobModel.aggregate([
@@ -30,7 +31,7 @@ const adminretrieveformsmodel = async (data, res) => {
             { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
             { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
             { $skip: skip }, // Skip documents
-            { $limit: limit } // Limit the number of documents returned
+            { $limit: limitdata } // Limit the number of documents returned
           ])
         }
         obj.totaldata.push(...findjobdata);
@@ -43,7 +44,7 @@ const adminretrieveformsmodel = async (data, res) => {
             { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
             { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
             { $skip: skip }, // Skip documents
-            { $limit: limit } // Limit the number of documents returned
+            { $limit: limitdata } // Limit the number of documents returned
           ])
       } else {
         hiretalent = await hiretalentModel.aggregate([
@@ -51,7 +52,7 @@ const adminretrieveformsmodel = async (data, res) => {
             { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
             { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
             { $skip: skip }, // Skip documents
-            { $limit: limit } // Limit the number of documents returned
+            { $limit: limitdata } // Limit the number of documents returned
           ])
         }
         obj.totaldata.push(...hiretalent);
@@ -64,7 +65,7 @@ const adminretrieveformsmodel = async (data, res) => {
             { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
             { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
             { $skip: skip }, // Skip documents
-            { $limit: limit } // Limit the number of documents returned
+            { $limit: limitdata } // Limit the number of documents returned
           ])
       } else {
           contactus = await contactusModel.aggregate([
@@ -72,7 +73,7 @@ const adminretrieveformsmodel = async (data, res) => {
             { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
             { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
             { $skip: skip }, // Skip documents
-            { $limit: limit } // Limit the number of documents returned
+            { $limit: limitdata } // Limit the number of documents returned
           ])
           }
           obj.totaldata.push(...contactus);

@@ -98,7 +98,7 @@ const adminretrieveformsController = async (req, res, next) => {
   try {
     const page = req.query.page || 1;
     const limit = 10;
-    let skip = (page - 1) * limit;
+    let skip = (page - 1) * 3;
     const { type, status } = req.body;
     const date = req.query.date;
     var query = { $and: [] };
@@ -127,8 +127,12 @@ const adminretrieveformsController = async (req, res, next) => {
       });
     }
     const totalform = obj.totaldata.length
+    const counthiretalent = await hiretalentModel.countDocuments()
+    const countfindjob = await findjobModel.countDocuments()
+    const countcontactus = await contactusModel.countDocuments()
+    const totalcount  = countcontactus + countfindjob + counthiretalent
     const formsdata =  obj.totaldata.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    const totalpages = Math.ceil(totalform/limit)
+    const totalpages = Math.ceil(totalcount/limit)
     return res.status(200).json({
       status_code: 200,
       status: true,
