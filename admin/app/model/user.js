@@ -17,27 +17,63 @@ const adminretrieveformsmodel = async (data, res) => {
       let formdata = []
     if (type.includes("findjob")) {
       if (query.$and.length > 0) {
-        findjobdata = await findjobModel.find(query).skip(skip).limit(limit).sort({ createdAt: -1 })
+        findjobdata = await findjobModel.aggregate([
+            { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: limit } // Limit the number of documents returned
+          ])
       } else {
-        findjobdata = await findjobModel.find().skip(skip).limit(limit).sort({ createdAt: -1 })
+        findjobdata = await findjobModel.aggregate([
+            // { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: limit } // Limit the number of documents returned
+          ])
         }
         obj.totaldata.push(...findjobdata);
     }
 
     if (type.includes("hiretalent")) {
       if (query.$and.length > 0) {
-        hiretalent = await hiretalentModel.find(query).skip(skip).limit(limit).sort({ createdAt: -1 })
+        hiretalent = await hiretalentModel.aggregate([
+            { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: limit } // Limit the number of documents returned
+          ])
       } else {
-        hiretalent = await hiretalentModel.find().skip(skip).limit(limit).sort({ createdAt: -1 })
+        hiretalent = await hiretalentModel.aggregate([
+            // { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: limit } // Limit the number of documents returned
+          ])
         }
         obj.totaldata.push(...hiretalent);
     }
       if (type.includes("contactus")) {
         
       if (query.$and.length > 0) {
-        contactus = await contactusModel.find(query).skip(skip).limit(limit).sort({ createdAt: -1 })
+        contactus = await contactusModel.aggregate([
+            { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: limit } // Limit the number of documents returned
+          ])
       } else {
-          contactus = await contactusModel.find().skip(skip).limit(limit).sort({ createdAt: -1 })
+          contactus = await contactusModel.aggregate([
+            // { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: limit } // Limit the number of documents returned
+          ])
           }
           obj.totaldata.push(...contactus);
     } else if (type == "All") {
@@ -45,18 +81,50 @@ const adminretrieveformsmodel = async (data, res) => {
       skip = (page - 1) * halflimit;
       if (query.$and.length > 0) {
         contactus = await contactusModel
-          .find(query)
-          .skip(skip)
-          .limit(halflimit).sort({ createdAt: -1 })
+          .aggregate([
+            { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: halflimit } // Limit the number of documents returned
+          ])
         hiretalent = await hiretalentModel
-          .find(query)
-          .skip(skip)
-          .limit(halflimit).sort({ createdAt: -1 })
-        findjob = await findjobModel.find(query).skip(skip).limit(halflimit).sort({ createdAt: -1 })
+          .aggregate([
+            { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: halflimit } // Limit the number of documents returned
+          ])
+        findjob = await findjobModel.aggregate([
+            { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: halflimit } // Limit the number of documents returned
+          ])
       } else {
-        contactus = await contactusModel.find().skip(skip).limit(halflimit).sort({ createdAt: -1 })
-        hiretalent = await hiretalentModel.find().skip(skip).limit(halflimit).sort({ createdAt: -1 })
-        findjob = await findjobModel.find().skip(skip).limit(halflimit).sort({ createdAt: -1 })
+        contactus = await contactusModel.aggregate([
+            // { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: halflimit } // Limit the number of documents returned
+          ])
+        hiretalent = await hiretalentModel.aggregate([
+            // { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: halflimit} // Limit the number of documents returned
+          ])
+        findjob = await findjobModel.aggregate([
+            // { $match: query },  // Match your query conditions
+            { $addFields: { createdAtDate: { $toDate: "$createdAt" } } }, // Convert createdAt string to Date
+            { $sort: { createdAtDate: -1 } }, // Sort by the converted Date field
+            { $skip: skip }, // Skip documents
+            { $limit: halflimit } // Limit the number of documents returned
+          ])
       }
 
        obj.totaldata = [...contactus, ...hiretalent, ...findjob];
