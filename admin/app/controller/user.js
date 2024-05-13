@@ -127,12 +127,13 @@ const adminretrieveformsController = async (req, res, next) => {
       });
     }
     const totalform = obj.totaldata.length
+    const formsdata =  obj.totaldata.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     const totalpages = Math.ceil(totalform/limit)
     return res.status(200).json({
       status_code: 200,
       status: true,
       message: "signup process successful",
-      data: obj.totaldata,
+      data: formsdata ,
       pagination: {
         limit,
         page, totalpages
