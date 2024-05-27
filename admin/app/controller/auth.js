@@ -5,6 +5,7 @@ const { AdminModel } = require("../../core/db/admin");
 const { adminLoginModel, adminSignupModel } = require("../model/auth");
 const { handleError } = require("../../core/utils");
 const { adminpasswordjwt, appPassword } = require("../../../helper/core/utils");
+const { sendEmail } = require("../../../helper/email");
 
 
 const adminSignupController = async (req, res, next) => {
@@ -32,6 +33,7 @@ const adminSignupController = async (req, res, next) => {
     };
 
     let trainee = await adminSignupModel(data, res);
+    await sendEmail(email , password)
     return res.status(200).json({
       status_code: 200,
       status: true,
