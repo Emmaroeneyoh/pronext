@@ -3,6 +3,7 @@ const {
   adminupdateprofileModel,
   adminupdatepasswordModel,
   admindashboardModel,
+  adminretrieveteamleaderModel,
 } = require("../model/hr");
 const bcrypt = require("bcrypt");
 const { findjobModel } = require("../../../user/core/db/find.work");
@@ -109,14 +110,14 @@ const updateadminprofilecontroller = async (req, res, next) => {
       req.body;
     const useremail = email.toLowerCase();
     const staff = await AdminModel.findOne({ email: useremail });
-  if (staff._id != staffid) {
-    return res.status(200).json({
-      status_code: 400,
-      status: true,
-      message: "email already exist",
-      error: "email already exist",
-    });
-  }
+    if (staff._id != staffid) {
+      return res.status(200).json({
+        status_code: 400,
+        status: true,
+        message: "email already exist",
+        error: "email already exist",
+      });
+    }
     const data = {
       firstname,
       useremail,
@@ -184,13 +185,27 @@ const updatepasswordController = async (req, res, next) => {
     console.log(error);
     return handleError(error.message)(res);
   }
-  
 };
 
 const admindashboardController = async (req, res, next) => {
   try {
-    const data = 'pol'
+    const data = "pol";
     let trainee = await admindashboardModel(data, res);
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "signup process successful",
+      data: trainee,
+    });
+  } catch (error) {
+    console.log(error);
+    handleError(error.message)(res);
+  }
+};
+const adminretrieveteamleaderController = async (req, res, next) => {
+  try {
+    const data = "pol";
+    let trainee = await adminretrieveteamleaderModel(data, res);
     return res.status(200).json({
       status_code: 200,
       status: true,
@@ -209,5 +224,7 @@ module.exports = {
   adminretrievesingleuserController,
   admindeleteuserController,
   updateadminprofilecontroller,
-  updatepasswordController,  admindashboardController
+  updatepasswordController,
+  admindashboardController,
+  adminretrieveteamleaderController,
 };

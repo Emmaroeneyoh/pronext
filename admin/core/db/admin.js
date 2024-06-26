@@ -3,6 +3,7 @@ const schema = mongoose.Schema
 
 const Adminschema = new schema({
 
+    basic_info: {
         email: {
             type:String,
         },
@@ -12,13 +13,13 @@ const Adminschema = new schema({
         firstname :{
             type:String
         },
+        middlename :{
+            type:String
+        },
         lastname:{
             type:String
         },
         photo:{
-            type:String
-        },
-        address:{
             type:String
         },
         phone:{
@@ -27,7 +28,49 @@ const Adminschema = new schema({
         dob:{
             type:String
         },
+        gender:{
+            type:String
+        },
+      } , 
+    address_details: {
+        address:{
+            type:String
+        },
+      
        
+        city:{
+            type:String
+        },
+       
+        state:{
+            type:String
+        },
+       
+       nationality:{
+            type:String
+        },
+      }  , 
+       
+    administrative: {
+        role:{
+            type:String
+        },
+        status:{
+            type:String
+        },
+       
+       
+    },
+    recruiter: {
+        recruiter_active:{
+            type:String , default : ''
+        },
+        teamleader :{
+            type:  String,  default : ''
+        },
+       
+    },
+    
     createdAt : {
         type: Date,
         default:Date.now

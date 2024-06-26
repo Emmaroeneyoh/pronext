@@ -13,24 +13,38 @@ const adminSignupModel = async (data, res) => {
       lastname,
       firstname,
       Harshpassword,
+      teamleader,
+      status,
+      role,
+      nationality,
+      state,
+      city,
+      gender,
+      middlename,  recruiter_active 
     } = data;
     const form = await new AdminModel({
-      email: userEmail,
-      password: Harshpassword,
-      address,
-      photo,
-      phone,
-      dob,
-      lastname,
-      firstname,
+      basic_info: {
+        email: userEmail,
+        password: Harshpassword,
+        photo,
+        phone,
+        dob,
+        lastname,
+        firstname,
+        middlename,
+        gender,
+      },
+      address_details: { nationality, state, city, address },
+      administrative: {  status, role },
+      recruiter: { teamleader , recruiter_active },
     });
 
     const userDetails = await form.save();
     // const token = create_admin_token(userDetails._id);
- 
+
     const userData = {
       id: userDetails._id,
-      email: userDetails.email,
+      email: userDetails.basic_info.email,
       // token,
     };
 
@@ -44,7 +58,7 @@ const adminSignupModel = async (data, res) => {
 const adminLoginModel = async (data, res) => {
   try {
     const { userEmail } = data;
-    const userDetails = await AdminModel.findOne({ email: userEmail });
+    const userDetails = await AdminModel.findOne({ 'basic_info.email': userEmail });
     const token = create_admin_token(userDetails._id);
     const userData = {
       id: userDetails._id,

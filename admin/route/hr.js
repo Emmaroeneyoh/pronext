@@ -1,4 +1,4 @@
-const { adminretrieveusersController, adminretrievesingleuserController, admindeleteuserController, updateadminController, updateadminprofilecontroller, updatepasswordController, admindashboardController } = require("../app/controller/hr");
+const { adminretrieveusersController, adminretrievesingleuserController, admindeleteuserController, updateadminController, updateadminprofilecontroller, updatepasswordController, admindashboardController, adminretrieveteamleaderController } = require("../app/controller/hr");
 const { admin_check_token } = require("../core/authorisation");
 const { adminValidation } = require("../core/validation/auth");
 const { adminupdateprofileValidation, adminretrievesingleprofileValidation, admindeleteadminValidation, adminupdateuserValidation, adminupdatepasswordValidation } = require("../core/validation/hr");
@@ -15,6 +15,12 @@ router.get(
     adminValidation,
     admin_check_token,
     adminretrieveusersController
+);
+router.get(
+    "/retrieve/teamleader/:adminid",
+    adminValidation,
+    admin_check_token,
+    adminretrieveteamleaderController
 );
 router.get(
     "/dashboard/:adminid",

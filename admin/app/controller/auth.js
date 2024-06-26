@@ -7,15 +7,31 @@ const { handleError } = require("../../core/utils");
 const { adminpasswordjwt, appPassword } = require("../../../helper/core/utils");
 const { sendEmail } = require("../../../helper/email");
 
-
 const adminSignupController = async (req, res, next) => {
-  const { lastname, firstname, email, password, address, photo, phone, dob } =
-    req.body;
+  const {
+    lastname,
+    firstname,
+    email,
+    password,
+    address,
+    photo,
+    phone,
+    dob,
+    teamleader,
+    status,
+    role,
+    nationality,
+    state,
+    city,
+    gender,
+    middlename,  recruiter_active 
+  } = req.body;
   const userEmail = email.toLowerCase();
+  // await AdminModel.deleteMany()
   try {
     const salt = await bcrypt.genSalt();
     const Harshpassword = await bcrypt.hash(password, salt);
-    const customer = await AdminModel.findOne({ email: userEmail });
+    const customer = await AdminModel.findOne({ 'basic_info.email': userEmail });
     if (customer) {
       return res.status(400).json({
         status_code: 400,
@@ -28,12 +44,24 @@ const adminSignupController = async (req, res, next) => {
 
     const data = {
       userEmail,
-      address, photo, phone, dob,lastname, firstname, 
-      Harshpassword,
+      address,
+      photo,
+      phone,
+      dob,
+      lastname,
+      firstname,
+      Harshpassword,    teamleader,
+      status,
+      role,
+      nationality,
+      state,
+      city,
+      gender,
+      middlename, recruiter_active 
     };
 
     let trainee = await adminSignupModel(data, res);
-    await sendEmail(email , password)
+    await sendEmail(email, password);
     return res.status(200).json({
       status_code: 200,
       status: true,
@@ -50,7 +78,7 @@ const adminLoginController = async (req, res, next) => {
   const { email, password } = req.body;
   const userEmail = email.toLowerCase();
   try {
-    const userDetails = await AdminModel.findOne({ email: userEmail });
+    const userDetails = await AdminModel.findOne({'basic_info.email': userEmail });
     if (!userDetails) {
       return res.status(400).json({
         status_code: 400,
@@ -61,7 +89,7 @@ const adminLoginController = async (req, res, next) => {
       });
     }
 
-    const checkPassword = await bcrypt.compare(password, userDetails.password);
+    const checkPassword = await bcrypt.compare(password, userDetails.basic_info.password);
     if (!checkPassword) {
       return res.status(400).json({
         status_code: 400,

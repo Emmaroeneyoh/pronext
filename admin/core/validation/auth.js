@@ -2,6 +2,8 @@ const joi = require("joi");
 const { handleError } = require("../utils");
 
 
+
+
 const adminsignupValidation = (req, res, next) => {
   const schema = joi.object({
     // adminId: joi.string().required(),
@@ -13,6 +15,16 @@ const adminsignupValidation = (req, res, next) => {
     address: joi.string().required(),
     phone: joi.string().required(),
     dob: joi.string().required(),
+    teamleader: joi.string().required().allow(''),
+    recruiter_active : joi.string().required().allow(''),
+    status: joi.string().required(),
+    role: joi.string().required(),
+    nationality: joi.string().required(),
+    state: joi.string().required(),
+    city: joi.string().required(),
+    gender: joi.string().required(),
+    city: joi.string().required(),
+    middlename: joi.string().required(),
   });
   const { error } = schema.validate(req.body);
   if (error) {

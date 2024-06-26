@@ -10,8 +10,12 @@ const { coonectdb } = require("./helper/connectdb");
 //admin
 const adminauth = require('./admin/route/auth')
 const adminservice = require('./admin/route/service')
+const admincountry = require('./admin/route/country')
 const adminhr = require('./admin/route/hr')
 const adminuser = require('./admin/route/user')
+
+//admin education , experience
+const admineducationexperience = require('./admin/route/eductaion.experince')
 
 
 //user
@@ -33,6 +37,8 @@ app.use(admin, adminauth)
 app.use(admin, adminservice) 
 app.use(admin, adminhr) 
 app.use(admin, adminuser) 
+app.use(admin, admineducationexperience) 
+app.use(admin, admincountry) 
 
 //for user
 app.use(user, userhire) 
