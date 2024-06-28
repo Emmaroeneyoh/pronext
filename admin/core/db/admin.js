@@ -31,6 +31,9 @@ const Adminschema = new schema({
         gender:{
             type:String
         },
+        maritalstatus:{
+            type:String
+        },
       } , 
     address_details: {
         address:{

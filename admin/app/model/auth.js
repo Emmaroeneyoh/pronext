@@ -20,7 +20,7 @@ const adminSignupModel = async (data, res) => {
       state,
       city,
       gender,
-      middlename,  recruiter_active 
+      middlename,  recruiter_active  , maritalstatus
     } = data;
     const form = await new AdminModel({
       basic_info: {
@@ -32,7 +32,7 @@ const adminSignupModel = async (data, res) => {
         lastname,
         firstname,
         middlename,
-        gender,
+        gender, maritalstatus
       },
       address_details: { nationality, state, city, address },
       administrative: {  status, role },

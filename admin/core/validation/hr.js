@@ -8,10 +8,11 @@ const adminupdateprofileValidation = (req, res, next) => {
     password: joi.string().required(),
     lastname: joi.string().required(),
     firstname: joi.string().required(),
-    photo: joi.string().required(),
+    photo: joi.string().optional().allow(''),
     address: joi.string().required(),
     phone: joi.string().required(),
     dob: joi.string().required(),
+    maritalstatus: joi.string().required(),
   });
   const { error } = schema.validate(req.body);
   if (error) {

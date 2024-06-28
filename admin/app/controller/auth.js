@@ -24,7 +24,7 @@ const adminSignupController = async (req, res, next) => {
     state,
     city,
     gender,
-    middlename,  recruiter_active 
+    middlename,  recruiter_active  , maritalstatus
   } = req.body;
   const userEmail = email.toLowerCase();
   // await AdminModel.deleteMany()
@@ -57,7 +57,7 @@ const adminSignupController = async (req, res, next) => {
       state,
       city,
       gender,
-      middlename, recruiter_active 
+      middlename, recruiter_active , maritalstatus
     };
 
     let trainee = await adminSignupModel(data, res);
