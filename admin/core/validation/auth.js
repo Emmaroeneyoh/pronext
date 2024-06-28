@@ -11,7 +11,7 @@ const adminsignupValidation = (req, res, next) => {
     password: joi.string().required(),
     lastname: joi.string().required(),
    firstname: joi.string().required(),
-    photo: joi.string().required(),
+    photo: joi.string().optional().allow(''),
     address: joi.string().required(),
     phone: joi.string().required(),
     dob: joi.string().required(),
@@ -25,6 +25,7 @@ const adminsignupValidation = (req, res, next) => {
     gender: joi.string().required(),
     city: joi.string().required(),
     middlename: joi.string().required(),
+    maritalstatus: joi.string().required(),
   });
   const { error } = schema.validate(req.body);
   if (error) {
