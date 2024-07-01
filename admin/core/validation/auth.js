@@ -24,7 +24,7 @@ const adminsignupValidation = (req, res, next) => {
     city: joi.string().required(),
     gender: joi.string().required(),
     city: joi.string().required(),
-    middlename: joi.string().required(),
+    middlename: joi.string().optional().allow(""),
     maritalstatus: joi.string().required(),
   });
   const { error } = schema.validate(req.body);
