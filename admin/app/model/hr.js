@@ -19,13 +19,16 @@ const adminupdateprofileModel = async (data, res) => {
 
     const form = await AdminModel.findByIdAndUpdate(staffid, {
       $set: {
-        lastname,
-        firstname,
-        address,
-        photo,
-        phone,
-        dob,
-        email: useremail,
+        basic_info: {
+          lastname,
+          firstname,
+          address,
+          photo,
+          phone,
+          dob,
+          email: useremail,
+      }
+    
       },
     });
 
@@ -42,7 +45,7 @@ const adminupdatepasswordModel = async (data, res) => {
 
     const form = await AdminModel.findByIdAndUpdate(adminid, {
       $set: {
-        password: Harshpassword,
+        'basic_info.password': Harshpassword,
       },
     });
 

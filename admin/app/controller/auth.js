@@ -121,8 +121,10 @@ const adminLoginController = async (req, res, next) => {
 const adminNewPasswordLink = async (req, res) => {
   const { email } = req.body;
   const useremail = email.toLowerCase();
+  console.log('email' , email)
   try {
-    const client = await AdminModel.findOne({ email: useremail });
+    const client = await AdminModel.findOne({'basic_info.email': useremail });
+    console.log('client' , client)
     if (!client) {
       return res.status(400).json({
         status_code: 400,
@@ -192,7 +194,7 @@ const adminresetPassword = async (req, res) => {
     const Harshpassword = await bcrypt.hash(password, salt);
     const updateclient = await AdminModel.findByIdAndUpdate(id, {
       $set: {
-        password: Harshpassword,
+        'basic_info.password': Harshpassword,
       },
     });
     //   const datad = { notification: 'you have successfully updated your profile', traineeId }

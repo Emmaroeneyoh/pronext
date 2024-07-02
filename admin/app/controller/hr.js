@@ -67,7 +67,7 @@ const updateadminController = async (req, res, next) => {
   } = req.body;
   const userEmail = email.toLowerCase();
   try {
-    const staff = await AdminModel.findOne({ email: userEmail });
+    const staff = await AdminModel.findOne({ 'basic_info.email': userEmail });
 
     if (staff._id != adminid) {
       return res.status(200).json({
@@ -109,7 +109,7 @@ const updateadminprofilecontroller = async (req, res, next) => {
     const { firstname, email, lastname, photo, address, phone, dob, staffid } =
       req.body;
     const useremail = email.toLowerCase();
-    const staff = await AdminModel.findOne({ email: useremail });
+    const staff = await AdminModel.findOne({ 'basic_info.email': useremail });
     if (staff._id != staffid) {
       return res.status(200).json({
         status_code: 400,
