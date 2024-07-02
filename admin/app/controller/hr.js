@@ -4,13 +4,25 @@ const {
   adminupdatepasswordModel,
   admindashboardModel,
   adminretrieveteamleaderModel,
+  admindeleteadminModel,
 } = require("../model/hr");
 const bcrypt = require("bcrypt");
 const { findjobModel } = require("../../../user/core/db/find.work");
+const { groupModel } = require("../../core/db/group");
 
 const adminretrieveusersController = async (req, res, next) => {
   try {
-    let comment = await AdminModel.find();
+    const page = req.body.page || 1;
+    const status = req.query.status;
+    const role = req.query.role;
+    const limit = 10;
+    let skip = (page - 1) * limit;
+    let comment = await AdminModel.find({
+      "administrative.role": role,
+      "administrative.status": status,
+    })
+      .skip(skip) // skip documents
+      .limit(limit);
     return res.status(200).json({
       status_code: 200,
       status: true,
@@ -67,7 +79,7 @@ const updateadminController = async (req, res, next) => {
   } = req.body;
   const userEmail = email.toLowerCase();
   try {
-    const staff = await AdminModel.findOne({ 'basic_info.email': userEmail });
+    const staff = await AdminModel.findOne({ "basic_info.email": userEmail });
 
     if (staff._id != adminid) {
       return res.status(200).json({
@@ -109,7 +121,7 @@ const updateadminprofilecontroller = async (req, res, next) => {
     const { firstname, email, lastname, photo, address, phone, dob, staffid } =
       req.body;
     const useremail = email.toLowerCase();
-    const staff = await AdminModel.findOne({ 'basic_info.email': useremail });
+    const staff = await AdminModel.findOne({ "basic_info.email": useremail });
     if (staff._id != staffid) {
       return res.status(200).json({
         status_code: 400,
@@ -217,6 +229,31 @@ const adminretrieveteamleaderController = async (req, res, next) => {
     handleError(error.message)(res);
   }
 };
+const admindeleteadminController = async (req, res, next) => {
+  try {
+    const { staffid } = req.body;
+    const groupleader = await groupModel.findOne({ teamleader: staffid });
+    if (groupleader) {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: "you cannot delete a team leader that is assigned to a group",
+      });
+    }
+    const data = {
+      staffid,
+    };
+    let trainee = await admindeleteadminModel(data, res);
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "signup process successful",
+    });
+  } catch (error) {
+    console.log(error);
+    handleError(error.message)(res);
+  }
+};
 
 module.exports = {
   adminretrieveusersController,
@@ -227,4 +264,5 @@ module.exports = {
   updatepasswordController,
   admindashboardController,
   adminretrieveteamleaderController,
+  admindeleteadminController,
 };

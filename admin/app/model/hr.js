@@ -69,6 +69,22 @@ const adminretrieveteamleaderModel = async (data, res) => {
     // handleError(error.message)(res)
   }
 };
+const admindeleteadminModel = async (data, res) => {
+  try {
+    const {
+      staffid
+    } = data;
+    const form = await AdminModel.findAndDelete(staffid);
+
+    return form;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+    // handleError(error.message)(res)
+  }
+};
+
+
 const admindashboardModel = async (data, res) => {
   try {
     let fourteenDaysAgo = new Date();
@@ -113,5 +129,5 @@ module.exports = {
   adminupdateprofileModel,
   adminupdatepasswordModel,
   admindashboardModel,
-  adminretrieveteamleaderModel,
+  adminretrieveteamleaderModel, admindeleteadminModel
 };
