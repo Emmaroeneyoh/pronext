@@ -15,12 +15,32 @@ const adminretrieveusersController = async (req, res, next) => {
     const page = req.body.page || 1;
     const status = req.query.status;
     const role = req.query.role;
+    console.log('poel', role, status)
+    var query = { $and: [] }
+   
+    if (status ) {
+            query.$and.push({ "administrative.status": status})
+      }
+   
+    if (role ) {
+    
+            query.$and.push({ "administrative.role": role})
+      }
     const limit = 10;
     let skip = (page - 1) * limit;
-    let comment = await AdminModel.find({
-      "administrative.role": role,
-      "administrative.status": status,
-    })
+
+    if (query.$and.length == 0) {
+      let comment = await AdminModel.find()
+      .skip(skip) // skip documents
+      .limit(limit);
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "cart code generated",
+      data: comment,
+    });
+    }
+    let comment = await AdminModel.find(query)
       .skip(skip) // skip documents
       .limit(limit);
     return res.status(200).json({
