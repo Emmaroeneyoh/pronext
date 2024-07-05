@@ -9,25 +9,53 @@ const adminupdateprofileModel = async (data, res) => {
     const {
       lastname,
       firstname,
-      useremail,
+      userEmail,
       address,
-      photo,
       phone,
       dob,
+      nationality,
+      state,
+      city,
+      gender,
+      middlename,   maritalstatus ,
+      adminid,
+    } = data;
+
+    const form = await AdminModel.findByIdAndUpdate(adminid, {
+      $set: {
+        basic_info: {
+          email: userEmail,
+          // password: Harshpassword,
+          // photo,
+          phone,
+          dob,
+          lastname,
+          firstname,
+          middlename,
+          gender, maritalstatus
+        },
+        address_details: { nationality, state, city, address },
+    
+      },
+    });
+
+    return form;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+    // handleError(error.message)(res)
+  }
+};
+const adminupdateroleModel = async (data, res) => {
+  try {
+    const {
+      role,status,
       staffid,
     } = data;
 
     const form = await AdminModel.findByIdAndUpdate(staffid, {
       $set: {
-        basic_info: {
-          lastname,
-          firstname,
-          address,
-          photo,
-          phone,
-          dob,
-          email: useremail,
-      }
+        administrative: {  status, role },
     
       },
     });
@@ -129,5 +157,5 @@ module.exports = {
   adminupdateprofileModel,
   adminupdatepasswordModel,
   admindashboardModel,
-  adminretrieveteamleaderModel, admindeleteadminModel
+  adminretrieveteamleaderModel, admindeleteadminModel , adminupdateroleModel
 };

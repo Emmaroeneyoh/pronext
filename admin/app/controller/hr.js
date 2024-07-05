@@ -5,6 +5,7 @@ const {
   admindashboardModel,
   adminretrieveteamleaderModel,
   admindeleteadminModel,
+  adminupdateroleModel,
 } = require("../model/hr");
 const bcrypt = require("bcrypt");
 const { findjobModel } = require("../../../user/core/db/find.work");
@@ -12,48 +13,109 @@ const { groupModel } = require("../../core/db/group");
 
 const adminretrieveusersController = async (req, res, next) => {
   try {
-    const page = req.body.page || 1;
-    const status = req.query.status;
-    const role = req.query.role;
-    console.log('poel', role, status)
-    var query = { $and: [] }
-   
-    if (status ) {
-            query.$and.push({ "administrative.status": status})
-      }
-   
-    if (role ) {
-    
-            query.$and.push({ "administrative.role": role})
-      }
+    const page = req.query.page || 1;
     const limit = 10;
     let skip = (page - 1) * limit;
+    const { role, status } = req.body;
+    // const date = req.query.date;
+    var query = { $and: [] };
 
-    if (query.$and.length == 0) {
-      let comment = await AdminModel.find()
-      .skip(skip) // skip documents
-      .limit(limit);
-    return res.status(200).json({
-      status_code: 200,
-      status: true,
-      message: "cart code generated",
-      data: comment,
-    });
+    // if (date && date != "") {
+    //   query.$and.push({ createdAt: date });
+    // }
+    // if (!type || type.length == 0) {
+    //   return res.status(400).json({
+    //     status_code: 400,
+    //     status: false,
+    //     message: "type must not be an empty array",
+    //   });
+    // }
+    if (status && status.length > 0) {
+      query.$and.push({ 'administrative.status': { $in: status } });
     }
-    let comment = await AdminModel.find(query)
-      .skip(skip) // skip documents
-      .limit(limit);
+    if (role && role.length > 0) {
+      query.$and.push({ 'administrative.role': { $in: role } });
+    }
+    if (query.$and.length == 0) {
+            let admins = await AdminModel.find()
+            .skip(skip) // skip documents
+            .limit(limit).sort({ createdAt: -1 })
+          return res.status(200).json({
+            status_code: 200,
+            status: true,
+            message: "cart code generated",
+            data: admins,
+          });
+          }
+          let admins = await AdminModel.find(query)
+            .skip(skip) // skip documents
+            .limit(limit).sort({ createdAt: -1 })
+          return res.status(200).json({
+            status_code: 200,
+            status: true,
+            message: "cart code generated",
+            data: admins,
+          });
     return res.status(200).json({
       status_code: 200,
       status: true,
-      message: "cart code generated",
-      data: comment,
+      message: "signup process successful",
+      data: formsdata ,
+      pagination: {
+        limit,
+        page, totalpages
+      },
     });
   } catch (error) {
     console.log(error);
     handleError(error.message)(res);
   }
 };
+
+// const adminretrieveusersController = async (req, res, next) => {
+//   try {
+//     const page = req.body.page || 1;
+//     const status = req.query.status;
+//     const role = req.query.role;
+//     console.log('poel', role, status)
+//     var query = { $and: [] }
+   
+//     if (status ) {
+//             query.$and.push({ "administrative.status": status})
+//       }
+   
+//     if (role ) {
+    
+//             query.$and.push({ "administrative.role": role})
+//       }
+//     const limit = 10;
+//     let skip = (page - 1) * limit;
+
+//     if (query.$and.length == 0) {
+//       let comment = await AdminModel.find()
+//       .skip(skip) // skip documents
+//       .limit(limit);
+//     return res.status(200).json({
+//       status_code: 200,
+//       status: true,
+//       message: "cart code generated",
+//       data: comment,
+//     });
+//     }
+//     let comment = await AdminModel.find(query)
+//       .skip(skip) // skip documents
+//       .limit(limit);
+//     return res.status(200).json({
+//       status_code: 200,
+//       status: true,
+//       message: "cart code generated",
+//       data: comment,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     handleError(error.message)(res);
+//   }
+// };
 const adminretrievesingleuserController = async (req, res, next) => {
   try {
     const { staffid } = req.params;
@@ -90,11 +152,14 @@ const updateadminController = async (req, res, next) => {
     lastname,
     firstname,
     email,
-    password,
     address,
-    photo,
     phone,
     dob,
+    nationality,
+    state,
+    city,
+    gender,
+    middlename,   maritalstatus ,
     adminid,
   } = req.body;
   const userEmail = email.toLowerCase();
@@ -112,17 +177,45 @@ const updateadminController = async (req, res, next) => {
 
     const data = {
       lastname,
-      firstname,
-      userEmail,
-      password,
-      address,
-      photo,
-      phone,
-      dob,
-      adminid,
+    firstname,
+    userEmail,
+    address,
+    phone,
+    dob,
+    nationality,
+    state,
+    city,
+    gender,
+    middlename,   maritalstatus ,
+    adminid,
     };
 
     let trainee = await adminupdateprofileModel(data, res);
+
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "login process successful",
+      data: trainee,
+    });
+  } catch (error) {
+    console.log(error);
+    handleError(error.message)(res);
+  }
+};
+const updateadminrroleController = async (req, res, next) => {
+  const {
+    role ,
+    adminid, status, staffid
+  } = req.body;
+  try {
+
+    const data = {
+      role ,
+      staffid, status,
+    };
+
+    let trainee = await adminupdateroleModel(data, res);
 
     return res.status(200).json({
       status_code: 200,
@@ -284,5 +377,5 @@ module.exports = {
   updatepasswordController,
   admindashboardController,
   adminretrieveteamleaderController,
-  admindeleteadminController,
+  admindeleteadminController, updateadminrroleController
 };
