@@ -18,7 +18,8 @@ const adminupdateprofileModel = async (data, res) => {
       city,
       gender,
       middlename,   maritalstatus ,
-      adminid,
+      adminid, role,
+      status,
     } = data;
 
     const form = await AdminModel.findByIdAndUpdate(adminid, {
@@ -35,6 +36,7 @@ const adminupdateprofileModel = async (data, res) => {
           gender, maritalstatus
         },
         address_details: { nationality, state, city, address },
+        administrative: {  status, role },
     
       },
     });

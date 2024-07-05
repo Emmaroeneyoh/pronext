@@ -88,7 +88,6 @@ const adminLoginController = async (req, res, next) => {
         error: "user dont exist on our application",
       });
     }
-
     const checkPassword = await bcrypt.compare(password, userDetails.basic_info.password);
     if (!checkPassword) {
       return res.status(400).json({

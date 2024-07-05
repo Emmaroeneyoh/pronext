@@ -159,6 +159,8 @@ const updateadminController = async (req, res, next) => {
     state,
     city,
     gender,
+    role,
+    status,
     middlename,   maritalstatus ,
     adminid,
   } = req.body;
@@ -187,7 +189,8 @@ const updateadminController = async (req, res, next) => {
     city,
     gender,
     middlename,   maritalstatus ,
-    adminid,
+    adminid, role,
+    status,
     };
 
     let trainee = await adminupdateprofileModel(data, res);

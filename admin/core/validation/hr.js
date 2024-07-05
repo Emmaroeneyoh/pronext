@@ -18,6 +18,8 @@ const adminupdateprofileValidation = (req, res, next) => {
     city: joi.string().required(),
     gender: joi.string().required(),
     maritalstatus: joi.string().required(),
+    status: joi.string().required(),
+    role: joi.string().required(),
   });
   const { error } = schema.validate(req.body);
   if (error) {

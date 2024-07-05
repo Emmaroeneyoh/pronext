@@ -6,11 +6,12 @@ const {
 } = require("../model/experience.education");
 
 const admincreateexperienceController = async (req, res, next) => {
-  const { value, name , adminid} = req.body;
+  const { value, name, adminid } = req.body;
   try {
     const data = {
       value,
-      name, adminid
+      name,
+      adminid,
     };
     let trainee = await admincreateexperienceModel(data, res);
     return res.status(200).json({
@@ -41,7 +42,6 @@ const adminupdateexperienceController = async (req, res, next) => {
       status_code: 200,
       status: true,
       message: "signup process successful",
-      
     });
   } catch (error) {
     console.log(error);
@@ -56,6 +56,10 @@ const adminretrieveexperienceController = async (req, res, next) => {
     let skip = (page - 1) * limit;
     let trainee = await experienceModel
       .find()
+      .populate({
+        path: "createdBy",
+        select: "basic_info.firstname",
+      })
       .skip(skip) // skip documents
       .limit(limit);
     return res.status(200).json({
@@ -101,11 +105,12 @@ const admindeleteexperienceController = async (req, res, next) => {
   }
 };
 const admincreateeducationController = async (req, res, next) => {
-  const { value, name  , adminid} = req.body;
+  const { value, name, adminid } = req.body;
   try {
     const data = {
       value,
-      name, adminid
+      name,
+      adminid,
     };
     let trainee = await admincreateeducationModel(data, res);
     return res.status(200).json({
@@ -147,6 +152,10 @@ const adminretrieveeducationController = async (req, res, next) => {
     let skip = (page - 1) * limit;
     let trainee = await educationModel
       .find()
+      .populate({
+        path: "createdBy",
+        select: "basic_info.firstname",
+      })
       .skip(skip) // skip documents
       .limit(limit);
     return res.status(200).json({
