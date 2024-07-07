@@ -58,7 +58,7 @@ const adminretrieveexperienceController = async (req, res, next) => {
       .find()
       .populate({
         path: "createdBy",
-        select: "basic_info.firstname",
+        select: "basic_info.firstname basic_info.lastname",
       })
       .skip(skip) // skip documents
       .limit(limit);
@@ -154,7 +154,7 @@ const adminretrieveeducationController = async (req, res, next) => {
       .find()
       .populate({
         path: "createdBy",
-        select: "basic_info.firstname",
+        select: "basic_info.firstname basic_info.lastname ",
       })
       .skip(skip) // skip documents
       .limit(limit);
