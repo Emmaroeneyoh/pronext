@@ -24,8 +24,8 @@ const admin_check_token = async (req, res, next) => {
 
           const decoded = jwt.verify(token, adminJWT)
         const user = decoded.admin
-        console.log('posis' , user , admin)
-        if (admin != user) {
+        console.log('user as' , user)
+        if (admin != user.adminid) {
           console.log('posis' )
           return res.status(400).json({
             status_code: 400,

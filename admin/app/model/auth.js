@@ -59,7 +59,7 @@ const adminLoginModel = async (data, res) => {
   try {
     const { userEmail } = data;
     const userDetails = await AdminModel.findOne({ 'basic_info.email': userEmail });
-    const tokenparams = {userid : userDetails._id , role: userDetails.administrative.role}
+    const tokenparams = {adminid : userDetails._id , role: userDetails.administrative.role}
     const token = create_admin_token(tokenparams);
     const userData = {
       id: userDetails._id,
