@@ -33,18 +33,18 @@ const adminSignupController = async (req, res, next) => {
   const userEmail = email.toLowerCase();
   // await AdminModel.deleteMany()
   try {
-    const salt = await bcrypt.genSalt();
-    const Harshpassword = await bcrypt.hash(password, salt);
-    const customer = await AdminModel.findOne({ 'basic_info.email': userEmail });
-    if (customer) {
-      return res.status(400).json({
-        status_code: 400,
-        status: false,
-        message: "email already exist",
-        data: [],
-        error: "email already exist",
-      });
-    }
+    // const salt = await bcrypt.genSalt();
+    // const Harshpassword = await bcrypt.hash(password, salt);
+    // const customer = await AdminModel.findOne({ 'basic_info.email': userEmail });
+    // if (customer) {
+    //   return res.status(400).json({
+    //     status_code: 400,
+    //     status: false,
+    //     message: "email already exist",
+    //     data: [],
+    //     error: "email already exist",
+    //   });
+    // }
 
     const data = {
       userEmail,
