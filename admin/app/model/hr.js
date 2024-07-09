@@ -4,7 +4,6 @@ const { hiretalentModel } = require("../../../user/core/db/hire.talent");
 const { AdminModel } = require("../../core/db/admin");
 
 const adminupdateprofileModel = async (data, res) => {
-  console.log("polsidfte", data);
   try {
     const {
       lastname,
@@ -28,18 +27,16 @@ const adminupdateprofileModel = async (data, res) => {
 
     const form = await AdminModel.findByIdAndUpdate(staffid, {
       $set: {
-        basic_info: {
-          email: userEmail,
-          // password: Harshpassword,
-          // photo,
-          phone,
-          dob,
-          lastname,
-          firstname,
-          middlename,
-          gender,
-          maritalstatus,
-        },
+        
+        'basic_info.email': userEmail,
+        'basic_info.phone':phone,
+        'basic_info.dob':dob,
+        'basic_info.lastname':lastname,
+        'basic_info.firstname':firstname,
+        'basic_info.middlename':middlename,
+        'basic_info.gender':gender,
+        'basic_info.maritalstatus':maritalstatus,
+        
         address_details: { nationality, state, city, address },
         administrative: { status, role },
         recruiter: { teamleader, recruiter_active },

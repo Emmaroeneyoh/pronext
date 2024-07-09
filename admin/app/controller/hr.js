@@ -284,7 +284,7 @@ const updatepasswordController = async (req, res, next) => {
 
     const checkPassword = await bcrypt.compare(
       currentpassword,
-      customerDetails.password
+      customerDetails.basic_info.password
     );
     if (!checkPassword) {
       return res.status(400).json({
