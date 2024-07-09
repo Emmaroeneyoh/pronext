@@ -6,6 +6,10 @@ const { adminLoginModel, adminSignupModel } = require("../model/auth");
 const { handleError } = require("../../core/utils");
 const { adminpasswordjwt, appPassword } = require("../../../helper/core/utils");
 const { sendEmail } = require("../../../helper/email");
+const { groupModel } = require("../../core/db/group");
+const { educationModel } = require("../../core/db/education");
+const { experienceModel } = require("../../core/db/experience");
+const { countryModel } = require("../../core/db/country");
 
 const adminSignupController = async (req, res, next) => {
   const {
@@ -88,16 +92,16 @@ const adminLoginController = async (req, res, next) => {
         error: "user dont exist on our application",
       });
     }
-    // const checkPassword = await bcrypt.compare(password, userDetails.basic_info.password);
-    // if (!checkPassword) {
-    //   return res.status(400).json({
-    //     status_code: 400,
-    //     status: false,
-    //     message: "incorrect password",
-    //     data: [],
-    //     error: "incorrect password",
-    //   });
-    // }
+    const checkPassword = await bcrypt.compare(password, userDetails.basic_info.password);
+    if (!checkPassword) {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: "incorrect password",
+        data: [],
+        error: "incorrect password",
+      });
+    }
     const data = {
       userEmail,
       password,

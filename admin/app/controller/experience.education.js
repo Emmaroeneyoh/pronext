@@ -1,5 +1,6 @@
 const { educationModel } = require("../../core/db/education");
 const { experienceModel } = require("../../core/db/experience");
+const { getcurrentdate } = require("../../core/utils");
 const {
   admincreateexperienceModel,
   admincreateeducationModel,
@@ -26,16 +27,20 @@ const admincreateexperienceController = async (req, res, next) => {
   }
 };
 const adminupdateexperienceController = async (req, res, next) => {
-  const { value, name, experienceid } = req.body;
+  const { value, name, experienceid , adminid } = req.body;
   try {
+    
     const data = {
       value,
       name,
     };
+    const editedAt = getcurrentdate();
+    const editedBy = adminid;
+    console.log('updating ' ,editedAt , editedBy )
     const form = await experienceModel.findByIdAndUpdate(experienceid, {
       $set: {
         value,
-        name,
+        name, editedAt , editedBy
       },
     });
     return res.status(200).json({
@@ -124,13 +129,18 @@ const admincreateeducationController = async (req, res, next) => {
     handleError(error.message)(res);
   }
 };
+
+
 const adminupdateeducationController = async (req, res, next) => {
-  const { value, name, eductaionid } = req.body;
+  const { value, name, eductaionid , adminid } = req.body;
   try {
+    const editedAt = getcurrentdate();
+    const editedBy = adminid;
+    
     const form = await educationModel.findByIdAndUpdate(eductaionid, {
       $set: {
         value,
-        name,
+        name,  editedBy , editedAt
       },
     });
 

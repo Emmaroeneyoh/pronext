@@ -6,6 +6,9 @@ const countryschema = new schema({
         name: {
             type:  String
         },
+        additional_note: {
+            type:  String
+        },
         continent: {
             type:  String
         },
@@ -19,7 +22,17 @@ const countryschema = new schema({
             type:  mongoose.Schema.Types.ObjectId,
             ref:'Admin'
         },
-   
+        editedBy: {
+            type:  mongoose.Schema.Types.ObjectId,
+            ref:'Admin' , default : null
+        },
+        additional_note: {
+            type:  String
+        },
+    editedAt : {
+        type: String,
+        default:''
+    },
     createdAt : {
         type: Date,
         default:Date.now

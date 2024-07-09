@@ -8,14 +8,14 @@ const {
 } = require("../model/country");
 
 const admincreatecountryController = async (req, res, next) => {
-  const { name, flag, continent, note, adminid } = req.body;
+  const { name, flag, continent, note, adminid , additional_note } = req.body;
   try {
     const data = {
       name,
       flag,
       continent,
       note,
-      adminid,
+      adminid, additional_note
     };
     let trainee = await admincreatecountryModel(data, res);
     return res.status(200).json({

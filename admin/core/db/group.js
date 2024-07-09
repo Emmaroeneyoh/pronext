@@ -10,7 +10,14 @@ const groupschema = new schema({
             type:  mongoose.Schema.Types.ObjectId,
             ref:'Admin'
         },
-   
+        editedBy: {
+            type:  mongoose.Schema.Types.ObjectId,
+            ref:'Admin' , default :null
+        },
+    editedAt : {
+        type: String,
+        default:""
+    },
     createdAt : {
         type: Date,
         default:Date.now
