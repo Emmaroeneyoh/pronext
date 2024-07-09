@@ -162,7 +162,7 @@ const updateadminController = async (req, res, next) => {
     role,
     status,
     middlename,   maritalstatus ,
-    adminid,
+    adminid, recruiter_active , teamleader
   } = req.body;
   const userEmail = email.toLowerCase();
   try {
@@ -190,7 +190,7 @@ const updateadminController = async (req, res, next) => {
     gender,
     middlename,   maritalstatus ,
     adminid, role,
-    status,
+    status, recruiter_active , teamleader
     };
 
     let trainee = await adminupdateprofileModel(data, res);

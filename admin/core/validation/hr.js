@@ -2,13 +2,14 @@ const joi = require("joi");
 const { handleError } = require("../utils");
 
 
-
 const adminupdateprofileValidation = (req, res, next) => {
   const schema = joi.object({
     adminid: joi.string().required(),
     email: joi.string().required(),
     lastname: joi.string().required(),
-    middlename: joi.string().required(),
+    middlename: joi.string().optional().allow(''),
+    teamleader: joi.string().optional().allow(''),
+    recruiter_active: joi.string().optional().allow(''),
     firstname: joi.string().required(),
     address: joi.string().required(),
     phone: joi.string().required(),

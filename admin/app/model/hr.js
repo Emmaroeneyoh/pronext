@@ -17,8 +17,12 @@ const adminupdateprofileModel = async (data, res) => {
       state,
       city,
       gender,
-      middlename,   maritalstatus ,
-      adminid, role,
+      middlename,
+      maritalstatus,
+      adminid,
+      role,
+      recruiter_active,
+      teamleader,
       status,
     } = data;
 
@@ -33,11 +37,12 @@ const adminupdateprofileModel = async (data, res) => {
           lastname,
           firstname,
           middlename,
-          gender, maritalstatus
+          gender,
+          maritalstatus,
         },
         address_details: { nationality, state, city, address },
-        administrative: {  status, role },
-    
+        administrative: { status, role },
+        recruiter: { teamleader, recruiter_active },
       },
     });
 
@@ -50,15 +55,11 @@ const adminupdateprofileModel = async (data, res) => {
 };
 const adminupdateroleModel = async (data, res) => {
   try {
-    const {
-      role,status,
-      staffid,
-    } = data;
+    const { role, status, staffid } = data;
 
     const form = await AdminModel.findByIdAndUpdate(staffid, {
       $set: {
-        administrative: {  status, role },
-    
+        administrative: { status, role },
       },
     });
 
@@ -75,7 +76,7 @@ const adminupdatepasswordModel = async (data, res) => {
 
     const form = await AdminModel.findByIdAndUpdate(adminid, {
       $set: {
-        'basic_info.password': Harshpassword,
+        "basic_info.password": Harshpassword,
       },
     });
 
@@ -101,9 +102,7 @@ const adminretrieveteamleaderModel = async (data, res) => {
 };
 const admindeleteadminModel = async (data, res) => {
   try {
-    const {
-      staffid
-    } = data;
+    const { staffid } = data;
     const form = await AdminModel.findAndDelete(staffid);
 
     return form;
@@ -113,7 +112,6 @@ const admindeleteadminModel = async (data, res) => {
     // handleError(error.message)(res)
   }
 };
-
 
 const admindashboardModel = async (data, res) => {
   try {
@@ -159,5 +157,7 @@ module.exports = {
   adminupdateprofileModel,
   adminupdatepasswordModel,
   admindashboardModel,
-  adminretrieveteamleaderModel, admindeleteadminModel , adminupdateroleModel
+  adminretrieveteamleaderModel,
+  admindeleteadminModel,
+  adminupdateroleModel,
 };
