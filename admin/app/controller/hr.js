@@ -162,20 +162,20 @@ const updateadminController = async (req, res, next) => {
     role,
     status,
     middlename,   maritalstatus ,
-    adminid, recruiter_active , teamleader
+    adminid, staffid , recruiter_active , teamleader
   } = req.body;
   const userEmail = email.toLowerCase();
   try {
     const staff = await AdminModel.findOne({ "basic_info.email": userEmail });
 
-    if (staff._id != adminid) {
-      return res.status(200).json({
-        status_code: 400,
-        status: true,
-        message: "email already exist",
-        error: "email already exist",
-      });
-    }
+    // if (staff._id != staffid) {
+    //   return res.status(200).json({
+    //     status_code: 400,
+    //     status: true,
+    //     message: "email already exist",
+    //     error: "email already exist",
+    //   });
+    // }
 
     const data = {
       lastname,
@@ -190,7 +190,7 @@ const updateadminController = async (req, res, next) => {
     gender,
     middlename,   maritalstatus ,
     adminid, role,
-    status, recruiter_active , teamleader
+    status, recruiter_active , teamleader , staffid
     };
 
     let trainee = await adminupdateprofileModel(data, res);

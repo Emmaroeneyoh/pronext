@@ -23,10 +23,10 @@ const adminupdateprofileModel = async (data, res) => {
       role,
       recruiter_active,
       teamleader,
-      status,
+      status,  staffid
     } = data;
 
-    const form = await AdminModel.findByIdAndUpdate(adminid, {
+    const form = await AdminModel.findByIdAndUpdate(staffid, {
       $set: {
         basic_info: {
           email: userEmail,
