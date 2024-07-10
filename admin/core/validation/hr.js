@@ -20,8 +20,8 @@ const adminupdateprofileValidation = (req, res, next) => {
     city: joi.string().required(),
     gender: joi.string().required(),
     maritalstatus: joi.string().required(),
-    status: joi.string().required(),
-    role: joi.string().required(),
+    status: joi.string().optional.allow(''),
+    role: joi.string().optional.allow(''),
   });
   const { error } = schema.validate(req.body);
   if (error) {
@@ -132,6 +132,7 @@ const adminupdateuserValidation = (req, res, next) => {
 const adminupdatepasswordValidation = (req, res, next) => {
   const schema = joi.object({
     adminid: joi.string().required(),
+    staffid: joi.string().required(),
     currentpassword: joi.string().required(),
     newpassword: joi.string().required(),
   });

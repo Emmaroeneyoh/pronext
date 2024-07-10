@@ -268,10 +268,11 @@ const updateadminprofilecontroller = async (req, res, next) => {
   }
 };
 
+
 const updatepasswordController = async (req, res, next) => {
-  const { adminid, currentpassword, newpassword } = req.body;
+  const { adminid, currentpassword, newpassword , staffid } = req.body;
   try {
-    const customerDetails = await AdminModel.findById(adminid);
+    const customerDetails = await AdminModel.findById(staffid);
     if (!customerDetails) {
       return res.status(400).json({
         status_code: 400,
@@ -299,7 +300,7 @@ const updatepasswordController = async (req, res, next) => {
     const Harshpassword = await bcrypt.hash(newpassword, salt);
     const data = {
       adminid,
-      Harshpassword,
+      Harshpassword, staffid
     };
 
     let trainee = await adminupdatepasswordModel(data, res);

@@ -82,6 +82,7 @@ const adminLoginController = async (req, res, next) => {
   const { email, password } = req.body;
   const userEmail = email.toLowerCase();
   try {
+
     const userDetails = await AdminModel.findOne({'basic_info.email': userEmail });
     if (!userDetails) {
       return res.status(400).json({

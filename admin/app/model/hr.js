@@ -69,9 +69,9 @@ const adminupdateroleModel = async (data, res) => {
 };
 const adminupdatepasswordModel = async (data, res) => {
   try {
-    const { Harshpassword, adminid } = data;
+    const { Harshpassword, adminid , staffid} = data;
 
-    const form = await AdminModel.findByIdAndUpdate(adminid, {
+    const form = await AdminModel.findByIdAndUpdate(staffid, {
       $set: {
         "basic_info.password": Harshpassword,
       },
