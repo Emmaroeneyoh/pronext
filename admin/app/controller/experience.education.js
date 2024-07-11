@@ -132,12 +132,11 @@ const admincreateeducationController = async (req, res, next) => {
 
 
 const adminupdateeducationController = async (req, res, next) => {
-  const { value, name, eductaionid , adminid } = req.body;
+  const { value, name, educationid , adminid } = req.body;
   try {
     const editedAt = getcurrentdate();
     const editedBy = adminid;
-    
-    const form = await educationModel.findByIdAndUpdate(eductaionid, {
+    const form = await educationModel.findByIdAndUpdate(educationid, {
       $set: {
         value,
         name,  editedBy , editedAt
