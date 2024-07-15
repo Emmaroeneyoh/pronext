@@ -27,20 +27,21 @@ const admincreateexperienceController = async (req, res, next) => {
   }
 };
 const adminupdateexperienceController = async (req, res, next) => {
-  const { value, name, experienceid , adminid } = req.body;
+  const { value, name, experienceid, adminid } = req.body;
   try {
-    
     const data = {
       value,
       name,
     };
     const editedAt = getcurrentdate();
     const editedBy = adminid;
-    console.log('updating ' ,editedAt , editedBy )
+    console.log("updating ", editedAt, editedBy);
     const form = await experienceModel.findByIdAndUpdate(experienceid, {
       $set: {
         value,
-        name, editedAt , editedBy
+        name,
+        editedAt,
+        editedBy,
       },
     });
     return res.status(200).json({
@@ -62,7 +63,7 @@ const adminretrieveexperienceController = async (req, res, next) => {
     let trainee = await experienceModel
       .find()
       .populate({
-        path: "createdBy",
+        path: "createdBy editedBy",
         select: "basic_info.firstname basic_info.lastname",
       })
       .skip(skip) // skip documents
@@ -81,7 +82,10 @@ const adminretrieveexperienceController = async (req, res, next) => {
 const adminretrievesingleexperienceController = async (req, res, next) => {
   try {
     const { experienceid } = req.params;
-    let trainee = await experienceModel.findById(experienceid);
+    let trainee = await experienceModel.findById(experienceid).populate({
+      path: "createdBy editedBy",
+      select: "basic_info.firstname basic_info.lastname",
+    });
     return res.status(200).json({
       status_code: 200,
       status: true,
@@ -130,16 +134,17 @@ const admincreateeducationController = async (req, res, next) => {
   }
 };
 
-
 const adminupdateeducationController = async (req, res, next) => {
-  const { value, name, educationid , adminid } = req.body;
+  const { value, name, educationid, adminid } = req.body;
   try {
     const editedAt = getcurrentdate();
     const editedBy = adminid;
     const form = await educationModel.findByIdAndUpdate(educationid, {
       $set: {
         value,
-        name,  editedBy , editedAt
+        name,
+        editedBy,
+        editedAt,
       },
     });
 
@@ -162,8 +167,8 @@ const adminretrieveeducationController = async (req, res, next) => {
     let trainee = await educationModel
       .find()
       .populate({
-        path: "createdBy",
-        select: "basic_info.firstname basic_info.lastname ",
+        path: "createdBy editedBy",
+        select: "basic_info.firstname basic_info.lastname",
       })
       .skip(skip) // skip documents
       .limit(limit);
@@ -181,7 +186,10 @@ const adminretrieveeducationController = async (req, res, next) => {
 const adminretrievesingleeducationController = async (req, res, next) => {
   try {
     const { educationid } = req.params;
-    let trainee = await educationModel.findById(educationid);
+    let trainee = await educationModel.findById(educationid).populate({
+      path: "createdBy editedBy",
+      select: "basic_info.firstname basic_info.lastname",
+    });
     return res.status(200).json({
       status_code: 200,
       status: true,

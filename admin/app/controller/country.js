@@ -8,14 +8,15 @@ const {
 } = require("../model/country");
 
 const admincreatecountryController = async (req, res, next) => {
-  const { name, flag, continent, note, adminid , additional_note } = req.body;
+  const { name, flag, continent, note, adminid, additional_note } = req.body;
   try {
     const data = {
       name,
       flag,
       continent,
       note,
-      adminid, additional_note
+      adminid,
+      additional_note,
     };
     let trainee = await admincreatecountryModel(data, res);
     return res.status(200).json({
@@ -56,7 +57,10 @@ const adminupdatecountryController = async (req, res, next) => {
 const adminretrievesinglecountryController = async (req, res, next) => {
   try {
     const { countryid } = req.params;
-    let trainee = await countryModel.findById(countryid);
+    let trainee = await countryModel.findById(countryid).populate({
+      path: "createdBy editedBy",
+      select: "basic_info.firstname basic_info.lastname",
+    });
     return res.status(200).json({
       status_code: 200,
       status: true,
@@ -147,7 +151,10 @@ const admincreategroupController = async (req, res, next) => {
 
 const adminretrievegroupController = async (req, res, next) => {
   try {
-    let trainee = await groupModel.find();
+    let trainee = await groupModel.find().populate({
+      path: "createdBy editedBy",
+      select: "basic_info.firstname basic_info.lastname",
+    });
     return res.status(200).json({
       status_code: 200,
       status: true,
