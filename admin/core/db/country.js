@@ -6,9 +6,6 @@ const countryschema = new schema({
         name: {
             type:  String
         },
-        additional_note: {
-            type:  String
-        },
         continent: {
             type:  String
         },
