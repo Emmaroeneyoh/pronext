@@ -4,7 +4,7 @@ const { getcurrentdate } = require("../../core/utils");
 
 const admincreatecountryModel = async (data, res) => {
   try {
-    const { name, flag, continent, note, adminid, additional_note } = data;
+    const { name, flag, continent, note, adminid,  } = data;
 
     const form = await new countryModel({
       name,
@@ -12,7 +12,7 @@ const admincreatecountryModel = async (data, res) => {
       continent,
       note,
       createdBy: adminid,
-      additional_note,
+      
     });
     const productDetails = await form.save();
 

@@ -26,9 +26,7 @@ const countryschema = new schema({
             type:  mongoose.Schema.Types.ObjectId,
             ref:'Admin' , default : null
         },
-        additional_note: {
-            type:  String
-        },
+       
     editedAt : {
         type: String,
         default:''
