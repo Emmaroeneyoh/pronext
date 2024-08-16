@@ -14,6 +14,10 @@ const admincountry = require('./admin/route/country')
 const adminhr = require('./admin/route/hr')
 const adminuser = require('./admin/route/user')
 
+//recruiter
+const admincompany = require('./admin/recruitment/route/company')
+const adminlocation = require('./admin/recruitment/route/location')
+
 //admin education , experience
 const admineducationexperience = require('./admin/route/eductaion.experince')
 
@@ -32,6 +36,9 @@ app.use(express.urlencoded({ extended: true }));
 const user = '/user'
 const admin = '/admin'
 
+//for admin recruitment
+app.use(admin, admincompany) 
+app.use(admin, adminlocation) 
 //for admin
 app.use(admin, adminauth) 
 app.use(admin, adminservice) 
