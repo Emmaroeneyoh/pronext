@@ -5,7 +5,7 @@ const countryschema = new schema({
   name: {
     type: Boolean,
   },
-  fullname: {
+  fullName: {
     type: Boolean,
   },
   email: {

@@ -13,7 +13,7 @@ const admincreateformValidation = (req, res, next) => {
     .try(joi.object(), joi.boolean())
     .required(),
     email: joi.boolean().required(),
-    fullname: joi.boolean().required(),
+    fullName: joi.boolean().required(),
     name: joi.boolean().required(),
     gender: joi.alternatives().try(joi.object(), joi.boolean()).required(),
     otterFields: joi.alternatives().try(joi.object(), joi.boolean()).required(),
@@ -61,7 +61,7 @@ const adminupdateformValidation = (req, res, next) => {
     .try(joi.object(), joi.boolean())
     .required(),
     email: joi.boolean().required(),
-    fullname: joi.boolean().required(),
+    fullName: joi.boolean().required(),
     name: joi.boolean().required(),
     gender: joi.alternatives().try(joi.object(), joi.boolean()).required(),
     otterFields: joi.alternatives().try(joi.object(), joi.boolean()).required(),
