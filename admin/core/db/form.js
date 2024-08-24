@@ -11,6 +11,10 @@ const countryschema = new schema({
   email: {
     type: Boolean,
   },
+ 
+  location: {
+    type: mongoose.Schema.Types.Mixed,
+  },
   phoneNumber: {
     type: Boolean,
   },
@@ -22,7 +26,8 @@ const countryschema = new schema({
   },
   course: {
     type: Boolean,
-  },
+    },
+   
   expectedSalary: {
     type: Boolean,
   },
@@ -30,30 +35,41 @@ const countryschema = new schema({
     type: Boolean,
   },
   maritalStatus: {
-    type:  mongoose.Schema.Mixed,
+    type: mongoose.Schema.Types.Mixed,
   },
   currentLocation: {
-    type:  mongoose.Schema.Mixed,
+    type: mongoose.Schema.Types.Mixed,
   },
   otterFields: {
-    type:  mongoose.Schema.Mixed,
+    type: mongoose.Schema.Types.Mixed,
   },
   gender: {
-    type:  mongoose.Schema.Mixed,
-  },
+    type: mongoose.Schema.Types.Mixed,
+    },
+    
   bpoAccountAndExperience: {
-    type:  mongoose.Schema.Mixed,
+    type: mongoose.Schema.Types.Mixed,
   },
   resume: {
-    type:  mongoose.Schema.Mixed,
+    type: mongoose.Schema.Types.Mixed,
   },
+  status: {
+    type: mongoose.Schema.Types.Mixed,
+  },
+  options: {
+    type: mongoose.Schema.Types.Mixed,
+  },
+  note: {
+    type: mongoose.Schema.Types.Mixed,
+  },
+  
 
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
-const countryModel = mongoose.model("country", countryschema);
+const formModel = mongoose.model("form", countryschema);
 module.exports = {
-  countryModel,
+  formModel,
 };
