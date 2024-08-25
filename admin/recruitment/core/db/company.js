@@ -7,7 +7,7 @@ const countryschema = new schema({
             type:  String
         },
         phone: {
-            type:  String
+            type:  String , default :""
         },
         note: { 
             type:  String

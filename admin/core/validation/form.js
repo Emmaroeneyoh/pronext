@@ -73,7 +73,7 @@ const adminupdateformValidation = (req, res, next) => {
       .alternatives()
       .try(joi.object(), joi.boolean())
       .required(),
-    educationalQualification: joi.boolean().required(),
+    educationalQualification:joi.alternatives().try(joi.object(), joi.boolean()).required(),
     expectedSalary: joi.boolean().required(),
     resume: joi.alternatives().try(joi.object(), joi.boolean()).required(),
     bpoAccountAndExperience: joi

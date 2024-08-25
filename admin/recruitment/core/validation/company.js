@@ -6,6 +6,7 @@ const admincreatecompanyValidation = (req, res, next) => {
     name: joi.string().required(),
     country: joi.string().required(),
     logo: joi.string().required(),
+    phone: joi.optional().required(),
     document: joi.string().required(),
     note: joi.string().required(),
   });
@@ -30,7 +31,8 @@ const adminupdatecompanyValidation = (req, res, next) => {
     companyid: joi.string().required().length(24),
     name: joi.string().required(),
     country: joi.string().required(),
-    logo: joi.string().required(),
+      logo: joi.string().required(),
+      phone: joi.optional().required(),
     document: joi.string().required(),
     note: joi.string().required(),
   });

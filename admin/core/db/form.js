@@ -32,7 +32,7 @@ const countryschema = new schema({
     type: Boolean,
   },
   educationalQualification: {
-    type: Boolean,
+    type: mongoose.Schema.Types.Mixed,
   },
   maritalStatus: {
     type: mongoose.Schema.Types.Mixed,
