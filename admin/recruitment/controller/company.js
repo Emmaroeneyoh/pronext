@@ -97,6 +97,10 @@ const adminretrievecompanyController = async (req, res, next) => {
     let skip = (page - 1) * limit;
     let trainee = await companyModel
       .find()
+      .populate({
+        path: "createdBy editedBy country",
+        select: "basic_info.firstname basic_info.lastname name",
+      })
       .skip(skip) // skip documents
       .limit(limit);
     return res.status(200).json({

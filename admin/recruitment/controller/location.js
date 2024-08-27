@@ -70,9 +70,16 @@ const adminupdatelocationController = async (req, res, next) => {
     address,
     city,
     state,
-    
+
     name,
-    experience , education , interview_mode , operation_mode , startup_date , other_info,company , country,
+    experience,
+    education,
+    interview_mode,
+    operation_mode,
+    startup_date,
+    other_info,
+    company,
+    country,
     adminid,
     locationid,
   } = req.body;
@@ -86,9 +93,16 @@ const adminupdatelocationController = async (req, res, next) => {
       address,
       city,
       state,
-      
+
       name,
-      experience , education , interview_mode , operation_mode , startup_date , other_info,company , country,
+      experience,
+      education,
+      interview_mode,
+      operation_mode,
+      startup_date,
+      other_info,
+      company,
+      country,
       adminid,
       locationid,
     };
@@ -147,6 +161,10 @@ const adminretrievelocationController = async (req, res, next) => {
     let skip = (page - 1) * limit;
     let trainee = await locationModel
       .find()
+      .populate({
+        path: "createdBy editedBy country company",
+        select: "basic_info.firstname basic_info.lastname name",
+      })
       .skip(skip) // skip documents
       .limit(limit);
     return res.status(200).json({
