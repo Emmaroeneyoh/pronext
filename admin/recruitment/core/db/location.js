@@ -5,9 +5,6 @@ const countryschema = new schema({
   name: {
     type: String,
   },
-  phone: {
-    type: String,
-  },
   state: {
     type: String,
   },

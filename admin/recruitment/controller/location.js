@@ -37,7 +37,6 @@ const admincreatelocationController = async (req, res, next) => {
       address,
       city,
       state,
-      phone,
       name,
       experience,
       education,
@@ -71,7 +70,7 @@ const adminupdatelocationController = async (req, res, next) => {
     address,
     city,
     state,
-    phone,
+    
     name,
     experience , education , interview_mode , operation_mode , startup_date , other_info,company , country,
     adminid,
@@ -87,7 +86,7 @@ const adminupdatelocationController = async (req, res, next) => {
       address,
       city,
       state,
-      phone,
+      
       name,
       experience , education , interview_mode , operation_mode , startup_date , other_info,company , country,
       adminid,

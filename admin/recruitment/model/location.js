@@ -12,7 +12,7 @@ const admincreatelocationModel = async (data, res) => {
       address,
       city,
       state,
-      phone,
+      
       name,
       experience,
       education,
@@ -34,7 +34,7 @@ const admincreatelocationModel = async (data, res) => {
       address,
       city,
       state,
-      phone,
+      
       name,
       experience,
       education,
@@ -67,7 +67,7 @@ const updatelocationModel = async (data, res) => {
       address,
       city,
       state,
-      phone,
+      
       name,
 
       adminid,
@@ -95,7 +95,7 @@ const updatelocationModel = async (data, res) => {
         address,
         city,
         state,
-        phone,
+        
         name,
         experience,
         education,
