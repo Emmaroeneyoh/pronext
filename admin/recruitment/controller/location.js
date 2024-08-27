@@ -110,8 +110,8 @@ const adminretrievesinglelocationController = async (req, res, next) => {
   try {
     const { locationid } = req.params;
     let trainee = await locationModel.findById(locationid).populate({
-      path: "createdBy editedBy",
-      select: "basic_info.firstname basic_info.lastname",
+      path: "createdBy editedBy country company",
+      select: "basic_info.firstname basic_info.lastname name",
     });
     return res.status(200).json({
       status_code: 200,

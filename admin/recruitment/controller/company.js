@@ -59,8 +59,8 @@ const adminretrievesinglecompanyController = async (req, res, next) => {
   try {
     const { companyid } = req.params;
     let trainee = await companyModel.findById(companyid).populate({
-      path: "createdBy editedBy",
-      select: "basic_info.firstname basic_info.lastname",
+      path: "createdBy editedBy company",
+      select: "basic_info.firstname basic_info.lastname name",
     });
     return res.status(200).json({
       status_code: 200,
