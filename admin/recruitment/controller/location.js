@@ -124,7 +124,7 @@ const adminretrievesinglelocationController = async (req, res, next) => {
     const { locationid } = req.params;
     let trainee = await locationModel.findById(locationid).populate({
       path: "createdBy editedBy country company",
-      select: "basic_info.firstname basic_info.lastname name",
+      select: "basic_info.firstname basic_info.lastname name logo flag",
     });
     return res.status(200).json({
       status_code: 200,
@@ -163,7 +163,7 @@ const adminretrievelocationController = async (req, res, next) => {
       .find()
       .populate({
         path: "createdBy editedBy country company",
-        select: "basic_info.firstname basic_info.lastname name",
+        select: "basic_info.firstname basic_info.lastname name logo flag",
       })
       .skip(skip) // skip documents
       .limit(limit);
