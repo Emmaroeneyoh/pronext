@@ -20,7 +20,7 @@ const admincreaterecruitformController = async (req, res, next) => {
     currentLocation,
     maritalStatus,
     educationalQualification,
-    expectedSalary,
+    
     resume,
     bpoAccountAndExperience,
     adminid,
@@ -41,7 +41,7 @@ const admincreaterecruitformController = async (req, res, next) => {
       currentLocation,
       maritalStatus,
       educationalQualification,
-      expectedSalary,
+      
       resume,
       bpoAccountAndExperience,
       adminid,
@@ -75,7 +75,7 @@ const adminupdaterecruitformController = async (req, res, next) => {
     currentLocation,
     maritalStatus,
     educationalQualification,
-    expectedSalary,
+    
     resume,
     bpoAccountAndExperience,
     adminid,
@@ -97,7 +97,7 @@ const adminupdaterecruitformController = async (req, res, next) => {
       currentLocation,
       maritalStatus,
       educationalQualification,
-      expectedSalary,
+      
       resume,
       bpoAccountAndExperience,
       adminid, formid

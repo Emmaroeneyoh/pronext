@@ -26,7 +26,6 @@ const admincreateformValidation = (req, res, next) => {
       .try(joi.object(), joi.boolean())
       .required(),
     educationalQualification: joi.alternatives().try(joi.object(), joi.boolean()).required(),
-    expectedSalary: joi.boolean().required(),
     resume: joi.alternatives().try(joi.object(), joi.boolean()).required(),
     bpoAccountAndExperience: joi
       .alternatives()
@@ -74,7 +73,6 @@ const adminupdateformValidation = (req, res, next) => {
       .try(joi.object(), joi.boolean())
       .required(),
     educationalQualification:joi.alternatives().try(joi.object(), joi.boolean()).required(),
-    expectedSalary: joi.boolean().required(),
     resume: joi.alternatives().try(joi.object(), joi.boolean()).required(),
     bpoAccountAndExperience: joi
       .alternatives()

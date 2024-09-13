@@ -17,7 +17,7 @@ const admincreaterecruitformModel = async (data, res) => {
       currentLocation,
       maritalStatus,
       educationalQualification,
-      expectedSalary,
+      
       resume,
       bpoAccountAndExperience,
       adminid,
@@ -38,7 +38,7 @@ const admincreaterecruitformModel = async (data, res) => {
       currentLocation,
       maritalStatus,
       educationalQualification,
-      expectedSalary,
+      
       resume,
       bpoAccountAndExperience,
       adminid,
@@ -70,7 +70,7 @@ const updaterecruitformModel = async (data, res) => {
       currentLocation,
       maritalStatus,
       educationalQualification,
-      expectedSalary,
+      
       resume,
       bpoAccountAndExperience,
       adminid,
@@ -92,7 +92,7 @@ const updaterecruitformModel = async (data, res) => {
         currentLocation,
         maritalStatus,
         educationalQualification,
-        expectedSalary,
+        
         resume,
         bpoAccountAndExperience,
         adminid

@@ -28,9 +28,7 @@ const countryschema = new schema({
     type: Boolean,
     },
    
-  expectedSalary: {
-    type: Boolean,
-  },
+ 
   educationalQualification: {
     type: mongoose.Schema.Types.Mixed,
   },
