@@ -20,12 +20,21 @@ const admincreaterecruitformController = async (req, res, next) => {
     currentLocation,
     maritalStatus,
     educationalQualification,
-    
+
     resume,
     bpoAccountAndExperience,
     adminid,
   } = req.body;
   try {
+    let checklocation_company = await formModel.findOne({ company, location });
+    if (checklocation_company) {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: "location and company already exist",
+      });
+    }
+
     const data = {
       course,
       city,
@@ -41,7 +50,7 @@ const admincreaterecruitformController = async (req, res, next) => {
       currentLocation,
       maritalStatus,
       educationalQualification,
-      
+
       resume,
       bpoAccountAndExperience,
       adminid,
@@ -75,7 +84,7 @@ const adminupdaterecruitformController = async (req, res, next) => {
     currentLocation,
     maritalStatus,
     educationalQualification,
-    
+
     resume,
     bpoAccountAndExperience,
     adminid,
@@ -97,10 +106,11 @@ const adminupdaterecruitformController = async (req, res, next) => {
       currentLocation,
       maritalStatus,
       educationalQualification,
-      
+
       resume,
       bpoAccountAndExperience,
-      adminid, formid
+      adminid,
+      formid,
     };
     let trainee = await updaterecruitformModel(data, res);
     return res.status(200).json({
@@ -117,9 +127,9 @@ const adminupdaterecruitformController = async (req, res, next) => {
 
 const adminretrievesinglerecruitformController = async (req, res, next) => {
   try {
-      const { formid } = req.params;
-      console.log('formid' , formid)
-    let trainee = await formModel.findById(formid)
+    const { formid } = req.params;
+    console.log("formid", formid);
+    let trainee = await formModel.findById(formid);
     return res.status(200).json({
       status_code: 200,
       status: true,
@@ -139,7 +149,7 @@ const adminretrieverecruitformController = async (req, res, next) => {
     let skip = (page - 1) * limit;
     let trainee = await formModel
       .find()
-      
+
       .skip(skip) // skip documents
       .limit(limit);
     return res.status(200).json({

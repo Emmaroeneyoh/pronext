@@ -1,12 +1,15 @@
 const {
-  adminretrievelineupController,
   adminaddlineupController,
   admincheckaddlineupController,
+  adminretrievecandidateController,
+  adminretrievelineupController,
+  adminretrievesinglelineupController,
 } = require("../app/controller/lineup");
 const { admin_check_token } = require("../core/authorisation");
 const {
   adminchecklineupValidation,
   adminretrievelineupValidation,
+  adminretrievesinglelineupValidation,
 } = require("../core/validation/lineup");
 
 const router = require("express").Router();
@@ -22,6 +25,12 @@ router.post(
   adminretrievelineupValidation,
   admin_check_token,
   adminretrievelineupController
+);
+router.get(
+  "/retrieve/single/lineup/:adminid/:lineupid",
+  adminretrievesinglelineupValidation,
+  admin_check_token,
+  adminretrievesinglelineupController
 );
 
 

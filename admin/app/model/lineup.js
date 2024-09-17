@@ -32,6 +32,25 @@ const adminaddlineupModel = async (data, res) => {
     // handleError(error.message)(res)
   }
 };
+const adminretrievecandidateModel = async (data, res) => {
+  try {
+    const { query } = data;
+
+    let lineuplist;
+    if (query.$and.length >= 1) {
+      console.log("good");
+      lineuplist = await lineupModel.find(query);
+    } else {
+      lineuplist = await lineupModel.find();
+    }
+
+    return lineuplist;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+    // handleError(error.message)(res)
+  }
+};
 const adminretrievelineupModel = async (data, res) => {
   try {
     const { query } = data;
@@ -43,6 +62,23 @@ const adminretrievelineupModel = async (data, res) => {
     } else {
       lineuplist = await lineupModel.find();
     }
+
+    return lineuplist;
+  } catch (error) {
+    console.log(error);
+    return error.message;
+    // handleError(error.message)(res)
+  }
+};
+const adminretrievesinglelineupModel = async (data, res) => {
+  try {
+    const { lineupid } = data;
+    let lineuplist = await lineupModel
+      .findById(lineupid)
+      .populate({
+        path: "adminid company location",
+        select: "basic_info.firstname basic_info.lastname",
+      });
 
     return lineuplist;
   } catch (error) {
@@ -73,7 +109,9 @@ const adminretrievelineupviewsform = async (data, res) => {
 
 module.exports = {
   adminaddlineupModel,
-  adminretrievelineupModel,
+  adminretrievecandidateModel,
   adminretrievelineupviewsform,
   adminchecklineupModel,
+  adminretrievelineupModel,
+  adminretrievesinglelineupModel,
 };

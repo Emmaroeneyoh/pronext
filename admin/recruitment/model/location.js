@@ -4,44 +4,30 @@ const { getcurrentdate } = require("../../core/utils");
 const admincreatelocationModel = async (data, res) => {
   try {
     const {
-      salary_range,
-      account_name,
       document,
       status,
       remark,
       address,
       city,
       state,
-      
+
       name,
-      experience,
-      education,
-      interview_mode,
-      operation_mode,
-      startup_date,
-      other_info,
+      account,
       company,
       country,
       adminid,
     } = data;
 
     const form = await new locationModel({
-      salary_range,
-      account_name,
       document,
       status,
       remark,
       address,
       city,
       state,
-      
+
       name,
-      experience,
-      education,
-      interview_mode,
-      operation_mode,
-      startup_date,
-      other_info,
+      account,
       company,
       country,
       createdBy: adminid,
@@ -59,25 +45,18 @@ const admincreatelocationModel = async (data, res) => {
 const updatelocationModel = async (data, res) => {
   try {
     const {
-      salary_range,
-      account_name,
       document,
       status,
       remark,
       address,
       city,
       state,
-      
+
       name,
 
       adminid,
       locationid,
-      experience,
-      education,
-      interview_mode,
-      operation_mode,
-      startup_date,
-      other_info,
+      account,
       company,
       country,
     } = data;
@@ -87,22 +66,15 @@ const updatelocationModel = async (data, res) => {
 
     const form = await locationModel.findByIdAndUpdate(locationid, {
       $set: {
-        salary_range,
-        account_name,
         document,
         status,
         remark,
         address,
         city,
         state,
-        
+
         name,
-        experience,
-        education,
-        interview_mode,
-        operation_mode,
-        startup_date,
-        other_info,
+        account,
         company,
         country,
         createdBy: adminid,

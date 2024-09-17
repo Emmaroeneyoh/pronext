@@ -6,8 +6,6 @@ const {
 
 const admincreatelocationController = async (req, res, next) => {
   const {
-    salary_range,
-    account_name,
     document,
     status,
     remark,
@@ -17,20 +15,13 @@ const admincreatelocationController = async (req, res, next) => {
     phone,
     name,
 
-    experience,
-    education,
-    interview_mode,
-    operation_mode,
-    startup_date,
-    other_info,
+    account,
     company,
     country,
     adminid,
   } = req.body;
   try {
     const data = {
-      salary_range,
-      account_name,
       document,
       status,
       remark,
@@ -38,12 +29,7 @@ const admincreatelocationController = async (req, res, next) => {
       city,
       state,
       name,
-      experience,
-      education,
-      interview_mode,
-      operation_mode,
-      startup_date,
-      other_info,
+      account,
       company,
       country,
       adminid,
@@ -62,8 +48,6 @@ const admincreatelocationController = async (req, res, next) => {
 };
 const adminupdatelocationController = async (req, res, next) => {
   const {
-    salary_range,
-    account_name,
     document,
     status,
     remark,
@@ -72,12 +56,7 @@ const adminupdatelocationController = async (req, res, next) => {
     state,
 
     name,
-    experience,
-    education,
-    interview_mode,
-    operation_mode,
-    startup_date,
-    other_info,
+    account,
     company,
     country,
     adminid,
@@ -85,8 +64,6 @@ const adminupdatelocationController = async (req, res, next) => {
   } = req.body;
   try {
     const data = {
-      salary_range,
-      account_name,
       document,
       status,
       remark,
@@ -95,12 +72,7 @@ const adminupdatelocationController = async (req, res, next) => {
       state,
 
       name,
-      experience,
-      education,
-      interview_mode,
-      operation_mode,
-      startup_date,
-      other_info,
+      account,
       company,
       country,
       adminid,

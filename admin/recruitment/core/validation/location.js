@@ -10,15 +10,8 @@ const admincreatelocationValidation = (req, res, next) => {
     address: joi.string().required(),
     remark: joi.string().required(),
     status: joi.string().required(),
-    salary_range: joi.string().required(),
     document: joi.string().required(),
-    account_name: joi.string().required(),
-    experience: joi.string().required(),
-    education: joi.string().required(),
-    interview_mode: joi.string().required(),
-    operation_mode: joi.string().required(),
-    startup_date: joi.string().required(),
-    other_info: joi.string().required(),
+    account: joi.array().required(),
     company: joi.string().required(),
   });
   const { error } = schema.validate(req.body);
@@ -47,15 +40,9 @@ const adminupdatelocationValidation = (req, res, next) => {
     address: joi.string().required(),
     remark: joi.string().required(),
     status: joi.string().required(),
-    salary_range: joi.string().required(),
     document: joi.string().required(),
-    account_name: joi.string().required(),
-    experience: joi.string().required(),
-    education: joi.string().required(),
-    interview_mode: joi.string().required(),
-    operation_mode: joi.string().required(),
-    startup_date: joi.string().required(),
-    other_info: joi.string().required(),
+    account: joi.array().required(),
+   
     company: joi.string().required(),
   });
   const { error } = schema.validate(req.body);

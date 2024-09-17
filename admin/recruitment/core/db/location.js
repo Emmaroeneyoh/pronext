@@ -23,32 +23,37 @@ const countryschema = new schema({
   document: {
     type: String,
   },
-  account_name: {
-    type: String,
-  },
-  salary_range: {
-    type: String,
-  },
-  other_info: {
-    type: String,
-  },
-  startup_date: {
-    type: String,
-  },
-  operation_mode : {
-    type: String,
-  },
-  interview_mode: {
-    type: String,
-  },
-  education: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "education",
-  },
-  experience: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "experience",
-  },
+  account: [
+    {
+      account_name: {
+        type: String,
+      },
+      salary_range: {
+        type: String,
+      },
+      other_info: {
+        type: String,
+      },
+      startup_date: {
+        type: String,
+      },
+      operation_mode: {
+        type: String,
+      },
+      interview_mode: {
+        type: String,
+      },
+      education: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "education",
+      },
+      experience: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "experience",
+      },
+    },
+  ],
+
   country: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "country",

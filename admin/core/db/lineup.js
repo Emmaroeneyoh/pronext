@@ -12,14 +12,16 @@ const groupschema = new schema(
       default : 'pending'
     },
     company: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "company",
     },
     adminid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "admin",
     },
     location: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "location",
     },
    email: {
       type: String,
