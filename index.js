@@ -15,6 +15,7 @@ const adminhr = require('./admin/route/hr')
 const adminuser = require('./admin/route/user')
 const adminform = require('./admin/route/form')
 const adminlineup = require('./admin/route/lineup')
+const adminreview = require('./admin/route/review')
 
 //recruiter
 const admincompany = require('./admin/recruitment/route/company')
@@ -31,8 +32,8 @@ const { PORT } = require("./helper/core/utils");
 coonectdb()
 app.use(cors());
 //applying our middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 
 const user = '/user'
@@ -50,6 +51,7 @@ app.use(admin, admineducationexperience)
 app.use(admin, admincountry) 
 app.use(admin, adminform) 
 app.use(admin, adminlineup) 
+app.use(admin, adminreview) 
 
 //for user
 app.use(user, userhire) 
