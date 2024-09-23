@@ -97,8 +97,8 @@ const adminretrievelineupController = async (req, res, next) => {
     const { location, company, status, recruiter, interviewdate } = req.body;
     var query = { $and: [] };
 
-    if (status != "") {
-      query.$and.push({ status: status });
+    if (status && status.length >= 1) {
+      query.$and.push({ status: { $in: status } });
     }
     if (company != "") {
       query.$and.push({ company: company });
