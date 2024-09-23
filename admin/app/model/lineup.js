@@ -72,6 +72,7 @@ const adminretrievelineupModel = async (data, res) => {
 };
 const adminretrievesinglelineupModel = async (data, res) => {
   try {
+    console.log('single')
     const { lineupid } = data;
     let lineuplist = await lineupModel
       .findById(lineupid)

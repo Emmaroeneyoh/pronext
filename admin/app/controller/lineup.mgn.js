@@ -1,5 +1,7 @@
 const { lineupModel } = require("../../core/db/lineup");
 const { adminupdatelineupModel } = require("../model/lineup.mgn");
+const nodemailer = require('nodemailer');
+const { appPassword } = require("../../../helper/core/utils");
 
 const admindeletelineupController = async (req, res, next) => {
   try {
@@ -52,7 +54,6 @@ const adminupdatelineupstatusController = async (req, res, next) => {
       status_code: 200,
       status: true,
       message: "signup process successful",
-      data: trainee,
     });
   } catch (error) {
     console.log(error);

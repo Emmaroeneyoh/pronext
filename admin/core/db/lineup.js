@@ -17,7 +17,7 @@ const groupschema = new schema(
     },
     adminid: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "admin",
+      ref: "Admin",
     },
     location: {
       type: mongoose.Schema.Types.ObjectId,

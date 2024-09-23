@@ -73,7 +73,7 @@ const adminuodatelineupstatusValidation = (req, res, next) => {
     lineupid: joi.string().required(),
     status: joi.string().required(),
   });
-  const { error } = schema.validate(req.params);
+  const { error } = schema.validate(req.body);
   if (error) {
     let err = error.details[0].message;
     // let errlen = err.split(' ')
@@ -94,7 +94,7 @@ const adminsendnotificationValidation = (req, res, next) => {
     emails: joi.array().required(),
     notification: joi.string().required(),
   });
-  const { error } = schema.validate(req.params);
+  const { error } = schema.validate(req.body);
   if (error) {
     let err = error.details[0].message;
     // let errlen = err.split(' ')
