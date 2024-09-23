@@ -11,6 +11,9 @@ const countryschema = new schema({
   email: {
     type: Boolean,
   },
+  remark: {
+    type: Boolean,
+  },
  
   location: {
     type: mongoose.Schema.Types.Mixed,

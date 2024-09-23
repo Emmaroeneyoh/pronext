@@ -5,6 +5,7 @@ const admincreateformValidation = (req, res, next) => {
   const schema = joi.object({
     adminid: joi.string().required(),
     course: joi.boolean().required(),
+    remark: joi.boolean().required(),
     dateOfBirth: joi.boolean().required(),
     phoneNumber: joi.boolean().required(),
     city: joi.boolean().required(),
@@ -61,6 +62,7 @@ const adminupdateformValidation = (req, res, next) => {
     .required(),
     email: joi.boolean().required(),
     fullName: joi.boolean().required(),
+    remark: joi.boolean().required(),
     name: joi.boolean().required(),
     gender: joi.alternatives().try(joi.object(), joi.boolean()).required(),
     otterFields: joi.alternatives().try(joi.object(), joi.boolean()).required(),

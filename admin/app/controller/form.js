@@ -21,7 +21,7 @@ const admincreaterecruitformController = async (req, res, next) => {
     maritalStatus,
     educationalQualification,
 
-    resume,
+    resume,remark,
     bpoAccountAndExperience,
     adminid,
   } = req.body;
@@ -51,7 +51,7 @@ const admincreaterecruitformController = async (req, res, next) => {
       maritalStatus,
       educationalQualification,
 
-      resume,
+      resume,remark,
       bpoAccountAndExperience,
       adminid,
     };
@@ -88,7 +88,7 @@ const adminupdaterecruitformController = async (req, res, next) => {
     resume,
     bpoAccountAndExperience,
     adminid,
-    formid,
+    formid,remark
   } = req.body;
   try {
     const data = {
@@ -110,7 +110,7 @@ const adminupdaterecruitformController = async (req, res, next) => {
       resume,
       bpoAccountAndExperience,
       adminid,
-      formid,
+      formid,remark
     };
     let trainee = await updaterecruitformModel(data, res);
     return res.status(200).json({
