@@ -97,22 +97,24 @@ const adminretrievelineupController = async (req, res, next) => {
     const { location, company, status, recruiter, interviewdate } = req.body;
     var query = { $and: [] };
 
-    if (status && status.length >= 1) {
+    if (Array.isArray(status) && status.length > 0) {
+      console.log(status)
       query.$and.push({ status: { $in: status } });
     }
-    if (company != "") {
+    if (company) {
       query.$and.push({ company: company });
     }
-    if (location != "") {
+    if (location) {
       query.$and.push({ location: location });
     }
-    if (interviewdate != "") {
+    if (interviewdate) {
       query.$and.push({ interviewdate: interviewdate });
     }
-    if (recruiter != "") {
+    if (recruiter) {
+      console.log('ididue')
       query.$and.push({ adminid: recruiter });
     }
-
+    console.log(query)
     const data = { query };
     let trainee = await adminretrievelineupModel(data, res);
     return res.status(200).json({

@@ -94,7 +94,6 @@ const adminretrievelineupviewsform = async (data, res) => {
 
     let lineuplist;
     if (query.$and.length >= 1) {
-      console.log("good");
       lineuplist = await findjobModel.find(query);
     } else {
       lineuplist = await findjobModel.find();

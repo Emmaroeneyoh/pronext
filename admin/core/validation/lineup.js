@@ -25,12 +25,13 @@ const adminchecklineupValidation = (req, res, next) => {
 
 const adminretrievelineupValidation = (req, res, next) => {
   const schema = joi.object({
-    adminid: joi.string().required().length(24),
-    status: joi.array().optional().allow(""),
-    company: joi.string().optional().allow(""),
-    location: joi.string().optional().allow(""),
-    interviewdate: joi.string().optional().allow(""),
-    recruiter: joi.string().optional().allow(""),
+    adminid: joi.string().required().length(24)
+    // ,
+    // status: joi.array().optional().allow(""),
+    // company: joi.string().optional().allow(""),
+    // location: joi.string().optional().allow(""),
+    // interviewdate: joi.string().optional().allow(""),
+    // recruiter: joi.string().optional().allow(""),
   });
   const { error } = schema.validate(req.body);
   if (error) {
