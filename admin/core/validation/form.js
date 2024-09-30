@@ -52,7 +52,7 @@ const adminupdateformValidation = (req, res, next) => {
   const schema = joi.object({
     adminid: joi.string().required(),
     formid: joi.string().required(),
-    course: joi.boolean().required(),
+    // course: joi.boolean().required(),
     dateOfBirth: joi.boolean().required(),
     phoneNumber: joi.boolean().required(),
     city: joi.boolean().required(),
