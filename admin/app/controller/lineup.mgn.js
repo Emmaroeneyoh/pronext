@@ -5,7 +5,7 @@ const { appPassword } = require("../../../helper/core/utils");
 
 const admindeletelineupController = async (req, res, next) => {
   try {
-    const { lineupid } = req.params;
+    const { lineupid } = req.body;
 
     const deletelineup = await lineupModel.findByIdAndDelete(lineupid);
     return res.status(200).json({

@@ -131,7 +131,18 @@ const adminretrievelineupController = async (req, res, next) => {
 const adminretrievesinglelineupController = async (req, res, next) => {
   try {
     const { lineupid } = req.params;
-
+    console.log('singe')
+    let lineup = await lineupModel.findById(lineupid).populate({
+      path: "adminid company location",
+      select: "basic_info.firstname basic_info.lastname",
+    });
+    if (!lineup) {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: "dont exist",
+      });
+    }
     const data = { lineupid };
     let trainee = await adminretrievesinglelineupModel(data, res);
     return res.status(200).json({

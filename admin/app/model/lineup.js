@@ -72,16 +72,24 @@ const adminretrievelineupModel = async (data, res) => {
 };
 const adminretrievesinglelineupModel = async (data, res) => {
   try {
-    console.log('single')
     const { lineupid } = data;
-    let lineuplist = await lineupModel
-      .findById(lineupid)
-      .populate({
-        path: "adminid company location",
-        select: "basic_info.firstname basic_info.lastname",
-      });
-
-    return lineuplist;
+    let lineup = await lineupModel.findById(lineupid).populate({
+      path: "adminid company location",
+      select: "basic_info.firstname basic_info.lastname",
+    });
+    if (!lineup) {
+      
+    }
+    const company = lineup.company._id.toString();
+    const location = lineup.location._id.toString()
+    console.log(company, location)
+    const form = await formModel.findOne({
+      "location.location": location,
+      "location.company": company,
+    });
+    return lineupdata = {
+        form , lineup
+    };
   } catch (error) {
     console.log(error);
     return error.message;

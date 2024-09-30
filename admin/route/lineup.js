@@ -19,6 +19,7 @@ const {
   adminupdatelineupValidation,
   adminuodatelineupstatusValidation,
   adminsendnotificationValidation,
+  admindeletelineupValidation,
 } = require("../core/validation/lineup");
 
 const router = require("express").Router();
@@ -54,9 +55,9 @@ router.get(
   admin_check_token,
   adminretrievesinglelineupController
 );
-router.delete(
-  "/delete/lineup/:adminid/:lineupid",
-  adminretrievesinglelineupValidation,
+router.post(
+  "/delete/lineup",
+  admindeletelineupValidation,
   admin_check_token,
   admindeletelineupController
 );

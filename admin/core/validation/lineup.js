@@ -110,6 +110,26 @@ const adminsendnotificationValidation = (req, res, next) => {
   }
   return next();
 };
+const admindeletelineupValidation = (req, res, next) => {
+  const schema = joi.object({
+    adminid: joi.string().required().length(24),
+    lineupid: joi.string().required(),
+  });
+  const { error } = schema.validate(req.body);
+  if (error) {
+    let err = error.details[0].message;
+    // let errlen = err.split(' ')
+    // console.log('this is length ' , errlen.length)
+    return res.status(400).json({
+      status_code: 400,
+      status: false,
+      message: err,
+      data: [],
+      error: err,
+    });
+  }
+  return next();
+};
 const adminupdatelineupValidation = (req, res, next) => {
   // Schema for validating data in req.params
   const paramsSchema = joi.object({
@@ -159,4 +179,5 @@ module.exports = {
   adminuodatelineupstatusValidation,
   adminupdatelineupValidation,
   adminsendnotificationValidation,
+  admindeletelineupValidation 
 };
