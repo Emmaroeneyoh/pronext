@@ -22,7 +22,7 @@ const admindeletelineupController = async (req, res, next) => {
 
 const adminupdatelineupController = async (req, res, next) => {
   const recruitform = req.body;
-  const lineupid = req.params.lineupid;
+  const lineupid = req.body.lineupid;
     try {
     const data = {
       recruitform,

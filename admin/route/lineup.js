@@ -38,7 +38,7 @@ router.post(
 );
 
 router.post(
-  "/update/lineup/:lineupid",
+  "/update/lineup",
   // adminupdatelineupValidation,
   admin_check_token,
   adminupdatelineupController
