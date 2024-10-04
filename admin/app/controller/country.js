@@ -96,7 +96,7 @@ const adminretrievecountryController = async (req, res, next) => {
     let skip = (page - 1) * limit;
     let trainee = await countryModel
       .find()
-      .skip(skip) // skip documents
+      .skip(skip) // skip document
       .limit(limit);
     return res.status(200).json({
       status_code: 200,
