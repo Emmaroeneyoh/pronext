@@ -1,5 +1,6 @@
 const { lineupModel } = require("../../core/db/lineup");
 const { lineupreviewModel } = require("../core/db/review");
+const { retrieveallLineupReviewmodel } = require("../model/review");
 
 const adminretrievereviewlineupController = async (req, res, next) => {
   const { country, location, email } = req.body;
@@ -105,13 +106,15 @@ const adminretrievesreviewlineupController = async (req, res, next) => {
     const page = req.query.page || 1;
     const limit = 10;
     let skip = (page - 1) * limit;
-    let trainee = await lineupreviewModel
-      .find()
-      .populate({
-        path: "lineupid",
-      })
-      .skip(skip) // skip documents
-      .limit(limit);
+    // let trainee = await lineupreviewModel
+    //   .find()
+    //   .populate({
+    //     path: "lineupid",
+    //   })
+    //   .skip(skip) // skip documents
+    //   .limit(limit);
+    const data = {skip,limit}
+      let trainee = await retrieveallLineupReviewmodel(data, res);
     return res.status(200).json({
       status_code: 200,
       status: true,
