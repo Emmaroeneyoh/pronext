@@ -1,4 +1,5 @@
 const { findjobModel } = require("../../../user/core/db/find.work");
+const { draftModel } = require("../../core/db/draft");
 const { formModel } = require("../../core/db/form");
 const { lineupModel } = require("../../core/db/lineup");
 
@@ -24,7 +25,14 @@ const adminaddlineupModel = async (data, res) => {
 
     const form = await new lineupModel(recruitform);
     const productDetails = await form.save();
-
+    
+    const { email, company, location } = recruitform
+    const userEmail = email.toLowerCase();
+    await draftModel.deleteOne({
+      company,
+      location,
+      email: userEmail,
+    });
     return productDetails;
   } catch (error) {
     console.log(error);

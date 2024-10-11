@@ -1,3 +1,4 @@
+const { adminsavedraftController, adminretrievedraftController } = require("../app/controller/draft");
 const {
   adminaddlineupController,
   admincheckaddlineupController,
@@ -66,6 +67,16 @@ router.post(
   adminsendnotificationValidation,
   admin_check_token,
   adminsendlineupnotificationcontroller
+);
+router.post(
+  "/update/draft",
+  admin_check_token,
+  adminsavedraftController
+);
+router.post(
+  "/retrieve/draft",
+  admin_check_token,
+  adminretrievedraftController
 );
 
 module.exports = router;
