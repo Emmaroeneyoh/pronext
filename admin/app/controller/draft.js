@@ -1,4 +1,5 @@
 const { draftModel } = require("../../core/db/draft");
+const { formModel } = require("../../core/db/form");
 
 const adminsavedraftController = async (req, res, next) => {
   const { company, location, email, adminid } = req.body;
@@ -41,23 +42,28 @@ const adminretrievedraftController = async (req, res, next) => {
   const { company, location, email, adminid } = req.body;
   try {
     const userEmail = email.toLowerCase();
-    const checklineup = await draftModel.findOne({
+    const draftlineup = await draftModel.findOne({
       company,
       location,
       email: userEmail,
     });
-    if (!checklineup) {
+    if (!draftlineup) {
       return res.status(400).json({
         status_code: 400,
         status: false,
         message: "draft not available",
       });
-    }
+      }
+      const shape = await formModel.findOne({
+        "location.location": location,
+        "location.company": company,
+      });
+      const draftdata = {draftlineup, shape}
     return res.status(200).json({
       status_code: 200,
       status: true,
       message: "draft not available",
-      data: checklineup,
+      data: shape,
     });
   } catch (error) {
     console.log(error);
