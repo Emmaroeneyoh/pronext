@@ -25,7 +25,7 @@ const adminchecklineupValidation = (req, res, next) => {
 
 const adminretrievelineupValidation = (req, res, next) => {
   const schema = joi.object({
-    adminid: joi.string().required().length(24)
+    adminid: joi.string().required().length(24),
     // ,
     // status: joi.array().optional().allow(""),
     // company: joi.string().optional().allow(""),
@@ -130,6 +130,26 @@ const admindeletelineupValidation = (req, res, next) => {
   }
   return next();
 };
+const adminsingledraftValidation = (req, res, next) => {
+  const schema = joi.object({
+    adminid: joi.string().required().length(24),
+    draftid: joi.string().required(),
+  });
+  const { error } = schema.validate(req.params);
+  if (error) {
+    let err = error.details[0].message;
+    // let errlen = err.split(' ')
+    // console.log('this is length ' , errlen.length)
+    return res.status(400).json({
+      status_code: 400,
+      status: false,
+      message: err,
+      data: [],
+      error: err,
+    });
+  }
+  return next();
+};
 const adminupdatelineupValidation = (req, res, next) => {
   // Schema for validating data in req.params
   const paramsSchema = joi.object({
@@ -179,5 +199,6 @@ module.exports = {
   adminuodatelineupstatusValidation,
   adminupdatelineupValidation,
   adminsendnotificationValidation,
-  admindeletelineupValidation 
+  admindeletelineupValidation,
+  adminsingledraftValidation,
 };

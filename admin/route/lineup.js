@@ -1,4 +1,4 @@
-const { adminsavedraftController, adminretrievedraftController } = require("../app/controller/draft");
+const { adminsavedraftController, adminretrievedraftController, adminretrievesingledraftController } = require("../app/controller/draft");
 const {
   adminaddlineupController,
   admincheckaddlineupController,
@@ -21,6 +21,7 @@ const {
   adminuodatelineupstatusValidation,
   adminsendnotificationValidation,
   admindeletelineupValidation,
+  adminsingledraftValidation,
 } = require("../core/validation/lineup");
 
 const router = require("express").Router();
@@ -77,6 +78,12 @@ router.post(
   "/retrieve/draft",
   admin_check_token,
   adminretrievedraftController
+);
+router.get(
+  "/retrieve/single/draft/:adminid/:draftid",
+  adminsingledraftValidation,
+  admin_check_token,
+   adminretrievesingledraftController
 );
 
 module.exports = router;

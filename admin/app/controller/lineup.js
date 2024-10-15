@@ -12,38 +12,33 @@ const admincheckaddlineupController = async (req, res, next) => {
   const { company, location, email } = req.body;
   try {
     const userEmail = email.toLowerCase();
-    const checklineup = await lineupModel.findOne({
+    const lineup = await lineupModel.findOne({
       company,
       location,
       email: userEmail,
     });
-    if (checklineup) {
+    if (!lineup) {
       return res.status(400).json({
         status_code: 400,
         status: false,
-        message: "candidate already linedup",
+        message: " linedup dont exist",
       });
     }
     const data = { company, location };
-    let trainee = await adminchecklineupModel(data, res);
-    if (trainee == null) {
-      return res.status(400).json({
-        status_code: 400,
-        status: false,
-        message: "form does not exist",
-      });
-    }
+    let shape = await adminchecklineupModel(data, res);
+    const lineupdata = {lineup , shape}
     return res.status(200).json({
       status_code: 200,
       status: true,
-      message: "candidate not linedup",
-      data: trainee,
+      message: " linedup",
+      data:  lineupdata
     });
   } catch (error) {
     console.log(error);
     handleError(error.message)(res);
   }
 };
+
 
 const adminaddlineupController = async (req, res, next) => {
   const recruitform = req.body;
