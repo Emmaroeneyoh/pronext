@@ -2,23 +2,31 @@ const { lineupModel } = require("../../core/db/lineup");
 const { lineupreviewModel } = require("../core/db/review");
 const { retrieveallLineupReviewmodel } = require("../model/review");
 
-const adminretrievereviewlineupController = async (req, res, next) => {
-  const { country, location, email } = req.body;
-  try {
-    let trainee = await lineupModel.findOne({ country, location, email });
 
-    if (!trainee) {
+const adminretrievereviewlineupController = async (req, res, next) => {
+  const { company, location, email } = req.body;
+  try {
+    const userEmail = email.toLowerCase();
+    const lineup = await lineupModel.findOne({
+      company,
+      location,
+      email: userEmail,
+    });
+    if (!lineup) {
       return res.status(400).json({
         status_code: 400,
         status: false,
-        message: "candidate dont exist",
+        message: " linedup dont exist",
       });
     }
+    const lineupid = lineup._id
+    const review = await lineupreviewModel.findOne({ lineupid })
+    const reviewid = review._id
     return res.status(200).json({
       status_code: 200,
       status: true,
-      message: "signup process successful",
-      data: trainee,
+      message: " linedup",
+      data:  reviewid
     });
   } catch (error) {
     console.log(error);

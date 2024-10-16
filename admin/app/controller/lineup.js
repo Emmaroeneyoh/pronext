@@ -17,11 +17,11 @@ const admincheckaddlineupController = async (req, res, next) => {
       location,
       email: userEmail,
     });
-    if (!lineup) {
+    if (lineup) {
       return res.status(400).json({
         status_code: 400,
         status: false,
-        message: " linedup dont exist",
+        message: " linedup exist already",
       });
     }
     const data = { company, location };
