@@ -1,3 +1,4 @@
+const { formModel } = require("../../core/db/form");
 const { lineupModel } = require("../../core/db/lineup");
 const {
   adminaddlineupModel,
@@ -11,27 +12,39 @@ const {
 const admincheckaddlineupController = async (req, res, next) => {
   const { company, location, email } = req.body;
   try {
+
+    const form = await formModel.findOne({
+      "location.location": location,
+      "location.company": company,
+    });
+    if (!form) {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: "form shape dont exist",
+      });
+    }
     const userEmail = email.toLowerCase();
     const lineup = await lineupModel.findOne({
       company,
       location,
       email: userEmail,
     });
-    if (lineup) {
+
+    if (!lineup) {
       return res.status(400).json({
         status_code: 400,
         status: false,
-        message: " linedup exist already",
+        message: " linedup dont exist ",
       });
     }
-    const data = { company, location };
-    let shape = await adminchecklineupModel(data, res);
-    const lineupdata = {lineup , shape}
+    
+    const formid = form._id
     return res.status(200).json({
       status_code: 200,
       status: true,
-      message: " linedup",
-      data:  lineupdata
+      message: " linedup exist",
+      data:  formid 
     });
   } catch (error) {
     console.log(error);
