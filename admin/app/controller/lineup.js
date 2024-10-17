@@ -35,7 +35,7 @@ const admincheckaddlineupController = async (req, res, next) => {
       return res.status(400).json({
         status_code: 400,
         status: false,
-        message: " linedup dont exist ",
+        message: " linedup already exist ",
       });
     }
     
