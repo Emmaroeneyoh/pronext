@@ -31,7 +31,7 @@ const admincheckaddlineupController = async (req, res, next) => {
       email: userEmail,
     });
 
-    if (!lineup) {
+    if (lineup) {
       return res.status(400).json({
         status_code: 400,
         status: false,
@@ -56,6 +56,20 @@ const admincheckaddlineupController = async (req, res, next) => {
 const adminaddlineupController = async (req, res, next) => {
   const recruitform = req.body;
   try {
+    const { company, location, email } = req.body;
+    const userEmail = email.toLowerCase();
+    const lineup = await lineupModel.findOne({
+      company,
+      location,
+      email: userEmail,
+    });
+    if (lineup) {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: " linedup aready exist ",
+      });
+    }
     const data = {
       recruitform,
     };
