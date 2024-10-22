@@ -2,7 +2,6 @@ const { lineupModel } = require("../../core/db/lineup");
 const { lineupreviewModel } = require("../core/db/review");
 const { retrieveallLineupReviewmodel } = require("../model/review");
 
-
 const adminretrievereviewlineupController = async (req, res, next) => {
   const { company, location, email } = req.body;
   try {
@@ -19,14 +18,14 @@ const adminretrievereviewlineupController = async (req, res, next) => {
         message: " linedup dont exist",
       });
     }
-    const lineupid = lineup._id
-    const review = await lineupreviewModel.findOne({ lineupid })
-    const reviewid = review._id
+    const lineupid = lineup._id;
+    const review = await lineupreviewModel.findOne({ lineupid });
+    const reviewid = review._id;
     return res.status(200).json({
       status_code: 200,
       status: true,
       message: " linedup",
-      data:  reviewid
+      data: reviewid,
     });
   } catch (error) {
     console.log(error);
@@ -78,8 +77,8 @@ const adminupdatereviewlineupController = async (req, res, next) => {
 };
 const admindeletereviewlineupController = async (req, res, next) => {
   const { reviewid } = req.params;
-    try {
-      console.log('rev' , reviewid)
+  try {
+    console.log("rev", reviewid);
     const form = await lineupreviewModel.findByIdAndDelete(reviewid);
     return res.status(200).json({
       status_code: 200,
@@ -114,15 +113,28 @@ const adminretrievesreviewlineupController = async (req, res, next) => {
     const page = req.query.page || 1;
     const limit = 10;
     let skip = (page - 1) * limit;
-    // let trainee = await lineupreviewModel
-    //   .find()
-    //   .populate({
-    //     path: "lineupid",
-    //   })
-    //   .skip(skip) // skip documents
-    //   .limit(limit);
-    const data = {skip,limit}
-      let trainee = await retrieveallLineupReviewmodel(data, res);
+    let trainee = await lineupreviewModel
+      .find()
+      .populate({
+        path: "adminid",
+        select: "basic_info.firstname basic_info.lastname basic_info.email",
+      })
+      .populate({
+        path: "lineupid",
+        populate: [
+          { path: "company", model: "company", select: "name" }, // Populate company inside lineupid
+          {
+            path: "adminid",
+            model: "Admin",
+            select: "basic_info.firstname basic_info.lastname basic_info.email",
+          }, // Populate adminid inside lineupid
+          { path: "location", model: "location", select: "name" }, // Populate location inside lineupid
+        ],
+      })
+      .skip(skip) // skip documents
+      .limit(limit);
+    // const data = {skip,limit}
+    //   let trainee = await retrieveallLineupReviewmodel(data, res);
     return res.status(200).json({
       status_code: 200,
       status: true,
