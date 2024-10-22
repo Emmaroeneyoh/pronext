@@ -122,13 +122,13 @@ const adminretrievesreviewlineupController = async (req, res, next) => {
       .populate({
         path: "lineupid",
         populate: [
-          { path: "company", model: "company", select: "name" }, // Populate company inside lineupid
+          // { path: "company", model: "company", select: "name" }, // Populate company inside lineupid
           {
             path: "adminid",
             model: "Admin",
             select: "basic_info.firstname basic_info.lastname basic_info.email",
           }, // Populate adminid inside lineupid
-          { path: "location", model: "location", select: "name" }, // Populate location inside lineupid
+          // { path: "location", model: "location", select: "name" }, // Populate location inside lineupid
         ],
       })
       .skip(skip) // skip documents
