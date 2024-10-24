@@ -53,12 +53,16 @@ const adminretrievedraftController = async (req, res, next) => {
         message: "draft not available",
       });
     }
-   
+    const shape = await formModel.findOne({
+        "location.location": location,
+        "location.company": company,
+    });
+      const draftdata = {shape,draftlineup,}
     return res.status(200).json({
       status_code: 200,
       status: true,
       message: "draft not available",
-      data:draftlineup,
+      data: draftdata
     });
   } catch (error) {
     console.log(error);
