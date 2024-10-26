@@ -84,7 +84,7 @@ const adminretrievesingledraftController = async (req, res, next) => {
     return res.status(200).json({
       status_code: 200,
       status: true,
-      message: "draft not available",
+      message: "draft available",
       data: draftdata,
     });
   } catch (error) {

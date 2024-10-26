@@ -35,7 +35,7 @@ router.post(
   admin_check_token,
   adminupdatereviewlineupController
 );
-router.delete(
+router.put(
   "/delete/review/:adminid/:reviewid",
   adminsinglelineupreviewValidation,
   admin_check_token,
