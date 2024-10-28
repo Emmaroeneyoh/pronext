@@ -13,6 +13,7 @@ const {
   adminupdatelineupreviewValidation,
   admincreatelineupreviewValidation,
   adminretrievelineupreviewValidation,
+  admindeletelineupreviewValidation,
 } = require("../recruitment/core/validation/review");
 
 const router = require("express").Router();
@@ -36,8 +37,8 @@ router.post(
   adminupdatereviewlineupController
 );
 router.put(
-  "/delete/review/:adminid/:reviewid",
-  adminsinglelineupreviewValidation,
+  "/delete/review",
+  admindeletelineupreviewValidation,
   admin_check_token,
   admindeletereviewlineupController
 );

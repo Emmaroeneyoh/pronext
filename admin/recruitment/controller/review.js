@@ -76,7 +76,7 @@ const adminupdatereviewlineupController = async (req, res, next) => {
   }
 };
 const admindeletereviewlineupController = async (req, res, next) => {
-  const { reviewid } = req.params;
+  const { reviewid } = req.body;
   try {
     console.log("rev", reviewid);
     const form = await lineupreviewModel.findByIdAndDelete(reviewid);
