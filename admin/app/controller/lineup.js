@@ -1,3 +1,4 @@
+const { draftModel } = require("../../core/db/draft");
 const { formModel } = require("../../core/db/form");
 const { lineupModel } = require("../../core/db/lineup");
 const {
@@ -12,7 +13,6 @@ const {
 const admincheckaddlineupController = async (req, res, next) => {
   const { company, location, email } = req.body;
   try {
-
     const form = await formModel.findOne({
       "location.location": location,
       "location.company": company,
@@ -38,20 +38,34 @@ const admincheckaddlineupController = async (req, res, next) => {
         message: " linedup already exist ",
       });
     }
-    
-    const formid = form._id
+
+    //check for draft
+    const checkdraft = await draftModel.findOne({
+      company,
+      location,
+      email: userEmail,
+    });
+    if (checkdraft) {
+      return res.status(200).json({
+        status_code: 200,
+        status: true,
+        message: "lineup already in draft",
+        type: "shape",
+      });
+    }
+    const formid = form._id;
     return res.status(200).json({
       status_code: 200,
       status: true,
       message: " linedup exist",
-      data:  formid 
+      type: "shape",
+      data: formid,
     });
   } catch (error) {
     console.log(error);
     handleError(error.message)(res);
   }
 };
-
 
 const adminaddlineupController = async (req, res, next) => {
   const recruitform = req.body;
@@ -120,7 +134,7 @@ const adminretrievelineupController = async (req, res, next) => {
     var query = { $and: [] };
 
     if (Array.isArray(status) && status.length > 0) {
-      console.log(status)
+      console.log(status);
       query.$and.push({ status: { $in: status } });
     }
     if (company) {
@@ -133,10 +147,10 @@ const adminretrievelineupController = async (req, res, next) => {
       query.$and.push({ interviewdate: interviewdate });
     }
     if (recruiter) {
-      console.log('ididue')
+      console.log("ididue");
       query.$and.push({ adminid: recruiter });
     }
-    console.log(query)
+    console.log(query);
     const data = { query };
     let trainee = await adminretrievelineupModel(data, res);
     return res.status(200).json({
@@ -153,7 +167,7 @@ const adminretrievelineupController = async (req, res, next) => {
 const adminretrievesinglelineupController = async (req, res, next) => {
   try {
     const { lineupid } = req.params;
-    console.log('singe')
+    console.log("singe");
     let lineup = await lineupModel.findById(lineupid).populate({
       path: "adminid company location",
       select: "basic_info.firstname basic_info.lastname",
