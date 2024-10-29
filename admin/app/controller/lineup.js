@@ -46,9 +46,9 @@ const admincheckaddlineupController = async (req, res, next) => {
       email: userEmail,
     });
     if (checkdraft) {
-      return res.status(200).json({
-        status_code: 200,
-        status: true,
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
         message: "lineup already in draft",
         type: "shape",
       });
