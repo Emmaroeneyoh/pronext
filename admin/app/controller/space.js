@@ -79,7 +79,7 @@ const admindeletespaceController = async (req, res, next) => {
 
 const adminretrievespaceController = async (req, res, next) => {
   try {
-    const { general } = req.body;
+    const { general } = req.query;
     const page = req.body.page || 1;
     const limit = 10;
     let skip = (page - 1) * limit;

@@ -100,9 +100,9 @@ router.post(
   admin_check_token,
   adminupdatespaceController
 );
-router.post(
-  "/retrieve/space",
-  adminretrievespaceValidation,
+router.get(
+  "/retrieve/space/:adminid",
+  adminValidation,
   admin_check_token,
   adminretrievespaceController
 );
