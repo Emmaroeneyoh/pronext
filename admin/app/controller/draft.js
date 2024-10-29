@@ -11,10 +11,15 @@ const adminsavedraftController = async (req, res, next) => {
       location,
       email: userEmail,
     });
-    if (checklineup) {
-      const updatedraft = await draftModel.findOneAndUpdate({
-        $set: draftdata,
-      });
+      if (checklineup) {
+       
+      const updatedraft = await draftModel.findOneAndUpdate(
+        { company, location, email: userEmail },
+        {
+          $set: draftdata,
+        },
+        { new: true, upsert: true }
+          );
       return res.status(200).json({
         status_code: 200,
         status: true,
@@ -45,7 +50,7 @@ const adminretrievedraftController = async (req, res, next) => {
       location,
       email: userEmail,
     });
-      console.log(draftlineup)
+    console.log(draftlineup);
     if (!draftlineup) {
       return res.status(400).json({
         status_code: 400,
@@ -54,15 +59,15 @@ const adminretrievedraftController = async (req, res, next) => {
       });
     }
     const shape = await formModel.findOne({
-        "location.location": location,
-        "location.company": company,
+      "location.location": location,
+      "location.company": company,
     });
-      const draftdata = {shape,draftlineup,}
+    const draftdata = { shape, draftlineup };
     return res.status(200).json({
       status_code: 200,
       status: true,
       message: "draft not available",
-      data: draftdata
+      data: draftdata,
     });
   } catch (error) {
     console.log(error);
@@ -75,7 +80,7 @@ const adminretrievesingledraftController = async (req, res, next) => {
     const draftlineup = await draftModel.findById(draftid);
     const company = draftlineup.company.toString();
     const location = draftlineup.location.toString();
-    
+
     const form = await formModel.findOne({
       "location.location": location,
       "location.company": company,
