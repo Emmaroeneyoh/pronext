@@ -73,9 +73,9 @@ const adminretrievesingledraftController = async (req, res, next) => {
   const { draftid } = req.params;
   try {
     const draftlineup = await draftModel.findById(draftid);
-    const company = draftlineup.company;
-    const location = draftlineup.location;
-
+    const company = draftlineup.company.toString();
+    const location = draftlineup.location.toString();
+    
     const form = await formModel.findOne({
       "location.location": location,
       "location.company": company,
