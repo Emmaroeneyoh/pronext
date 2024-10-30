@@ -1,0 +1,63 @@
+Objective:
+The objective of this assignment is to integrate an external API to fetch and display real-time news headlines on a news website. This task will assess your ability to work with external APIs, handle data responses, and seamlessly integrate the functionality into a sample news website.
+
+API Documentation:
+- API Provider: News API
+- API Documentation: [News API Documentation](https://newsapi.org/docs/endpoints/top-headlines)
+
+Requirements:
+
+1. Frontend Integration:
+   - Create a new section on the homepage of the news website to display the latest headlines.
+   - Display at least 5 headlines along with the article source and publication date.
+
+2. Backend Integration :
+   - your application has a backend, create a route to fetch news headlines from the News API.
+   - Cache the responses to reduce the number of API calls.
+
+3. Error Handling:
+   - Implement error handling for cases where the API request fails.
+   - Display a user-friendly message if there are issues fetching the headlines.
+
+Technical Considerations:
+
+1. Frontend:
+   - Use a modern frontend framework or library (React).
+   - Fetch data from the News API using asynchronous requests (e.g., fetch or a library like Axios).
+
+2. Backend :
+   -  use a backend technology Node.js to act as an intermediary between the frontend and the News API.
+
+3. API Key:
+   - Sign up on the News API website to obtain an API key.
+   - Include the API key in your requests for authentication.
+
+4. Data Display:
+   - Display the fetched headlines in a visually appealing format on the homepage.
+
+Submission Guidelines:
+
+1. GitHub Repository
+ 
+2. Code Organization:
+   - Organize your code into clear and well-documented structures.
+   - Include comments to explain complex sections of your code.
+
+3. Instructions:
+   - Provide a README.md file with instructions on how to set up and run your application locally.
+   - Clearly mention any additional libraries or dependencies required.
+
+Assessment Criteria:
+
+1. Successful API Integration:
+   - Proper integration of the News API into the news website.
+
+2. Data Handling:
+   - Effective handling of API responses and displaying relevant information.
+
+3. Error Handling:
+   - Implementation of error handling for potential issues with API requests.
+
+4. Code Quality:
+   - Clean and well-structured code.
+   - Adherence to coding best practices and standards.

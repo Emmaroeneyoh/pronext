@@ -66,9 +66,9 @@ const adminretrievelineupModel = async (data, res) => {
     let lineuplist;
     if (query.$and.length >= 1) {
       console.log("good");
-      lineuplist = await lineupModel.find(query);
+      lineuplist = await lineupModel.find(query).sort({createdAt:-1})
     } else {
-      lineuplist = await lineupModel.find();
+      lineuplist = await lineupModel.find().sort({createdAt:-1})
     }
 
     return lineuplist;
