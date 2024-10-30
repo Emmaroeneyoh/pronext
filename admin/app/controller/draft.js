@@ -77,7 +77,14 @@ const adminretrievedraftController = async (req, res, next) => {
 const adminretrievesingledraftController = async (req, res, next) => {
   const { draftid } = req.params;
   try {
-    const draftlineup = await draftModel.findById(draftid);
+      const draftlineup = await draftModel.findById(draftid);
+      if (!draftlineup) {
+        return res.status(400).json({
+            status_code: 400,
+            status: false,
+            message: "draft does not exist",
+          });
+      }
     const company = draftlineup.company.toString();
     const location = draftlineup.location.toString();
 
