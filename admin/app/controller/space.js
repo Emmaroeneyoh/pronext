@@ -1,10 +1,11 @@
 const { spaceModel } = require("../../core/db/space");
 
 const admincreatespaceController = async (req, res, next) => {
-  const { name, general, note, adminid } = req.body;
+  const {title, general, note, adminid } = req.body;
   try {
+ 
     const form = await new spaceModel({
-      name,
+     title,
       general,
       note,
       adminid,
