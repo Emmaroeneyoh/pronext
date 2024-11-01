@@ -23,11 +23,11 @@ const admincreatespaceController = async (req, res, next) => {
   }
 };
 const adminupdatespaceController = async (req, res, next) => {
-  const { name, general, note, adminid, spaceid } = req.body;
+  const { title, general, note, adminid, spaceid } = req.body;
   try {
     const form = await spaceModel.findByIdAndUpdate(spaceid, {
       $set: {
-        name,
+        title,
         general,
         note,
         adminid,
@@ -86,6 +86,10 @@ const adminretrievespaceController = async (req, res, next) => {
     let skip = (page - 1) * limit;
     let trainee = await spaceModel
       .find({ general })
+      .populate({
+        path: "adminid",
+        select: "basic_info.firstname basic_info.lastname"
+      })
       .skip(skip) // skip documents
       .limit(limit);
     return res.status(200).json({
