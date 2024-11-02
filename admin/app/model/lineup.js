@@ -15,8 +15,8 @@ const adminchecklineupModel = async (data, res) => {
     return form;
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 const adminaddlineupModel = async (data, res) => {
@@ -36,8 +36,8 @@ const adminaddlineupModel = async (data, res) => {
     return productDetails;
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 const adminretrievecandidateModel = async (data, res) => {
@@ -55,8 +55,8 @@ const adminretrievecandidateModel = async (data, res) => {
     return lineuplist;
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 const adminretrievelineupModel = async (data, res) => {
@@ -74,8 +74,8 @@ const adminretrievelineupModel = async (data, res) => {
     return lineuplist;
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 const adminretrievesinglelineupModel = async (data, res) => {
@@ -100,8 +100,8 @@ const adminretrievesinglelineupModel = async (data, res) => {
     };
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 const adminretrievelineupviewsform = async (data, res) => {
@@ -118,8 +118,8 @@ const adminretrievelineupviewsform = async (data, res) => {
     return lineuplist;
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 

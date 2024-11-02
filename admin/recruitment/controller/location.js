@@ -43,7 +43,7 @@ const admincreatelocationController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminupdatelocationController = async (req, res, next) => {
@@ -87,7 +87,7 @@ const adminupdatelocationController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -106,7 +106,7 @@ const adminretrievesinglelocationController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const admindeletelocationController = async (req, res, next) => {
@@ -122,7 +122,7 @@ const admindeletelocationController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -147,7 +147,7 @@ const adminretrievelocationController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 

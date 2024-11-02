@@ -65,7 +65,7 @@ const admincreaterecruitformController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminupdaterecruitformController = async (req, res, next) => {
@@ -121,7 +121,7 @@ const adminupdaterecruitformController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -138,7 +138,7 @@ const adminretrievesinglerecruitformController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -160,7 +160,7 @@ const adminretrieverecruitformController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 

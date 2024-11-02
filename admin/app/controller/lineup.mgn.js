@@ -37,7 +37,7 @@ const adminupdatelineupController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -57,7 +57,7 @@ const adminupdatelineupstatusController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -101,7 +101,7 @@ const adminsendlineupnotificationcontroller = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 module.exports = {

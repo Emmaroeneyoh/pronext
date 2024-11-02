@@ -27,7 +27,7 @@ const admincreatecountryController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminupdatecountryController = async (req, res, next) => {
@@ -50,7 +50,7 @@ const adminupdatecountryController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -69,7 +69,7 @@ const adminretrievesinglecountryController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const admindeletecountryController = async (req, res, next) => {
@@ -85,7 +85,7 @@ const admindeletecountryController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -106,7 +106,7 @@ const adminretrievecountryController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -145,7 +145,7 @@ const admincreategroupController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -163,7 +163,7 @@ const adminretrievegroupController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 

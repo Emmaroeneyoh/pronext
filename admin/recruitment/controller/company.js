@@ -25,7 +25,7 @@ const admincreatecompanyController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminupdatecompanyController = async (req, res, next) => {
@@ -51,7 +51,7 @@ const adminupdatecompanyController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -70,7 +70,7 @@ const adminretrievesinglecompanyController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const admindeletecompanyController = async (req, res, next) => {
@@ -86,7 +86,7 @@ const admindeletecompanyController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -111,7 +111,7 @@ const adminretrievecompanyController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 

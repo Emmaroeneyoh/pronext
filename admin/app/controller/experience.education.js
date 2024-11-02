@@ -23,7 +23,7 @@ const admincreateexperienceController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminupdateexperienceController = async (req, res, next) => {
@@ -51,7 +51,7 @@ const adminupdateexperienceController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -76,7 +76,7 @@ const adminretrieveexperienceController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrievesingleexperienceController = async (req, res, next) => {
@@ -94,7 +94,7 @@ const adminretrievesingleexperienceController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -110,7 +110,7 @@ const admindeleteexperienceController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const admincreateeducationController = async (req, res, next) => {
@@ -130,7 +130,7 @@ const admincreateeducationController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -155,7 +155,7 @@ const adminupdateeducationController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -180,7 +180,7 @@ const adminretrieveeducationController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrievesingleeducationController = async (req, res, next) => {
@@ -198,7 +198,7 @@ const adminretrievesingleeducationController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -214,7 +214,7 @@ const admindeleteeducationController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 

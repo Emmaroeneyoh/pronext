@@ -29,7 +29,7 @@ const adminretrievereviewlineupController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const admincreatereviewlineupController = async (req, res, next) => {
@@ -51,7 +51,7 @@ const admincreatereviewlineupController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminupdatereviewlineupController = async (req, res, next) => {
@@ -72,7 +72,7 @@ const adminupdatereviewlineupController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const admindeletereviewlineupController = async (req, res, next) => {
@@ -88,7 +88,7 @@ const admindeletereviewlineupController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrievesinglereviewlineupController = async (req, res, next) => {
@@ -105,7 +105,7 @@ const adminretrievesinglereviewlineupController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrievesreviewlineupController = async (req, res, next) => {
@@ -143,7 +143,7 @@ const adminretrievesreviewlineupController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 

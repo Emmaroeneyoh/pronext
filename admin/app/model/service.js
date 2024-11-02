@@ -16,8 +16,8 @@ const admincreateserviceModel = async (data, res) => {
       return productDetails;
     } catch (error) {
       console.log(error);
-      return error.message;
-      // handleError(error.message)(res)
+      throw new Error(error.message);
+      // return handleError(error.message)(res)
     }
 };
 const adminupdateserviceModel = async (data, res) => {
@@ -36,8 +36,8 @@ const adminupdateserviceModel = async (data, res) => {
       return productDetails;
     } catch (error) {
       console.log(error);
-      return error.message;
-      // handleError(error.message)(res)
+      throw new Error(error.message);
+      // return handleError(error.message)(res)
     }
 };
 

@@ -51,7 +51,7 @@ const adminSignupModel = async (data, res) => {
     return userData;
   } catch (error) {
     console.log("error", error);
-    return error.message;
+    throw new Error(error.message);
   }
 };
 
@@ -70,7 +70,7 @@ const adminLoginModel = async (data, res) => {
 
     return userData;
   } catch (error) {
-    return error.message;
+    throw new Error(error.message);
   }
 };
 

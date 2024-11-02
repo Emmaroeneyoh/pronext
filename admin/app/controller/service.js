@@ -24,7 +24,7 @@ const admincreateserviceController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -50,7 +50,7 @@ const adminupdateserviceController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -66,7 +66,7 @@ const adminretrievesinglserviceController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const admindeleteserviceController = async (req, res, next) => {
@@ -82,7 +82,7 @@ const admindeleteserviceController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrieveallserviceController = async (req, res, next) => {
@@ -96,7 +96,7 @@ const adminretrieveallserviceController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 

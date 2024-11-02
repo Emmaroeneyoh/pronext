@@ -138,7 +138,7 @@ const adminretrieveformsmodel = async (data, res) => {
       obj.status = false
       obj.message = error.message
     return obj
-    // handleError(error.message)(res)
+    // return handleError(error.message)(res)
   }
 };
 const adminupdateformstatusmodel = async (data, res) => {
@@ -172,7 +172,7 @@ const adminupdateformstatusmodel = async (data, res) => {
       obj.status = false
       obj.message = error.message
     return obj
-    // handleError(error.message)(res)
+    // return handleError(error.message)(res)
   }
 };
 

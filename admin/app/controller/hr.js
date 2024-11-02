@@ -68,7 +68,7 @@ const adminretrieveusersController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -113,7 +113,7 @@ const adminretrieveusersController = async (req, res, next) => {
 //     });
 //   } catch (error) {
 //     console.log(error);
-//     handleError(error.message)(res);
+//     return handleError(error.message)(res);
 //   }
 // };
 const adminretrievesingleuserController = async (req, res, next) => {
@@ -128,7 +128,7 @@ const adminretrievesingleuserController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const admindeleteuserController = async (req, res, next) => {
@@ -143,7 +143,7 @@ const admindeleteuserController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -203,7 +203,7 @@ const updateadminController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const updateadminrroleController = async (req, res, next) => {
@@ -228,7 +228,7 @@ const updateadminrroleController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -264,7 +264,7 @@ const updateadminprofilecontroller = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -328,7 +328,7 @@ const admindashboardController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrieveteamleaderController = async (req, res, next) => {
@@ -343,7 +343,7 @@ const adminretrieveteamleaderController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -370,7 +370,7 @@ const admindeleteadminController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 

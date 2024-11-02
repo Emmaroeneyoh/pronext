@@ -38,7 +38,7 @@ const adminsavedraftController = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrievedraftController = async (req, res, next) => {
@@ -71,7 +71,7 @@ const adminretrievedraftController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrievesingledraftController = async (req, res, next) => {
@@ -101,7 +101,7 @@ const adminretrievesingledraftController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 

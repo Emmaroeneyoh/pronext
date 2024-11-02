@@ -17,7 +17,7 @@ const adminretrievesinglehiretalentController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const admindeletehiremeController = async (req, res, next) => {
@@ -32,7 +32,7 @@ const admindeletehiremeController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrieveallhiretalentController = async (req, res, next) => {
@@ -46,7 +46,7 @@ const adminretrieveallhiretalentController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrievesinglefindjobController = async (req, res, next) => {
@@ -61,7 +61,7 @@ const adminretrievesinglefindjobController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const admindeletefindjobController = async (req, res, next) => {
@@ -76,7 +76,7 @@ const admindeletefindjobController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrieveallfindjobController = async (req, res, next) => {
@@ -90,7 +90,7 @@ const adminretrieveallfindjobController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -145,7 +145,7 @@ const adminretrieveformsController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 
@@ -186,7 +186,7 @@ const adminretrievesingleformController = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 const adminretrieveupdateformstatusController = async (req, res, next) => {
@@ -209,7 +209,7 @@ const adminretrieveupdateformstatusController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    handleError(error.message)(res);
+    return handleError(error.message)(res);
   }
 };
 module.exports = {

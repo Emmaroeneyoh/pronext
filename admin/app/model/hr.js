@@ -46,8 +46,8 @@ const adminupdateprofileModel = async (data, res) => {
     return form;
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 const adminupdateroleModel = async (data, res) => {
@@ -63,8 +63,8 @@ const adminupdateroleModel = async (data, res) => {
     return form;
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 const adminupdatepasswordModel = async (data, res) => {
@@ -80,8 +80,8 @@ const adminupdatepasswordModel = async (data, res) => {
     return form;
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 const adminretrieveteamleaderModel = async (data, res) => {
@@ -93,8 +93,8 @@ const adminretrieveteamleaderModel = async (data, res) => {
     return form;
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 const admindeleteadminModel = async (data, res) => {
@@ -105,8 +105,8 @@ const admindeleteadminModel = async (data, res) => {
     return form;
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 
@@ -145,8 +145,8 @@ const admindashboardModel = async (data, res) => {
     return dashboard;
   } catch (error) {
     console.log(error);
-    return error.message;
-    // handleError(error.message)(res)
+    throw new Error(error.message);
+    // return handleError(error.message)(res)
   }
 };
 
