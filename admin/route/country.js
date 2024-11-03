@@ -31,6 +31,7 @@ const {
   adminsinglespaceValidation,
   adminupdatespaceValidation,
   admincreatespaceValidation,
+  admindeletespaceValidation,
 } = require("../core/validation/space");
 
 const router = require("express").Router();
@@ -112,9 +113,9 @@ router.get(
   admin_check_token,
   adminretrievesinglespaceController
 );
-router.delete(
-  "/delete/space/:adminid/:spaceid",
-  adminsinglespaceValidation,
+router.put(
+  "/delete/space",
+  admindeletespaceValidation,
   admin_check_token,
   admindeletespaceController
 );

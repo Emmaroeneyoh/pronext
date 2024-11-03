@@ -64,7 +64,7 @@ const adminretrievesinglespaceController = async (req, res, next) => {
 };
 const admindeletespaceController = async (req, res, next) => {
   try {
-    const { spaceid } = req.params;
+    const { spaceid } = req.body;
     let trainee = await spaceModel.findByIdAndDelete(spaceid);
     return res.status(200).json({
       status_code: 200,
