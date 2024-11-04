@@ -113,7 +113,7 @@ router.get(
   admin_check_token,
   adminretrievesinglespaceController
 );
-router.put(
+router.post(
   "/delete/space",
   admindeletespaceValidation,
   admin_check_token,
