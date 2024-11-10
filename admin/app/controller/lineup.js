@@ -68,7 +68,6 @@ const admincheckaddlineupController = async (req, res, next) => {
         status_code: 400,
         status: false,
         message: "lineup already in draft",
-        type: "shape",
       });
     }
     const formid = form._id;
