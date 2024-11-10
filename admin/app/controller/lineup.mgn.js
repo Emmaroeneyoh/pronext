@@ -2,6 +2,7 @@ const { lineupModel } = require("../../core/db/lineup");
 const { adminupdatelineupModel } = require("../model/lineup.mgn");
 const nodemailer = require('nodemailer');
 const { appPassword } = require("../../../helper/core/utils");
+const { handleError } = require("../../core/utils");
 
 const admindeletelineupController = async (req, res, next) => {
   try {

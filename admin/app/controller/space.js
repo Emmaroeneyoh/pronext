@@ -1,4 +1,5 @@
 const { spaceModel } = require("../../core/db/space");
+const { handleError } = require("../../core/utils");
 
 const admincreatespaceController = async (req, res, next) => {
   const {title, general, note, adminid } = req.body;

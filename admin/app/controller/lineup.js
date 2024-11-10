@@ -9,6 +9,7 @@ const {
   adminretrievelineupModel,
   adminretrievesinglelineupModel,
 } = require("../model/lineup");
+const { handleError } = require("../../core/utils");
 
 const admincheckaddlineupController = async (req, res, next) => {
   const { company, location, email , adminid } = req.body;
@@ -40,7 +41,7 @@ const admincheckaddlineupController = async (req, res, next) => {
       email: userEmail, adminid
     });
       // if the draft exist , cehck if its the same person that created the lineup
-    if (checkdraft.adminid != lineup.adminid) {
+    if (checkdraft && checkdraft.adminid != lineup.adminid) {
       return res.status(400).json({
         status_code: 400,
         status: false,
@@ -62,7 +63,7 @@ const admincheckaddlineupController = async (req, res, next) => {
       location,
       email: userEmail,
     });
-    if (checkdraft.adminid == adminid) {
+    if (checkdraft && checkdraft.adminid == adminid) {
       return res.status(400).json({
         status_code: 400,
         status: false,
