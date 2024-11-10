@@ -108,7 +108,10 @@ const adminretrievesingledraftController = async (req, res, next) => {
 const adminretrieveadmindraftController = async (req, res, next) => {
   const { adminid } = req.params;
   try {
-      const draftlineup = await draftModel.find({adminid});
+      const draftlineup = await draftModel.find({adminid}).sort({createdAt:-1}).populate({
+        path: "adminid",
+        select: "basic_info.firstname basic_info.lastname",
+      });
 
     return res.status(200).json({
       status_code: 200,
