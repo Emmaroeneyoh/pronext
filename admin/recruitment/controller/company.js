@@ -3,6 +3,7 @@ const {
   admincreatecompanyModel,
   updatecompanyModel,
 } = require("../model/company");
+const { handleError } = require("../../core/utils");
 
 const admincreatecompanyController = async (req, res, next) => {
   const { country, document, logo, note, phone, name, adminid } = req.body;

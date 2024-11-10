@@ -3,6 +3,7 @@ const {
   updatelocationModel,
   admincreatelocationModel,
 } = require("../model/location");
+const { handleError } = require("../../core/utils");
 
 const admincreatelocationController = async (req, res, next) => {
   const {
