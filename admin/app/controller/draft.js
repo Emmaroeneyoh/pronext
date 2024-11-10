@@ -104,9 +104,26 @@ const adminretrievesingledraftController = async (req, res, next) => {
     return handleError(error.message)(res);
   }
 };
+const adminretrieveadmindraftController = async (req, res, next) => {
+  const { adminid } = req.params;
+  try {
+      const draftlineup = await draftModel.find({adminid});
+
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "draft available",
+      data: draftlineup
+    });
+  } catch (error) {
+    console.log(error);
+    return handleError(error.message)(res);
+  }
+};
 
 module.exports = {
   adminretrievedraftController,
   adminsavedraftController,
-  adminretrievesingledraftController,
+    adminretrievesingledraftController,
+    adminretrieveadmindraftController 
 };

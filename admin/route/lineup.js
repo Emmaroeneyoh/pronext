@@ -1,4 +1,4 @@
-const { adminsavedraftController, adminretrievedraftController, adminretrievesingledraftController } = require("../app/controller/draft");
+const { adminsavedraftController, adminretrievedraftController, adminretrievesingledraftController, adminretrieveadmindraftController } = require("../app/controller/draft");
 const {
   adminaddlineupController,
   admincheckaddlineupController,
@@ -13,6 +13,7 @@ const {
   adminsendlineupnotificationcontroller,
 } = require("../app/controller/lineup.mgn");
 const { admin_check_token } = require("../core/authorisation");
+const { adminValidation } = require("../core/validation/auth");
 const {
   adminchecklineupValidation,
   adminretrievelineupValidation,
@@ -78,6 +79,17 @@ router.post(
   "/retrieve/draft",
   admin_check_token,
   adminretrievedraftController
+);
+router.post(
+  "/retrieve/draft",
+  admin_check_token,
+  adminretrievedraftController
+);
+router.get(
+  "/recall/draft/:adminid",
+  adminValidation,
+  admin_check_token,
+  adminretrieveadmindraftController
 );
 router.get(
   "/retrieve/single/draft/:adminid/:draftid",
