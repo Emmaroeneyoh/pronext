@@ -11,7 +11,7 @@ const {
 } = require("../model/lineup");
 
 const admincheckaddlineupController = async (req, res, next) => {
-  const { company, location, email } = req.body;
+  const { company, location, email , adminid } = req.body;
   try {
     const form = await formModel.findOne({
       "location.location": location,
@@ -45,7 +45,7 @@ const admincheckaddlineupController = async (req, res, next) => {
       location,
       email: userEmail,
     });
-    if (checkdraft) {
+    if (checkdraft.adminid == adminid) {
       return res.status(400).json({
         status_code: 400,
         status: false,
