@@ -31,6 +31,23 @@ const admincheckaddlineupController = async (req, res, next) => {
       email: userEmail,
     });
 
+    //check if lineup exist
+    if (lineup) {
+       //check this lineup in draft
+    const checkdraft = await draftModel.findOne({
+      company,
+      location,
+      email: userEmail, adminid
+    });
+      // if the draft exist , cehck if its the same person that created the lineup
+    if (checkdraft.adminid != lineup.adminid) {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: "lineup already added, delete from draft",
+      });
+    }
+    }
     if (lineup) {
       return res.status(400).json({
         status_code: 400,
