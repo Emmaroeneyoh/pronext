@@ -4,11 +4,11 @@ const admincreatecompanyValidation = (req, res, next) => {
   const schema = joi.object({
     adminid: joi.string().required().length(24),
     name: joi.string().required(),
-    country: joi.string().required(),
+    country: joi.string().required().allow(""),
     logo: joi.string().required(),
     phone: joi.optional().required(),
-    document: joi.string().required(),
-    note: joi.string().required(),
+    document: joi.string().required().allow(""),
+    note: joi.string().required().allow(""),
   });
   const { error } = schema.validate(req.body);
   if (error) {

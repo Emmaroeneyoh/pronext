@@ -36,6 +36,20 @@ const adminretrievereviewlineupController = async (req, res, next) => {
 const admincreatereviewlineupController = async (req, res, next) => {
   const { status, remark, rating, lineupid, adminid } = req.body;
   try {
+    const checkreview = await lineupreviewModel.findOne({ lineupid })
+    if (checkreview) {
+      await lineupreviewModel.updateOne({ lineupid }, {
+        $set:{ adminid,
+          status,
+          remark,
+          rating,}
+      })
+      return res.status(200).json({
+        status_code: 200,
+        status: true,
+        message: "review updated",
+      });
+    }
     let trainee = await new lineupreviewModel({
       adminid,
       status,
