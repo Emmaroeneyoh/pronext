@@ -6,7 +6,7 @@ const admincreatecountryValidation = (req, res, next) => {
     name: joi.string().required(),
     continent: joi.string().required().allow(""),
     flag: joi.string().required(),
-    note: joi.string().required(),
+    note: joi.string().required().allow(""),
     additional_note: joi.string().required().allow(""),
   });
   const { error } = schema.validate(req.body);
