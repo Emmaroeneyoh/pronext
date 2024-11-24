@@ -1,14 +1,21 @@
+const { adminupdateprofileController, adminupdateaddressController, adminresetPassword, adminretrieveteams } = require("../app/controller/admin.mgn");
 const { adminretrieveusersController, adminretrievesingleuserController, admindeleteuserController, updateadminController, updateadminprofilecontroller, updatepasswordController, admindashboardController, adminretrieveteamleaderController, admindeleteadminController, updateadminrroleController } = require("../app/controller/hr");
 const { admin_check_token } = require("../core/authorisation");
 const { adminValidation } = require("../core/validation/auth");
-const { adminupdateprofileValidation, adminretrievesingleprofileValidation, admindeleteadminValidation, adminupdateuserValidation, adminupdatepasswordValidation, adminudeleteuserValidation, adminupdateroleValidation } = require("../core/validation/hr");
+const { adminupdateprofileValidation, adminretrievesingleprofileValidation, admindeleteadminValidation, adminupdateuserValidation, adminupdatepasswordValidation, adminudeleteuserValidation, adminupdateroleValidation, adminupdateaddressValidation } = require("../core/validation/hr");
 
 const router = require("express").Router();
 router.post(
     "/update/profile",
     adminupdateprofileValidation,
     admin_check_token,
-    updateadminController
+    adminupdateprofileController
+);
+router.post(
+    "/update/address",
+    adminupdateaddressValidation,
+    admin_check_token,
+    adminupdateaddressController
 );
 router.post(
     "/update/staff/role_status",
@@ -59,10 +66,16 @@ router.post(
     updateadminprofilecontroller
 );
 router.post(
-    "/update/staff/password",
+    "/update/password",
     adminupdatepasswordValidation,
     admin_check_token,
-    updatepasswordController
+    adminresetPassword
+);
+router.get(
+    "/retrieve/teams/:adminid",
+    adminValidation,
+    admin_check_token,
+    adminretrieveteams
 );
 
 module.exports = router
