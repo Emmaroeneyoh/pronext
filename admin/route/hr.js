@@ -48,7 +48,7 @@ router.get(
     admindashboardController
 );
 router.get(
-    "/retrieve/single/admin/:adminid/:staffid",
+    "/retrieve/single/admin/:adminid",
     adminretrievesingleprofileValidation,
     admin_check_token,
     adminretrievesingleuserController

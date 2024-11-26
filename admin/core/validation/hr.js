@@ -76,7 +76,6 @@ const adminupdateroleValidation = (req, res, next) => {
 const adminretrievesingleprofileValidation = (req, res, next) => {
   const schema = joi.object({
     adminid: joi.string().required(),
-    staffid: joi.string().required(),
   });
   const { error } = schema.validate(req.params);
   if (error) {
