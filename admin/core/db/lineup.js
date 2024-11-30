@@ -11,6 +11,10 @@ const groupschema = new schema(
       type: String,
       default : 'pending'
     },
+  updated_at: {
+      type: String,
+      default : ''
+    },
     company: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "company",

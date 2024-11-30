@@ -2,7 +2,7 @@ const { lineupModel } = require("../../core/db/lineup");
 const { adminupdatelineupModel } = require("../model/lineup.mgn");
 const nodemailer = require('nodemailer');
 const { appPassword } = require("../../../helper/core/utils");
-const { handleError } = require("../../core/utils");
+const { handleError, getcurrentdate } = require("../../core/utils");
 
 const admindeletelineupController = async (req, res, next) => {
   try {
@@ -46,9 +46,11 @@ const adminupdatelineupstatusController = async (req, res, next) => {
   const { status, lineupid } = req.body;
     try {
       console.log('update status')
+      const xdate = getcurrentdate();
+   
     const form = await lineupModel.findByIdAndUpdate(lineupid, {
       $set: {
-        status,
+        lineUpStatus:status,updated_at:xdate
       },
     });
     return res.status(200).json({

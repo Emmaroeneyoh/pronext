@@ -51,6 +51,26 @@ const adminupdateaddressValidation = (req, res, next) => {
   }
   return next();
 };
+const adminupdateprofilephotoValidation = (req, res, next) => {
+  const schema = joi.object({
+    adminid: joi.string().required(),
+    photo: joi.string().required()
+  });
+  const { error } = schema.validate(req.body);
+  if (error) {
+    let err = error.details[0].message;
+    let errlen = err.split(" ");
+    console.log("this is length ", errlen.length);
+    return res.status(400).json({
+      status_code: 400,
+      status: false,
+      message: err,
+      data: [],
+      error: err,
+    });
+  }
+  return next();
+};
 const adminupdateroleValidation = (req, res, next) => {
   const schema = joi.object({
     adminid: joi.string().required(),
@@ -182,6 +202,26 @@ const adminudeleteuserValidation = (req, res, next) => {
   }
   return next();
 };
+const adminmaindashboardValidation = (req, res, next) => {
+  const schema = joi.object({
+    adminid: joi.string().required(),
+    date: joi.string().required(),
+  });
+  const { error } = schema.validate(req.body);
+  if (error) {
+    let err = error.details[0].message;
+    let errlen = err.split(" ");
+    console.log("this is length ", errlen.length);
+    return res.status(400).json({
+      status_code: 400,
+      status: false,
+      message: err,
+      data: [],
+      error: err,
+    });
+  }
+  return next();
+};
 
 module.exports = {
   adminretrievesingleprofileValidation,
@@ -192,4 +232,5 @@ module.exports = {
   adminupdateaddressValidation,
   adminudeleteuserValidation,
   adminupdateroleValidation,
+  adminupdateprofilephotoValidation ,adminmaindashboardValidation
 };

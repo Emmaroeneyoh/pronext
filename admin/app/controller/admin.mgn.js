@@ -115,16 +115,35 @@ const adminresetPassword = async (req, res, next) => {
     return handleError(error.message)(res);
   }
 };
-const adminretrieveteams = async (req, res, next) => {
-  const { adminid } = req.params
+const adminupdateprofilephoto = async (req, res, next) => {
+  const { adminid, photo } = req.body;
   try {
-    const teams = await groupModel.find({teamleader:adminid});
+    await AdminModel.findByIdAndUpdate(adminid, {
+      $set: {
+        "basic_info.photo": photo,
+      },
+    });
 
     return res.status(200).json({
       status_code: 200,
       status: true,
-        message: "login process successful",
-      data:teams
+      message: "login process successful",
+    });
+  } catch (error) {
+    console.log(error);
+    return handleError(error.message)(res);
+  }
+};
+const adminretrieveteams = async (req, res, next) => {
+  const { adminid } = req.params;
+  try {
+    const teams = await groupModel.find({ teamleader: adminid });
+
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "login process successful",
+      data: teams,
     });
   } catch (error) {
     console.log(error);
@@ -135,6 +154,7 @@ const adminretrieveteams = async (req, res, next) => {
 module.exports = {
   adminresetPassword,
   adminupdateaddressController,
-    adminupdateprofileController,
-    adminretrieveteams
+  adminupdateprofileController,
+  adminretrieveteams,
+  adminupdateprofilephoto,
 };

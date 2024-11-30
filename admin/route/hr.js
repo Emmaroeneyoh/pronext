@@ -1,8 +1,9 @@
-const { adminupdateprofileController, adminupdateaddressController, adminresetPassword, adminretrieveteams } = require("../app/controller/admin.mgn");
+const { adminupdateprofileController, adminupdateaddressController, adminresetPassword, adminretrieveteams, adminupdateprofilephoto } = require("../app/controller/admin.mgn");
+const { adminmaindashboardController } = require("../app/controller/dashboard");
 const { adminretrieveusersController, adminretrievesingleuserController, admindeleteuserController, updateadminController, updateadminprofilecontroller, updatepasswordController, admindashboardController, adminretrieveteamleaderController, admindeleteadminController, updateadminrroleController } = require("../app/controller/hr");
 const { admin_check_token } = require("../core/authorisation");
 const { adminValidation } = require("../core/validation/auth");
-const { adminupdateprofileValidation, adminretrievesingleprofileValidation, admindeleteadminValidation, adminupdateuserValidation, adminupdatepasswordValidation, adminudeleteuserValidation, adminupdateroleValidation, adminupdateaddressValidation } = require("../core/validation/hr");
+const { adminupdateprofileValidation, adminretrievesingleprofileValidation, admindeleteadminValidation, adminupdateuserValidation, adminupdatepasswordValidation, adminudeleteuserValidation, adminupdateroleValidation, adminupdateaddressValidation, adminupdateprofilephotoValidation, adminmaindashboardValidation } = require("../core/validation/hr");
 
 const router = require("express").Router();
 router.post(
@@ -10,6 +11,18 @@ router.post(
     adminupdateprofileValidation,
     admin_check_token,
     adminupdateprofileController
+);
+router.post(
+    "/main/dashboard",
+    adminmaindashboardValidation,
+    admin_check_token,
+    adminmaindashboardController
+);
+router.post(
+    "/update/profile/photo",
+    adminupdateprofilephotoValidation,
+    admin_check_token,
+    adminupdateprofilephoto
 );
 router.post(
     "/update/address",

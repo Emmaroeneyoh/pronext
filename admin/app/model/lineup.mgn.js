@@ -1,4 +1,5 @@
 const { lineupModel } = require("../../core/db/lineup");
+const { getcurrentdate } = require("../../core/utils");
 
 const adminupdatelineupModel = async (data, res) => {
   try {
@@ -8,6 +9,8 @@ const adminupdatelineupModel = async (data, res) => {
       recruitform, // The data to update
       { new: true } // Return the updated document
     );
+
+  
 
     return form;
   } catch (error) {
