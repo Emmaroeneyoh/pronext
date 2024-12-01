@@ -9,8 +9,8 @@ const {
 
 const admindashboardModel = async (data, res) => {
   try {
-    const { date } = data;
-
+    const { start_date , end_date } = data;
+    const date = {start_date , end_date}
     const lineupstatus = await lineupstatusdata(date);
     const totallineup = await totallineupdata(date);
     const totalcompany = await totalcompanydata(date);

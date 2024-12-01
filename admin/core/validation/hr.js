@@ -205,9 +205,9 @@ const adminudeleteuserValidation = (req, res, next) => {
 const adminmaindashboardValidation = (req, res, next) => {
   const schema = joi.object({
     adminid: joi.string().required(),
-    date: joi.string().required(),
+
   });
-  const { error } = schema.validate(req.body);
+  const { error } = schema.validate(req.params);
   if (error) {
     let err = error.details[0].message;
     let errlen = err.split(" ");

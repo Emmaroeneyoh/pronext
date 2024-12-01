@@ -14,11 +14,18 @@ const lineupstatusdata = async (date) => {
     "ClawBack",
     "Induction",
   ]; // List of statuses to check
-
+  const {start_date , end_date} = date
+  // Convert the provided date string into a Date object (to match the format of `createdAt`)
+  const startOfDay = new Date(start_date);
+  const endOfDay = new Date(end_date);
+  endOfDay.setHours(23, 59, 59, 999); // Ensure endOfDay includes the full end date
   const result = await lineupModel.aggregate([
     {
       $match: {
-        updated_at: date, // Match the exact date string
+        updated_at: {
+            $gte: startOfDay, // Start of the day
+            $lt: endOfDay, // Start of the next day (exclusive)
+          },
         lineUpStatus: { $in: statuses }, // Filter for relevant statuses
       },
     },
@@ -55,10 +62,11 @@ const lineupstatusdata = async (date) => {
   return finalResult;
 };
 const totallineupdata = async (date) => {
+    const {start_date , end_date} = date
   // Convert the provided date string into a Date object (to match the format of `createdAt`)
-  const startOfDay = new Date(date);
-  const endOfDay = new Date(date);
-  endOfDay.setDate(startOfDay.getDate() + 1); // Move to the next day to get the range
+  const startOfDay = new Date(start_date);
+  const endOfDay = new Date(end_date);
+  endOfDay.setHours(23, 59, 59, 999); // Ensure endOfDay includes the full end date
 
   const result = await lineupModel.aggregate([
     {
@@ -70,7 +78,7 @@ const totallineupdata = async (date) => {
       },
     },
     {
-      $count: "totalDocuments", // Count the number of documents
+      $count: "totalDocuments", // Count the number of document
     },
   ]);
 
@@ -80,11 +88,11 @@ const totallineupdata = async (date) => {
   return totalDocuments;
 };
 const totalcompanydata = async (date) => {
-  // Convert the provided date string into a Date object (to match the format of `createdAt`)
-  const startOfDay = new Date(date);
-  const endOfDay = new Date(date);
-  endOfDay.setDate(startOfDay.getDate() + 1); // Move to the next day to get the range
-
+    const {start_date , end_date} = date
+    // Convert the provided date string into a Date object (to match the format of `createdAt`)
+    const startOfDay = new Date(start_date);
+    const endOfDay = new Date(end_date);
+    endOfDay.setHours(23, 59, 59, 999); // Ensure endOfDay includes the full end date
   const result = await companyModel.aggregate([
     {
       $match: {
@@ -105,10 +113,11 @@ const totalcompanydata = async (date) => {
   return totalDocuments;
 };
 const totallocationdata = async (date) => {
-  // Convert the provided date string into a Date object (to match the format of `createdAt`)
-  const startOfDay = new Date(date);
-  const endOfDay = new Date(date);
-  endOfDay.setDate(startOfDay.getDate() + 1); // Move to the next day to get the range
+    const {start_date , end_date} = date
+    // Convert the provided date string into a Date object (to match the format of `createdAt`)
+    const startOfDay = new Date(start_date);
+    const endOfDay = new Date(end_date);
+    endOfDay.setHours(23, 59, 59, 999); // Ensure endOfDay includes the full end date
 
   const result = await locationModel.aggregate([
     {
@@ -130,10 +139,11 @@ const totallocationdata = async (date) => {
   return totalDocuments;
 };
 const totalrecruiterdata = async (date) => {
-  // Convert the provided date string into a Date object (to match the format of `createdAt`)
-  const startOfDay = new Date(date);
-  const endOfDay = new Date(date);
-  endOfDay.setDate(startOfDay.getDate() + 1); // Move to the next day to get the range
+    const {start_date , end_date} = date
+    // Convert the provided date string into a Date object (to match the format of `createdAt`)
+    const startOfDay = new Date(start_date);
+    const endOfDay = new Date(end_date);
+    endOfDay.setHours(23, 59, 59, 999); // Ensure endOfDay includes the full end date
 
   const result = await AdminModel.aggregate([
     {

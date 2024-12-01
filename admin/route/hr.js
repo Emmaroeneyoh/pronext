@@ -12,8 +12,8 @@ router.post(
     admin_check_token,
     adminupdateprofileController
 );
-router.post(
-    "/main/dashboard",
+router.get(
+    "/main/dashboard/:adminid",
     adminmaindashboardValidation,
     admin_check_token,
     adminmaindashboardController

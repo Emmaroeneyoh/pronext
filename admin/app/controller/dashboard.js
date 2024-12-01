@@ -3,12 +3,11 @@ const { handleError, getcurrentdate } = require("../../core/utils");
 const { admindashboardModel } = require("../model/dashboard");
 
 const adminmaindashboardController = async (req, res, next) => {
-  const { date } = req.body;
+  const { start_date , end_date } = req.query;
     try {
-      
        
     const data = {
-      date,
+      start_date , end_date,
     };
     let dashboard = await admindashboardModel(data, res);
     return res.status(200).json({

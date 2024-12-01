@@ -3,10 +3,11 @@ const { contactusModel } = require("../../../../user/core/db/contactus")
 
 
 const totalformdata = async (date) => {
+    const {start_date , end_date} = date
     // Convert the provided date string into a Date object (to match the format of `createdAt`)
-    const startOfDay = new Date(date);
-    const endOfDay = new Date(date);
-    endOfDay.setDate(startOfDay.getDate() + 1); // Move to the next day to get the range
+    const startOfDay = new Date(start_date);
+    const endOfDay = new Date(end_date);
+    endOfDay.setHours(23, 59, 59, 999); // Ensure endOfDay includes the full end date
   
     const result = await formModel.aggregate([
       {
@@ -29,9 +30,11 @@ const totalformdata = async (date) => {
   };
 const totalcontactformdata = async (date) => {
     // Convert the provided date string into a Date object (to match the format of `createdAt`)
-    const startOfDay = new Date(date);
-    const endOfDay = new Date(date);
-    endOfDay.setDate(startOfDay.getDate() + 1); // Move to the next day to get the range
+    const {start_date , end_date} = date
+    // Convert the provided date string into a Date object (to match the format of `createdAt`)
+    const startOfDay = new Date(start_date);
+    const endOfDay = new Date(end_date);
+    endOfDay.setHours(23, 59, 59, 999); // Ensure endOfDay includes the full end date
   
     const result = await contactusModel.aggregate([
       { 
