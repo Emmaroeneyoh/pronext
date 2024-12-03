@@ -1,35 +1,47 @@
-const mongoose = require("mongoose");
-const { lineupModel } = require("./path/to/your/model");
+const mongoose = require('mongoose');
+const { lineupModel } = require('./your-lineup-model'); // Adjust the path as needed
 
-
-
-async function getTotalDocumentsForDate(date) {
-  // Convert the provided date string into a Date object (to match the format of `createdAt`)
-  const startOfDay = new Date(date);
-  const endOfDay = new Date(date);
-  endOfDay.setDate(startOfDay.getDate() + 1); // Move to the next day to get the range
-
-  const result = await lineupModel.aggregate([
-    {
-      $match: {
-        createdAt: {
-          $gte: startOfDay, // Start of the day
-          $lt: endOfDay, // Start of the next day (exclusive)
-        },
+async function getAdminStats() {
+  try {
+    const result = await lineupModel.aggregate([
+      {
+        // Step 1: Group by adminid and count occurrences
+        $group: {
+          _id: '$adminid',  // Group by adminid
+          count: { $sum: 1 } // Count occurrences
+        }
       },
-    },
-    {
-      $count: "totalDocuments", // Count the number of documents
-    },
-  ]);
+      {
+        // Step 2: Lookup to join with the Admin model and get admin name
+        $lookup: {
+          from: 'admins', // The collection name of the Admin model
+          localField: '_id', // The field we want to match in the Admin collection
+          foreignField: '_id', // The field in Admin collection to match
+          as: 'adminInfo' // The name of the field to store the lookup result
+        }
+      },
+      {
+        // Step 3: Project the fields you want in the final output
+        $project: {
+          // Concatenate first name and last name into a full name
+          adminName: {
+            $concat: [
+              { $arrayElemAt: ['$adminInfo.firstName', 0] }, // First Name
+              ' ', // Add a space between first and last name
+              { $arrayElemAt: ['$adminInfo.lastName', 0] }  // Last Name
+            ]
+          },
+          count: 1 // Keep the count field
+        }
+      }
+    ]);
 
-  // If no documents are found, return 0
-  const totalDocuments = result.length > 0 ? result[0].totalDocuments : 0;
-
-  console.log({ totalDocuments });
-  return { totalDocuments };
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error('Error aggregating data:', error);
+  }
 }
 
-// Example Usage
-const date = "2024-10-16"; // Example date
-getTotalDocumentsForDate(date).then(console.log).catch(console.error);
+// Call the function to get the result
+getAdminStats();
