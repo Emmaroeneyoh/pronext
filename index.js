@@ -16,6 +16,7 @@ const adminuser = require('./admin/route/user')
 const adminform = require('./admin/route/form')
 const adminlineup = require('./admin/route/lineup')
 const adminreview = require('./admin/route/review')
+const admindashboard = require('./admin/route/dashboard')
 
 //recruiter
 const admincompany = require('./admin/recruitment/route/company')
@@ -52,6 +53,7 @@ app.use(admin, admincountry)
 app.use(admin, adminform) 
 app.use(admin, adminlineup) 
 app.use(admin, adminreview) 
+app.use(admin, admindashboard) 
 
 //for user
 app.use(user, userhire) 
