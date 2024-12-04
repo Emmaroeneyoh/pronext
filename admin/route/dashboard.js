@@ -24,7 +24,7 @@ router.post(
   admindeletedasboardinfoController
 );
 router.get(
-  "/retrieve/single/dashboard/info/:adminid/:dashbaordinfoid",
+  "/retrieve/single/dashboard/info/:adminid/:dashboardinfoid",
   adminretrievesingledashboardValidation,
   admin_check_token,
   adminretrievesingledasboardinfoController

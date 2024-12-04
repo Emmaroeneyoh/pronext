@@ -73,7 +73,7 @@ const admindeletedasboardinfoController = async (req, res, next) => {
   }
 };
 const adminretrievesingledasboardinfoController = async (req, res, next) => {
-  const { dashboardinfoid } = req.body;
+  const { dashboardinfoid } = req.params;
   try {
     const dashboard = await dashboardinformationModel
       .findById(dashboardinfoid)
