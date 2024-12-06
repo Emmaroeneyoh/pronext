@@ -8,6 +8,7 @@ const {
   admindeletecountryController,
   adminretrievesinglegroupController,
   adminupdategroupController,
+  adminretrievegroupleaderController,
 } = require("../app/controller/country");
 const {
   admincreateexperienceController,
@@ -90,6 +91,12 @@ router.get(
   adminValidation,
   admin_check_token,
   adminretrievegroupController
+);
+router.get(
+  "/retrieve/group/leader/:adminid",
+  adminValidation,
+  admin_check_token,
+  adminretrievegroupleaderController
 );
 router.get(
   "/retrieve/single/group/:adminid/:groupid",

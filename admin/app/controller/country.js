@@ -166,6 +166,23 @@ const adminretrievegroupController = async (req, res, next) => {
     return handleError(error.message)(res);
   }
 };
+const adminretrievegroupleaderController = async (req, res, next) => {
+  try {
+    let trainee = await groupModel.find().select('teamleader').populate({
+      path: "teamleader",
+      select: "basic_info.firstname basic_info.lastname",
+    });
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "signup process successful",
+      data: trainee,
+    });
+  } catch (error) {
+    console.log(error);
+    return handleError(error.message)(res);
+  }
+};
 
 const adminretrievesinglegroupController = async (req, res, next) => {
   const { groupid } = req.params;
@@ -212,4 +229,5 @@ module.exports = {
   admincreategroupController,
   adminretrievesinglegroupController,
   adminupdategroupController,
+  adminretrievegroupleaderController
 };
