@@ -6,6 +6,8 @@ const {
   adminretrievesinglecountryController,
   adminupdatecountryController,
   admindeletecountryController,
+  adminretrievesinglegroupController,
+  adminupdategroupController,
 } = require("../app/controller/country");
 const {
   admincreateexperienceController,
@@ -25,6 +27,8 @@ const {
   adminretrievecountryValidation,
   admindeletecountryValidation,
   adminupdatecountryValidation,
+  adminupdategroupValidation,
+  adminretrievesinglegroupValidation,
 } = require("../core/validation/country");
 const {
   adminretrievespaceValidation,
@@ -87,7 +91,18 @@ router.get(
   admin_check_token,
   adminretrievegroupController
 );
-
+router.get(
+  "/retrieve/single/group/:adminid/:groupid",
+  adminretrievesinglegroupValidation,
+  admin_check_token,
+  adminretrievesinglegroupController
+);
+router.post(
+  "/update/group",
+  adminupdategroupValidation,
+  admin_check_token,
+  adminupdategroupController
+);
 //for space
 router.post(
   "/create/space",

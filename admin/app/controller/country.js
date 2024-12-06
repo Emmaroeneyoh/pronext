@@ -9,7 +9,7 @@ const {
 const { handleError } = require("../../core/utils");
 
 const admincreatecountryController = async (req, res, next) => {
-  const { name, flag, continent, note, adminid,  } = req.body;
+  const { name, flag, continent, note, adminid } = req.body;
   try {
     const data = {
       name,
@@ -17,7 +17,6 @@ const admincreatecountryController = async (req, res, next) => {
       continent,
       note,
       adminid,
-      
     };
     let trainee = await admincreatecountryModel(data, res);
     return res.status(200).json({
@@ -153,7 +152,7 @@ const admincreategroupController = async (req, res, next) => {
 const adminretrievegroupController = async (req, res, next) => {
   try {
     let trainee = await groupModel.find().populate({
-      path: "createdBy editedBy",
+      path: "teamleader",
       select: "basic_info.firstname basic_info.lastname",
     });
     return res.status(200).json({
@@ -168,6 +167,41 @@ const adminretrievegroupController = async (req, res, next) => {
   }
 };
 
+const adminretrievesinglegroupController = async (req, res, next) => {
+  const { groupid } = req.params;
+  try {
+    const dashboard = await groupModel.findById(groupid);
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "signup process successful",
+      data: dashboard,
+    });
+  } catch (error) {
+    console.log(error);
+    return handleError(error.message)(res);
+  }
+};
+
+const adminupdategroupController = async (req, res, next) => {
+  const { name, groupid , teamleader } = req.body;
+  try {
+    const groupname = name.toLowerCase();
+    const form = await groupModel.findByIdAndUpdate(groupid, {
+      $set: {
+        name: groupname, teamleader
+      },
+    });
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "signup process successful",
+    });
+  } catch (error) {
+    console.log(error);
+    return handleError(error.message)(res);
+  }
+};
 module.exports = {
   adminretrievecountryController,
   admincreatecountryController,
@@ -176,4 +210,6 @@ module.exports = {
   admindeletecountryController,
   adminretrievegroupController,
   admincreategroupController,
+  adminretrievesinglegroupController,
+  adminupdategroupController,
 };
