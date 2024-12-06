@@ -151,15 +151,31 @@ const admincreategroupController = async (req, res, next) => {
 
 const adminretrievegroupController = async (req, res, next) => {
   try {
-    let trainee = await groupModel.find().populate({
+    let groups = await groupModel.find().populate({
       path: "teamleader",
       select: "basic_info.firstname basic_info.lastname",
     });
+    let updatedGroups = await Promise.all(
+      groups.map(async (group) => {
+        const teamleader = group.teamleader._id.toString()
+        // Find team members based on teamleader
+        const teammembers = await AdminModel
+          .find({
+            "recruiter.teamleader": teamleader, // Assuming teamleader is an object with an _id field
+          })
+          .select("basic_info.firstname basic_info.lastname");
+        // Add `teammembers` to the group object directly
+        group = group.toObject(); // Convert Mongoose document to plain JS object
+        group.teammembers = teammembers; // Add the teammembers array
+
+        return group; // Return the modified group
+      })
+    );
     return res.status(200).json({
       status_code: 200,
       status: true,
       message: "signup process successful",
-      data: trainee,
+      data: updatedGroups
     });
   } catch (error) {
     console.log(error);
@@ -168,7 +184,7 @@ const adminretrievegroupController = async (req, res, next) => {
 };
 const adminretrievegroupleaderController = async (req, res, next) => {
   try {
-    let trainee = await groupModel.find().select('teamleader').populate({
+    let trainee = await groupModel.find().select("teamleader").populate({
       path: "teamleader",
       select: "basic_info.firstname basic_info.lastname",
     });
@@ -201,12 +217,13 @@ const adminretrievesinglegroupController = async (req, res, next) => {
 };
 
 const adminupdategroupController = async (req, res, next) => {
-  const { name, groupid , teamleader } = req.body;
+  const { name, groupid, teamleader } = req.body;
   try {
     const groupname = name.toLowerCase();
     const form = await groupModel.findByIdAndUpdate(groupid, {
       $set: {
-        name: groupname, teamleader
+        name: groupname,
+        teamleader,
       },
     });
     return res.status(200).json({
@@ -229,5 +246,5 @@ module.exports = {
   admincreategroupController,
   adminretrievesinglegroupController,
   adminupdategroupController,
-  adminretrievegroupleaderController
+  adminretrievegroupleaderController,
 };
