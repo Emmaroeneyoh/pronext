@@ -1,3 +1,4 @@
+const { AdminserviceRoles } = require("../../helper/rolecontrol");
 const { adminupdateprofileController, adminupdateaddressController, adminresetPassword, adminretrieveteams, adminupdateprofilephoto } = require("../app/controller/admin.mgn");
 const { adminmaindashboardController } = require("../app/controller/dashboard");
 const { adminretrieveusersController, adminretrievesingleuserController, admindeleteuserController, updateadminController, updateadminprofilecontroller, updatepasswordController, admindashboardController, adminretrieveteamleaderController, admindeleteadminController, updateadminrroleController } = require("../app/controller/hr");
@@ -15,6 +16,14 @@ router.post(
 router.get(
     "/main/dashboard/:adminid",
     adminmaindashboardValidation,
+    AdminserviceRoles([
+        "admin",
+        "superAdmin",
+        "recruiter",
+        "officeassistant",
+        "manager",
+        "teamleader",
+      ]),
     admin_check_token,
     adminmaindashboardController
 );

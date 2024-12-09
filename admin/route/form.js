@@ -1,3 +1,4 @@
+const { AdminserviceRoles } = require("../../helper/rolecontrol");
 const { admincreaterecruitformController,
     adminupdaterecruitformController,
 adminretrievesinglerecruitformController,
@@ -15,28 +16,30 @@ const router = require("express").Router();
 router.post(
   "/create/form",
   admincreateformValidation,
+  AdminserviceRoles(["admin", "superAdmin"]),
   admin_check_token,
   admincreaterecruitformController
 );
 router.post(
   "/update/form",
   adminupdateformValidation,
+  AdminserviceRoles(["admin", "superAdmin"]),
   admin_check_token,
   adminupdaterecruitformController
 );
 router.get(
   "/retrieve/single/dynamicform/:adminid/:formid",
   adminsingleformValidation,
+  AdminserviceRoles(["admin", "superAdmin"]),
   admin_check_token,
   adminretrievesinglerecruitformController
 );
 router.get(
   "/retrieve/all/dynamicform/:adminid",
   adminValidation,
+  AdminserviceRoles(["admin", "superAdmin"]),
   admin_check_token,
   adminretrieverecruitformController
 );
 
-
-
-  module.exports = router
+ module.exports = router

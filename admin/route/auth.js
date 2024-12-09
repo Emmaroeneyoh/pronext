@@ -1,3 +1,4 @@
+const { AdminserviceRoles } = require("../../helper/rolecontrol");
 const {
   adminSignupController,
   adminLoginController,
@@ -16,7 +17,12 @@ const {
 
 const router = require("express").Router();
 
-router.post("/signup", adminsignupValidation, adminSignupController);
+router.post(
+  "/signup",
+  adminsignupValidation,
+  AdminserviceRoles(["admin", "superAdmin"]),
+  adminSignupController
+);
 router.post("/login", adminLoginValidation, adminLoginController);
 router.post(
   "/forgot/password",
@@ -29,9 +35,9 @@ router.post(
   adminresetPassword
 );
 router.post(
-    "/profile",
-    adminValidation,
-    admin_check_token,
+  "/profile",
+  adminValidation,
+  admin_check_token,
   adminprofileController
 );
 
