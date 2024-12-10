@@ -120,7 +120,7 @@ const adminretrieveusersController = async (req, res, next) => {
 const adminretrievesingleuserController = async (req, res, next) => {
   try {
     const { adminid } = req.params;
-    let comment = await AdminModel.findById(adminid);
+    let comment = await AdminModel.findById(adminid).select('-basic_info.password')
     return res.status(200).json({
       status_code: 200,
       status: true,

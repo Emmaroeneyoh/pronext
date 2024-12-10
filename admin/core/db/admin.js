@@ -20,7 +20,9 @@ const Adminschema = new schema({
             type:String
         },
         photo:{
-            type:String
+            type: String,
+            default:"https://img.freepik.com/premium-photo/graphic-designer-digital-avatar-generative-ai_934475-9292.jpg"
+            
         },
         phone:{
             type:String
