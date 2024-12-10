@@ -110,7 +110,7 @@ router.post(
   adminupdatesubadminidroleController,
 );
 router.get(
-  "/retrieve/single/:adminid/:subadminid",
+  "/retrieve/subadmin/:adminid/:subadminid",
   adminretrievesubadminprofileValidation,
   admin_check_token,
   adminretrievesubadminprofileController,
@@ -144,7 +144,7 @@ router.get(
   admindashboardController
 );
 router.get(
-  "/retrieve/single/admin/:adminid",
+  "/retrieve/profile/:adminid",
   adminretrievesingleprofileValidation,
   admin_check_token,
   adminretrievesingleuserController

@@ -168,7 +168,7 @@ const adminupdateroleValidation = (req, res, next) => {
 };
 const adminretrievesingleprofileValidation = (req, res, next) => {
   const schema = joi.object({
-    adminid: joi.string().required(),
+    adminid: joi.string().required().length(24),
   });
   const { error } = schema.validate(req.params);
   if (error) {
@@ -187,8 +187,8 @@ const adminretrievesingleprofileValidation = (req, res, next) => {
 };
 const adminretrievesubadminprofileValidation = (req, res, next) => {
   const schema = joi.object({
-    adminid: joi.string().required(),
-    subadminid: joi.string().required(),
+    adminid: joi.string().required().length(24),
+    subadminid: joi.string().required().length(24),
   });
   const { error } = schema.validate(req.params);
   if (error) {
