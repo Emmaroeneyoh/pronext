@@ -123,6 +123,14 @@ const admincreategroupController = async (req, res, next) => {
         message: "group already exist",
       });
     }
+    const checkteamleader = await groupModel.findOne({ teamleader });
+    if (checkteamleader) {
+      return res.status(400).json({
+        status_code: 400,
+        status: false,
+        message: "team leader already has a group",
+      });
+    }
     //check if teamleader exist
     const customer = await AdminModel.findById(teamleader);
     if (!customer) {

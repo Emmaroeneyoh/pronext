@@ -10,6 +10,8 @@ const {
   adminretrievesinglelineupModel,
 } = require("../model/lineup");
 const { handleError } = require("../../core/utils");
+const { groupModel } = require("../../core/db/group");
+const { AdminModel } = require("../../core/db/admin");
 
 const admincheckaddlineupController = async (req, res, next) => {
   const { company, location, email , adminid } = req.body;
@@ -147,7 +149,7 @@ const adminretrievecandidateController = async (req, res, next) => {
 };
 const adminretrievelineupController = async (req, res, next) => {
   try {
-    const { location, company, status, recruiter, interviewdate } = req.body;
+    const { location, company, status, recruiter, interviewdate , group } = req.body;
     var query = { $and: [] };
 
     if (Array.isArray(status) && status.length > 0) {
@@ -157,15 +159,22 @@ const adminretrievelineupController = async (req, res, next) => {
     if (company) {
       query.$and.push({ company: company });
     }
-    if (location) {
+    if (location) { 
+      
       query.$and.push({ location: location });
+    }
+    if (status) {
+      query.$and.push({lineUpStatus: { $in: status } });
     }
     if (interviewdate) {
       query.$and.push({ interviewdate: interviewdate });
     }
     if (recruiter) {
-      console.log("ididue");
       query.$and.push({ adminid: recruiter });
+    }
+    if (group) {
+      const admins = await AdminModel.find({ 'recruiter.teamleader' : group });
+      query.$and.push({ adminid: { $in: admins } });
     }
     console.log(query);
     const data = { query };
