@@ -11,6 +11,9 @@ const groupschema = new schema(
       type: String,
       default : 'pending'
     },
+    interviewDate: {
+      type: Date,  default : null
+    },
   updated_at: {
       type: Date,
       default : null

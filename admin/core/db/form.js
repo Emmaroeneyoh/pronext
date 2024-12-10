@@ -30,6 +30,9 @@ const countryschema = new schema({
   course: {
     type: Boolean,
     },
+    interviewDate: {
+    type: Boolean, default: true
+    },
    
  
   educationalQualification: {
