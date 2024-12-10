@@ -7,6 +7,7 @@ const admincreateformValidation = (req, res, next) => {
     course: joi.boolean().required(),
     remark: joi.boolean().required(),
     dateOfBirth: joi.boolean().required(),
+    interviewDate: joi.boolean().required(),
     phoneNumber: joi.boolean().required(),
     city: joi.boolean().required(),
     location:joi
@@ -55,6 +56,7 @@ const adminupdateformValidation = (req, res, next) => {
     // course: joi.boolean().required(),
     dateOfBirth: joi.boolean().required(),
     phoneNumber: joi.boolean().required(),
+    interviewDate: joi.boolean().required(),
     city: joi.boolean().required(),
     location:joi
     .alternatives()

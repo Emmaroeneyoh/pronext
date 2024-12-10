@@ -14,7 +14,7 @@ const countryschema = new schema({
   remark: {
     type: Boolean,
   },
- 
+
   location: {
     type: mongoose.Schema.Types.Mixed,
   },
@@ -29,12 +29,12 @@ const countryschema = new schema({
   },
   course: {
     type: Boolean,
-    },
-    interviewDate: {
-    type: Boolean, default: true
-    },
-   
- 
+  },
+  interviewDate: {
+    type: Boolean,
+    default: true,
+  },
+
   educationalQualification: {
     type: mongoose.Schema.Types.Mixed,
   },
@@ -49,8 +49,8 @@ const countryschema = new schema({
   },
   gender: {
     type: mongoose.Schema.Types.Mixed,
-    },
-    
+  },
+
   bpoAccountAndExperience: {
     type: mongoose.Schema.Types.Mixed,
   },
@@ -66,7 +66,6 @@ const countryschema = new schema({
   note: {
     type: mongoose.Schema.Types.Mixed,
   },
-  
 
   createdAt: {
     type: Date,

@@ -27,7 +27,6 @@ const adminaddlineupModel = async (data, res) => {
     const productDetails = await form.save();
     
     const { draftid} = recruitform
-    const userEmail = email.toLowerCase();
     await draftModel.findByIdAndDelete(draftid);
     return productDetails;
   } catch (error) {
