@@ -147,6 +147,14 @@ const adminupdatesubadminprofileController = async (req, res, next) => {
     phone,
     adminid,
     subadminid,
+    recruiter_active,
+    teamleader,
+    address,
+    state,
+    city,
+    nationality,
+    role,
+    status,
   } = req.body;
   const adminEmail = email.toLowerCase();
   try {
@@ -172,6 +180,14 @@ const adminupdatesubadminprofileController = async (req, res, next) => {
         "basic_info.dob": dob,
         "basic_info.phone": phone,
         "basic_info.maritalstatus": maritalstatus,
+        "address_details.state": state,
+        "address_details.address": address,
+        "address_details.city": city,
+        "address_details.nationality": nationality,
+        "administrative.role": role,
+        "administrative.status": status,
+        "recruiter.recruiter_active": recruiter_active,
+        "recruiter.teamleader": teamleader,
       },
     });
     return res.status(200).json({
@@ -193,6 +209,8 @@ const adminupdatesubadminidaddressController = async (req, res, next) => {
         "address_details.address": address,
         "address_details.city": city,
         "address_details.nationality": nationality,
+        "administrative.role": role,
+        "administrative.status": status,
       },
     });
     return res.status(200).json({
@@ -206,7 +224,7 @@ const adminupdatesubadminidaddressController = async (req, res, next) => {
   }
 };
 const adminupdatesubadminidroleController = async (req, res, next) => {
-  const { role, subadminid, adminid , status } = req.body;
+  const { role, subadminid, adminid, status } = req.body;
   try {
     await AdminModel.findByIdAndUpdate(subadminid, {
       $set: {
@@ -226,9 +244,10 @@ const adminupdatesubadminidroleController = async (req, res, next) => {
 };
 const adminretrievesubadminprofileController = async (req, res, next) => {
   const { subadminid, adminid } = req.params;
-    try {
-       
-    const subadmin = await AdminModel.findById(subadminid).select('-basic_info.password')
+  try {
+    const subadmin = await AdminModel.findById(subadminid).select(
+      "-basic_info.password"
+    );
     return res.status(200).json({
       status_code: 200,
       status: true,

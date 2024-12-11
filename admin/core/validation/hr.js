@@ -83,6 +83,14 @@ const adminupdatesubadminprofileValidation = (req, res, next) => {
     dob: joi.string().required(),
     gender: joi.string().required(),
     maritalstatus: joi.string().required(),
+    address: joi.string().required(),
+    nationality: joi.string().required(),
+    state: joi.string().required(),
+    city: joi.string().required(),
+    role: joi.string().required(),
+    status: joi.string().required(),
+    teamleader: joi.string().optional().allow(''),
+    recruiter_active : joi.string().optional().allow(''),
   });
   const { error } = schema.validate(req.body);
   if (error) {
