@@ -20,7 +20,7 @@ const router = require("express").Router();
 router.post(
   "/signup",
   adminsignupValidation,
-  AdminserviceRoles(["admin", "superAdmin"]),
+  // AdminserviceRoles(["admin", "superAdmin"]),
   adminSignupController
 );
 router.post("/login", adminLoginValidation, adminLoginController);

@@ -6,8 +6,8 @@ const { handleError } = require("../utils");
 
 const adminsignupValidation = (req, res, next) => {
   const schema = joi.object({
-    // adminId: joi.string().required(),
-    email: joi.string().required(),
+    // adminid: joi.string().required(),
+    email: joi.string().email().required(),
     password: joi.string().required(),
     lastname: joi.string().required(),
    firstname: joi.string().required(),
