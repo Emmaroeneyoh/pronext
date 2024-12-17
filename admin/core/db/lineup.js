@@ -15,8 +15,8 @@ const groupschema = new schema(
       type: Date,  default : null
     },
   updated_at: {
-      type: Date,
-      default : null
+    type: Date, 
+    default: Date.now 
     },
     company: {
       type: mongoose.Schema.Types.ObjectId,

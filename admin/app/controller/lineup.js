@@ -9,7 +9,7 @@ const {
   adminretrievelineupModel,
   adminretrievesinglelineupModel,
 } = require("../model/lineup");
-const { handleError } = require("../../core/utils");
+const { handleError, checktime10pm_12am } = require("../../core/utils");
 const { groupModel } = require("../../core/db/group");
 const { AdminModel } = require("../../core/db/admin");
 
@@ -89,6 +89,18 @@ const admincheckaddlineupController = async (req, res, next) => {
 const adminaddlineupController = async (req, res, next) => {
   const recruitform = req.body;
   try {
+    if (!checktime10pm_12am()) {
+      const adminid = req.body.adminid
+      const admin = await AdminModel.findById(adminid)
+      const role = admin.administrative.role 
+      if (role != "superAdmin") {
+        return res.status(400).json({
+          status_code: 400,
+          status: false,
+          message: "cant add lineup by this time",
+        });
+      }
+    }
     const { company, location, email } = req.body;
     const userEmail = email.toLowerCase();
     const lineup = await lineupModel.findOne({

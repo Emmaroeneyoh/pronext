@@ -46,7 +46,7 @@ const adminupdatelineupstatusController = async (req, res, next) => {
   const { status, lineupid } = req.body;
     try {
       console.log('update status')
-      const xdate = getcurrentdate();
+      const xdate = Date.now();
    
     const form = await lineupModel.findByIdAndUpdate(lineupid, {
       $set: {
