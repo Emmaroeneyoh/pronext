@@ -33,7 +33,7 @@ const adminupdatecompanyValidation = (req, res, next) => {
     country: joi.string().required(),
       logo: joi.string().required(),
       phone: joi.optional().required(),
-    document: joi.string().required(),
+    document: joi.string().required().allow(""),
     note: joi.string().required(),
   });
   const { error } = schema.validate(req.body);

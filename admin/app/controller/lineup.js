@@ -14,7 +14,7 @@ const { groupModel } = require("../../core/db/group");
 const { AdminModel } = require("../../core/db/admin");
 
 const admincheckaddlineupController = async (req, res, next) => {
-  const { company, location, email , adminid } = req.body;
+  const { company, location, email, adminid } = req.body;
   try {
     const form = await formModel.findOne({
       "location.location": location,
@@ -36,20 +36,21 @@ const admincheckaddlineupController = async (req, res, next) => {
 
     //check if lineup exist
     if (lineup) {
-       //check this lineup in draft
-    const checkdraft = await draftModel.findOne({
-      company,
-      location,
-      email: userEmail, adminid
-    });
-      // if the draft exist , cehck if its the same person that created the lineup
-    if (checkdraft && checkdraft.adminid != lineup.adminid) {
-      return res.status(400).json({
-        status_code: 400,
-        status: false,
-        message: "lineup already added, delete from draft",
+      //check this lineup in draft
+      const checkdraft = await draftModel.findOne({
+        company,
+        location,
+        email: userEmail,
+        adminid,
       });
-    }
+      // if the draft exist , cehck if its the same person that created the lineup
+      if (checkdraft && checkdraft.adminid != lineup.adminid) {
+        return res.status(400).json({
+          status_code: 400,
+          status: false,
+          message: "lineup already added, delete from draft",
+        });
+      }
     }
     if (lineup) {
       return res.status(400).json({
@@ -90,9 +91,9 @@ const adminaddlineupController = async (req, res, next) => {
   const recruitform = req.body;
   try {
     if (!checktime10pm_12am()) {
-      const adminid = req.body.adminid
-      const admin = await AdminModel.findById(adminid)
-      const role = admin.administrative.role 
+      const adminid = req.body.adminid;
+      const admin = await AdminModel.findById(adminid);
+      const role = admin.administrative.role;
       if (role != "superAdmin") {
         return res.status(400).json({
           status_code: 400,
@@ -161,37 +162,46 @@ const adminretrievecandidateController = async (req, res, next) => {
 };
 const adminretrievelineupController = async (req, res, next) => {
   try {
- 
-    const { location, company, status, recruiter, interviewdate , group } = req.body;
+    const { location, company, status, recruiter, interviewdate, group } =
+      req.body;
     var query = { $and: [] };
 
-    if (Array.isArray(status) && status.length > 0) {
-      console.log(status);
-      query.$and.push({ status: { $in: status } });
+    if (company.length > 0) {
+      query.$and.push({ company: { $in: company } });
     }
-    if (company) {
-      query.$and.push({ company: company });
+    if (location.length > 0) {
+      query.$and.push({ location: { $in: location } });
     }
-    if (location) { 
-      
-      query.$and.push({ location: location });
-    }
-    if (status) {
-      query.$and.push({lineUpStatus: { $in: status } });
+    if (status.length > 0) {
+      query.$and.push({ lineUpStatus: { $in: status } });
     }
     if (interviewdate) {
-      query.$and.push({ interviewdate: interviewdate });
+      const [day, month, year] = interviewdate.split("/").map(Number);
+      const startOfDay = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+      const endOfDay = new Date(Date.UTC(year, month - 1, day, 23, 59, 59));
+      console.log(startOfDay , endOfDay)
+      query.$and.push({
+        interviewDate: {
+          $gte: (startOfDay),
+          $lte: (endOfDay),
+        },
+      });
     }
-    if (recruiter) {
-      query.$and.push({ adminid: recruiter });
+    if (recruiter.length > 0) {
+      query.$and.push({ adminid: { $in: recruiter } });
     }
-    if (group) {
-      const admins = await AdminModel.find({ 'recruiter.teamleader' : group });
-      query.$and.push({ adminid: { $in: admins } });
+    if (group.length > 0) {
+      const admins = await AdminModel.find({
+        "recruiter.teamleader": { $in: group },
+      });
+      const groupmembers = admins.map((obj) => obj._id);
+      query.$and.push({ adminid: { $in: groupmembers } });
     }
-    console.log(query);
     const data = { query };
+    console.log(query)
     let trainee = await adminretrievelineupModel(data, res);
+    // ["66ead5ca592abea9c05c21c0" , "66eae7ca592abea9c05c240d"],
+ 
     return res.status(200).json({
       status_code: 200,
       status: true,

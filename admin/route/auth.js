@@ -23,7 +23,7 @@ router.post(
   // AdminserviceRoles(["admin", "superAdmin"]),
   adminSignupController
 );
-router.post("/login", adminLoginValidation, adminLoginController);
+router.post("/login", adminLoginValidation, adminLoginController)
 router.post(
   "/forgot/password",
   adminforgotpasswordValidation,
