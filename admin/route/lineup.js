@@ -11,6 +11,7 @@ const {
   adminretrievecandidateController,
   adminretrievelineupController,
   adminretrievesinglelineupController,
+  adminretrieveallrecruitersController,
 } = require("../app/controller/lineup");
 const {
   admindeletelineupController,
@@ -86,6 +87,13 @@ router.post(
   AdminserviceRoles([  "superAdmin"  ]),
   admin_check_token,
   admindeletelineupController
+);
+router.get(
+  "/retrieve/recuiters/:adminid",
+  adminValidation,
+
+  admin_check_token,
+  adminretrieveallrecruitersController
 );
 router.post(
   "/send/notification",

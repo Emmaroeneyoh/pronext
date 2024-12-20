@@ -179,11 +179,11 @@ const adminretrievelineupController = async (req, res, next) => {
       const [day, month, year] = interviewdate.split("/").map(Number);
       const startOfDay = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
       const endOfDay = new Date(Date.UTC(year, month - 1, day, 23, 59, 59));
-      console.log(startOfDay , endOfDay)
+      console.log(startOfDay, endOfDay);
       query.$and.push({
         interviewDate: {
-          $gte: (startOfDay),
-          $lte: (endOfDay),
+          $gte: startOfDay,
+          $lte: endOfDay,
         },
       });
     }
@@ -198,10 +198,10 @@ const adminretrievelineupController = async (req, res, next) => {
       query.$and.push({ adminid: { $in: groupmembers } });
     }
     const data = { query };
-    console.log(query)
+    console.log(query);
     let trainee = await adminretrievelineupModel(data, res);
     // ["66ead5ca592abea9c05c21c0" , "66eae7ca592abea9c05c240d"],
- 
+
     return res.status(200).json({
       status_code: 200,
       status: true,
@@ -241,6 +241,23 @@ const adminretrievesinglelineupController = async (req, res, next) => {
     // return handleError(error.message)(res);
   }
 };
+const adminretrieveallrecruitersController = async (req, res, next) => {
+  try {
+    let lineup = await AdminModel.find({
+      "administrative.role": "recruiter",
+    }).select("basic_info.firstname basic_info.lastname basic_info.email");
+
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "signup process successful",
+      data: lineup,
+    });
+  } catch (error) {
+    console.log(error);
+    // return handleError(error.message)(res);
+  }
+};
 const adminretrieveformController = async (req, res, next) => {
   try {
     const { date, status } = req.body;
@@ -274,4 +291,5 @@ module.exports = {
   admincheckaddlineupController,
   adminretrievelineupController,
   adminretrievesinglelineupController,
+  adminretrieveallrecruitersController
 };
