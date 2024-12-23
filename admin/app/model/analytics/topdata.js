@@ -87,6 +87,7 @@ const topthreelineuprecuiterdata = async () => {
           ],
         },
         country: { $arrayElemAt: ["$adminInfo.address_details.nationality", 0] },
+        photo: { $arrayElemAt: ["$adminInfo.basic_info.photo", 0] },
         count: 1, // Keep the count field
       },
     },
