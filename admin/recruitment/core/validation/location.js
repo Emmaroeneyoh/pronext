@@ -8,7 +8,7 @@ const admincreatelocationValidation = (req, res, next) => {
     state: joi.string().required().allow(""),
     city: joi.string().required().allow(""),
     address: joi.string().required(),
-    remark: joi.string().required(),
+    remark: joi.string().required().allow(""),
     status: joi.string().required(),
     document: joi.string().required().allow(""),
     account: joi.array().required(),

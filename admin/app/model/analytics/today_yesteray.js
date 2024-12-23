@@ -1,82 +1,93 @@
+const { lineupModel } = require("../../../core/db/lineup");
 
 
-const get = async () => {
-    const now = new Date();
-  
-    // Calculate date ranges
-    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const endOfToday = new Date(startOfToday);
-    endOfToday.setDate(startOfToday.getDate() + 1);
-  
-    const startOfYesterday = new Date(startOfToday);
-    startOfYesterday.setDate(startOfToday.getDate() - 1);
-  
-    const startOfTomorrow = new Date(endOfToday);
-    const endOfTomorrow = new Date(startOfTomorrow);
-    endOfTomorrow.setDate(startOfTomorrow.getDate() + 1);
-  
-    const result = await Interview.aggregate([
-      {
-        $addFields: {
-          category: {
-            $switch: {
-              branches: [
-                {
-                  case: {
-                    $and: [
-                      { $gte: ['$interviewDate', startOfToday] },
-                      { $lt: ['$interviewDate', endOfToday] },
-                    ],
-                  },
-                  then: 'today',
-                },
-                {
-                  case: {
-                    $and: [
-                      { $gte: ['$interviewDate', startOfYesterday] },
-                      { $lt: ['$interviewDate', startOfToday] },
-                    ],
-                  },
-                  then: 'yesterday',
-                },
-                {
-                  case: {
-                    $and: [
-                      { $gte: ['$interviewDate', startOfTomorrow] },
-                      { $lt: ['$interviewDate', endOfTomorrow] },
-                    ],
-                  },
-                  then: 'tomorrow',
-                },
-              ],
-              default: null,
-            },
-          },
-        },
-      },
-      {
-        $match: {
-          category: { $ne: null }, // Ignore documents not in today, yesterday, or tomorrow
-        },
-      },
-      {
-        $group: {
-          _id: '$category',
-          count: { $sum: 1 },
-        },
-      },
-    ]);
-  
-    // Transform result to desired format
-    const formattedResult = result.reduce((acc, curr) => {
-      acc[curr._id] = curr.count;
-      return acc;
-    }, {});
-  
-    // Ensure keys for all categories
-    return {
-      today: formattedResult.today || 0,
-      yesterday: formattedResult.yesterday || 0,
-      tomorrow: formattedResult.tomorrow || 0,
-    };
+const getTomorrowInterviews = async () => {
+  try {
+    // Get today's date and time
+    const today = new Date();
+
+    // Calculate start and end of tomorrow
+    const tomorrowStart = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() + 1
+    ); // Midnight of tomorrow
+    const tomorrowEnd = new Date(
+      tomorrowStart.getFullYear(),
+      tomorrowStart.getMonth(),
+      tomorrowStart.getDate() + 1
+    ); // Midnight of the day after tomorrow
+
+    // Query to find interviews scheduled for tomorrow
+    const interviews = await lineupModel.countDocuments({
+      interviewDate: { $gte: tomorrowStart, $lt: tomorrowEnd },
+    });
+
+    return interviews;
+  } catch (error) {
+    console.error("Error fetching interviews:", error);
+    throw error;
   }
+}
+
+const  getTodayInterviews  = async()  =>{
+  try {
+    // Get today's date and time
+    const today = new Date();
+
+    // Calculate start and end of today
+    const todayStart = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    ); // Midnight of today
+    const todayEnd = new Date(
+      todayStart.getFullYear(),
+      todayStart.getMonth(),
+      todayStart.getDate() + 1
+    ); // Midnight of tomorrow
+
+    // Query to find interviews scheduled for today
+    const interviews = await lineupModel.countDocuments({
+      interviewDate: { $gte: todayStart, $lt: todayEnd },
+    });
+
+    return interviews;
+  } catch (error) {
+    console.error("Error fetching interviews:", error);
+    throw error;
+  }
+}
+
+const getYesterdayInterviews = async ()  =>{
+  try {
+    // Get today's date and time
+    const today = new Date();
+
+    // Calculate start and end of yesterday
+    const yesterdayStart = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() - 1
+    ); // Midnight of yesterday
+    const yesterdayEnd = new Date(
+      yesterdayStart.getFullYear(),
+      yesterdayStart.getMonth(),
+      yesterdayStart.getDate() + 1
+    ); // Midnight of today
+
+    // Query to find interviews scheduled for yesterday
+    const interviews = await lineupModel.countDocuments({
+      interviewDate: { $gte: yesterdayStart, $lt: yesterdayEnd },
+    });
+
+    return interviews;
+  } catch (error) {
+    console.error("Error fetching interviews:", error);
+    throw error;
+  }
+}
+
+module.exports = {
+  getTomorrowInterviews ,  getTodayInterviews  , getYesterdayInterviews
+}

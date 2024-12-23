@@ -300,6 +300,21 @@ const adminupdatesubadminidprofilephoto = async (req, res, next) => {
     return handleError(error.message)(res);
   }
 };
+const admindeletesubadminid = async (req, res, next) => {
+  const { subadminid } = req.body;
+  try {
+    await AdminModel.findByIdAndDelete(subadminid);
+
+    return res.status(200).json({
+      status_code: 200,
+      status: true,
+      message: "login process successful",
+    });
+  } catch (error) {
+    console.log(error);
+    return handleError(error.message)(res);
+  }
+};
 const adminretrieveteams = async (req, res, next) => {
   const { adminid } = req.params;
   try {
@@ -329,4 +344,5 @@ module.exports = {
   adminupdatesubadminidroleController,
   adminupdatesubadminidaddressController,
   adminupdatesubadminprofileController,
+  admindeletesubadminid
 };

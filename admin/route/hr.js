@@ -11,6 +11,7 @@ const {
     adminupdatesubadminidroleController,
     adminupdatesubadminidaddressController,
     adminupdatesubadminprofileController,
+    admindeletesubadminid,
 } = require("../app/controller/admin.mgn");
 const { adminmaindashboardController } = require("../app/controller/dashboard");
 const {
@@ -44,6 +45,7 @@ const {
   adminupdatesubaddressValidation,
   adminupdatesubadminprofileValidation,
   adminupdatesubadminpasswordValidation,
+  admindeletesubamdinValidation,
 } = require("../core/validation/hr");
 
 const router = require("express").Router();
@@ -114,6 +116,12 @@ router.get(
   adminretrievesubadminprofileValidation,
   admin_check_token,
   adminretrievesubadminprofileController,
+);
+router.post(
+  "/delete/subadmin",
+  admindeletesubamdinValidation,
+  admin_check_token,
+  admindeletesubadminid
 );
 
 

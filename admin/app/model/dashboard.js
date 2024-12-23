@@ -1,4 +1,10 @@
-const { topcompanyrecuiterdata, topselectcompanyrecuiterdata, topjoinercompanyrecuiterdata } = require("./analytics/companytopdata");
+const { AdminModel } = require("../../core/db/admin");
+const { lineupModel } = require("../../core/db/lineup");
+const {
+  topcompanyrecuiterdata,
+  topselectcompanyrecuiterdata,
+  topjoinercompanyrecuiterdata,
+} = require("./analytics/companytopdata");
 const { totalcontactformdata, totalformdata } = require("./analytics/form");
 const {
   lineupstatusdata,
@@ -7,10 +13,21 @@ const {
   totalcompanydata,
   totalrecruiterdata,
 } = require("./analytics/lineupstatus");
-const { toplocationrecuiterdata, topselectlocationrecuiterdata, topjoinerlocationrecuiterdata } = require("./analytics/locationtopdata");
-const { topjoinerineuprecuiterdata,
+const {
+  toplocationrecuiterdata,
+  topselectlocationrecuiterdata,
+  topjoinerlocationrecuiterdata,
+} = require("./analytics/locationtopdata");
+const {
+  getTomorrowInterviews,
+  getTodayInterviews,
+  getYesterdayInterviews,
+} = require("./analytics/today_yesteray");
+const {
+  topjoinerineuprecuiterdata,
   toplineuprecuiterdata,
   topselectlineuprecuiterdata,
+  topthreelineuprecuiterdata,
 } = require("./analytics/topdata");
 
 const admindashboardModel = async (data, res) => {
@@ -33,7 +50,37 @@ const admindashboardModel = async (data, res) => {
     const toplocationrecuiter = await toplocationrecuiterdata(date);
     const topselectlocationrecuiter = await topselectlocationrecuiterdata(date);
     const topjoinerlocationrecuiter = await topjoinerlocationrecuiterdata(date);
+    const topthreerecuiter = await topthreelineuprecuiterdata();
+    const totalinterviewtomorrow = await getTomorrowInterviews();
+    const totalinterviewtoday = await getTodayInterviews();
+    const totalinterviewyesterday = await getYesterdayInterviews();
 
+    //lineupcountries
+    const totalnigerian = await AdminModel.find({
+      "address_details.nationality": "Nigerian",
+    }).select("_id");
+    const nigerianrecruiter = totalnigerian.map((obj) => obj._id);
+    const totalnigerianlineup = await lineupModel.countDocuments({
+      adminid: { $in: nigerianrecruiter },
+    });
+
+    //for kenya
+    const totalkenya = await AdminModel.find({
+      "address_details.nationality": "Kenya",
+    }).select("_id");
+    const kenyarecruiter = totalkenya.map((obj) => obj._id);
+    const totalkenyalineup = await lineupModel.countDocuments({
+      adminid: { $in: kenyarecruiter },
+    });
+
+    //for Philipine
+    const totalPhilipine = await AdminModel.find({
+      "address_details.nationality": "Philipine",
+    }).select("_id");
+    const Philipinerecruiter = totalPhilipine.map((obj) => obj._id);
+    const totalPhilipinelineup = await lineupModel.countDocuments({
+      adminid: { $in: Philipinerecruiter },
+    });
     const dashboard = {
       lineupstatus,
       totallineup,
@@ -51,6 +98,13 @@ const admindashboardModel = async (data, res) => {
       toplocationrecuiter,
       topselectlocationrecuiter,
       topjoinerlocationrecuiter,
+      totalnigerianlineup,
+      totalkenyalineup,
+      totalPhilipinelineup,
+      topthreerecuiter,
+      totalinterviewtomorrow,
+      totalinterviewyesterday,
+      totalinterviewtoday,
     };
     return dashboard;
   } catch (error) {
