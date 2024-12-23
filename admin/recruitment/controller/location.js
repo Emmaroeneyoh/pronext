@@ -129,17 +129,18 @@ const admindeletelocationController = async (req, res, next) => {
 
 const adminretrievelocationController = async (req, res, next) => {
   try {
-    const page = req.body.page || 1;
-    const limit = 10;
-    let skip = (page - 1) * limit;
+    // const page = req.body.page || 1;
+    // const limit = 10;
+    // let skip = (page - 1) * limit;
     let trainee = await locationModel
       .find()
       .populate({
         path: "createdBy editedBy country company",
         select: "basic_info.firstname basic_info.lastname name logo flag",
       })
-      .skip(skip) // skip documents
-      .limit(limit);
+    .sort({createdAt:-1})
+      // .skip(skip) // skip documents
+      // .limit(limit);
     return res.status(200).json({
       status_code: 200,
       status: true,
