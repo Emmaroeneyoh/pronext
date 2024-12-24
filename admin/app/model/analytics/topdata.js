@@ -74,7 +74,18 @@ const topthreelineuprecuiterdata = async () => {
         foreignField: "_id", // The field in Admin collection to match
         as: "adminInfo", // The name of the field to store the lookup result
       },
+      
     },
+    {
+      // Step 3: Lookup to join with the country collection based on nationality
+      $lookup: {
+        from: "countries", // The collection name of the Country model
+        localField: "adminInfo.address_details.nationality", // The field to match from adminInfo (ObjectId)
+        foreignField: "_id", // The _id field in the country collection
+        as: "countryInfo", // The alias for the country info
+      },
+    },
+    
     {
       // Step 3: Project the fields you want in the final output
       $project: {
@@ -88,6 +99,7 @@ const topthreelineuprecuiterdata = async () => {
         },
         country: { $arrayElemAt: ["$adminInfo.address_details.nationality", 0] },
         photo: { $arrayElemAt: ["$adminInfo.basic_info.photo", 0] },
+        countryflag: { $arrayElemAt: ["$countryInfo.flag", 0] },
         count: 1, // Keep the count field
       },
     },
