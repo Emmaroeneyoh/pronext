@@ -57,7 +57,7 @@ const admindashboardModel = async (data, res) => {
 
     //lineupcountries
     const totalnigerian = await AdminModel.find({
-      "address_details.nationality": "Nigerian",
+      "address_details.nationality": "668977e4f9f4b96014101539",
     }).select("_id");
     const nigerianrecruiter = totalnigerian.map((obj) => obj._id);
     const totalnigerianlineup = await lineupModel.countDocuments({
@@ -66,7 +66,7 @@ const admindashboardModel = async (data, res) => {
 
     //for kenya
     const totalkenya = await AdminModel.find({
-      "address_details.nationality": "Kenya",
+      "address_details.nationality": "668977e4f9f4b96014101539",
     }).select("_id");
     const kenyarecruiter = totalkenya.map((obj) => obj._id);
     const totalkenyalineup = await lineupModel.countDocuments({
@@ -75,12 +75,13 @@ const admindashboardModel = async (data, res) => {
 
     //for Philipine
     const totalPhilipine = await AdminModel.find({
-      "address_details.nationality": "Philipine",
+      "address_details.nationality": "668977e4f9f4b96014101539",
     }).select("_id");
     const Philipinerecruiter = totalPhilipine.map((obj) => obj._id);
     const totalPhilipinelineup = await lineupModel.countDocuments({
       adminid: { $in: Philipinerecruiter },
     });
+
     const dashboard = {
       lineupstatus,
       totallineup,

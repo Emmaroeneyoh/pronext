@@ -84,7 +84,7 @@ const adminupdatesubadminprofileValidation = (req, res, next) => {
     gender: joi.string().required(),
     maritalstatus: joi.string().required(),
     address: joi.string().required(),
-    nationality: joi.string().required(),
+    nationality: joi.string().required().length(24),
     state: joi.string().required(),
     city: joi.string().required(),
     role: joi.string().required(),

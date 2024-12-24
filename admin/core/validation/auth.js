@@ -19,7 +19,7 @@ const adminsignupValidation = (req, res, next) => {
     recruiter_active : joi.string().optional().allow(''),
     status: joi.string().required(),
     role: joi.string().required(),
-    nationality: joi.string().required(),
+    nationality: joi.string().required().length(24),
     state: joi.string().required(),
     city: joi.string().required(),
     gender: joi.string().required(),

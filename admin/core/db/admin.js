@@ -51,8 +51,10 @@ const Adminschema = new schema({
             type:String
         },
        
-       nationality:{
-            type:String
+       
+        nationality: {
+            type:  mongoose.Schema.Types.ObjectId,
+            ref:'country'
         },
       }  , 
        
