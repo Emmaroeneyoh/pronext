@@ -165,10 +165,14 @@ const adminretrievelineupController = async (req, res, next) => {
     const { location, company, status, recruiter, interviewdate, group, name } =
       req.body;
     var query = { $and: [] };
+    fullNameCombined
 
     if (name != "") {
       query.$and.push({
         firstName: { $regex: name, $options: "i" },
+      });
+      query.$and.push({
+        fullNameCombined: { $regex: name, $options: "i" },
       });
     }
     if (company.length > 0) {
