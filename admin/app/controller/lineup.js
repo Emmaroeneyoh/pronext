@@ -162,13 +162,15 @@ const adminretrievecandidateController = async (req, res, next) => {
 };
 const adminretrievelineupController = async (req, res, next) => {
   try {
-    const { location, company, status, recruiter, interviewdate, group , name } =
+    const { location, company, status, recruiter, interviewdate, group, name } =
       req.body;
     var query = { $and: [] };
 
     if (name != "") {
-      query.$and.push({ fullNameCombined : { $regex: name , $options: "i" }});
-    } 
+      query.$and.push({
+        firstName: { $regex: name, $options: "i" },
+      });
+    }
     if (company.length > 0) {
       query.$and.push({ company: { $in: company } });
     }
@@ -294,5 +296,5 @@ module.exports = {
   admincheckaddlineupController,
   adminretrievelineupController,
   adminretrievesinglelineupController,
-  adminretrieveallrecruitersController
+  adminretrieveallrecruitersController,
 };
