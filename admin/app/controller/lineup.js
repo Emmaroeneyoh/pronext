@@ -162,10 +162,13 @@ const adminretrievecandidateController = async (req, res, next) => {
 };
 const adminretrievelineupController = async (req, res, next) => {
   try {
-    const { location, company, status, recruiter, interviewdate, group } =
+    const { location, company, status, recruiter, interviewdate, group , name } =
       req.body;
     var query = { $and: [] };
 
+    if (name != "") {
+      query.$and.push({ fullNameCombined : { $regex: name }});
+    } 
     if (company.length > 0) {
       query.$and.push({ company: { $in: company } });
     }

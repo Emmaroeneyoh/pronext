@@ -54,6 +54,7 @@ const admindashboardModel = async (data, res) => {
     const totalinterviewtomorrow = await getTomorrowInterviews();
     const totalinterviewtoday = await getTodayInterviews();
     const totalinterviewyesterday = await getYesterdayInterviews();
+    const overall_lineup = await lineupModel.countDocuments()
 
     //lineupcountries
     const totalnigerian = await AdminModel.find({
@@ -106,6 +107,7 @@ const admindashboardModel = async (data, res) => {
       totalinterviewtomorrow,
       totalinterviewyesterday,
       totalinterviewtoday,
+      overall_lineup
     };
     return dashboard;
   } catch (error) {

@@ -32,6 +32,7 @@ const adminretrievelineupValidation = (req, res, next) => {
     interviewdate: joi.string().allow(""),
     group: joi.array().min(0),
     recruiter: joi.array().min(0),
+    name: joi.string().required().allow(""),
   });
   const { error } = schema.validate(req.body)
   if (error) {
